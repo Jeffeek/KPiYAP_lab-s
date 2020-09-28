@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPiYAP_labs", "KPiYAP_labs\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_no3", "Lab_no3\Lab_no3.csproj", "{62B44BC9-4644-40F2-B946-D64B1E0BE7BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_no4", "Lab_no4\Lab_no4.csproj", "{3941A766-EC14-423E-BEDB-8B30FEE01BF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{62B44BC9-4644-40F2-B946-D64B1E0BE7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62B44BC9-4644-40F2-B946-D64B1E0BE7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62B44BC9-4644-40F2-B946-D64B1E0BE7BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3941A766-EC14-423E-BEDB-8B30FEE01BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3941A766-EC14-423E-BEDB-8B30FEE01BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3941A766-EC14-423E-BEDB-8B30FEE01BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3941A766-EC14-423E-BEDB-8B30FEE01BF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
