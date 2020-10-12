@@ -50,23 +50,29 @@ namespace Lab_no5.Models
 
         public void AddSeconds(int seconds)
         {
-            _timeCorrection = _timeCorrection.AddSeconds(seconds);
-            Seconds = _timeCorrection.Second;
-            Minutes = _timeCorrection.Minute;
-            Hours = _timeCorrection.Hour;
+            var time = _timeCorrection.AddSeconds(seconds);
+            Hours = time.Hour;
+            Minutes = time.Minute;
+            Seconds = time.Second;
+            _timeCorrection = time;
         }
 
         public void AddMinutes(int minutes)
         {
-            _timeCorrection = _timeCorrection.AddMinutes(minutes);
-            Minutes = _timeCorrection.Minute;
-            Hours = _timeCorrection.Hour;
+            var time = _timeCorrection.AddMinutes(minutes);
+            Hours = time.Hour;
+            Minutes = time.Minute;
+            Seconds = time.Second;
+            _timeCorrection = time;
         }
 
         public void AddHours(int hours)
         {
-            _timeCorrection = _timeCorrection.AddHours(hours);
-            Hours = _timeCorrection.Hour;
+            var time = _timeCorrection.AddHours(hours);
+            Hours = time.Hour;
+            Minutes = time.Minute;
+            Seconds = time.Second;
+            _timeCorrection = time;
         }
 
         public int Minutes

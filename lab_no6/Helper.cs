@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lab_no6
 {
@@ -13,11 +10,12 @@ namespace lab_no6
 
         public static void Sort(double[] arr, bool order)
         {
-            if (order)
+
+            for (int i = 0; i < arr.Length; i++)
             {
-                for (int i = 0; i < arr.Length; i++)
+                for (int j = i; j < arr.Length; j++)
                 {
-                    for (int j = i; j < arr.Length; j++)
+                    if (order)
                     {
                         if (arr[i] < arr[j])
                         {
@@ -26,13 +24,7 @@ namespace lab_no6
                             arr[j] = temp;
                         }
                     }
-                }
-            }
-            else
-            {
-                for (int i = 0; i < arr.Length; i++)
-                {
-                    for (int j = i; j < arr.Length; j++)
+                    else
                     {
                         if (arr[i] > arr[j])
                         {
@@ -45,54 +37,38 @@ namespace lab_no6
             }
         }
 
-        public static double[] Mul(double[,] matrix, double[] vector)
+        public static Matrix GetMatrixFromConsole()
         {
-            return MatrixToVector(Mul(matrix, VectorToMatrix(vector)));
-        }
+            Console.Write("Количество строк матрицы: ");
+            var n = int.Parse(Console.ReadLine());
+            Console.Write("Количество столбцов матрицы: ");
+            var m = int.Parse(Console.ReadLine());
 
-        public static double[] MatrixToVector(double[,] matrix)
-        {
-            double[] vector = new double[matrix.GetLength(0)];
-            for (int i = 0; i < vector.Length; i++)
+            var matrix = new Matrix(n, m);
+            for (var i = 0; i < n; i++)
             {
-                vector[i] = matrix[i, 0];
-            }
-
-            return vector;
-        }
-
-        public static double[,] VectorToMatrix(double[] vector)
-        {
-            double[,] matrix = new double[vector.Length,1];
-            for (int i = 0; i < vector.Length; i++)
-                matrix[i, 0] = vector[i];
-            return matrix;
-        }
-
-        public static double[,] Mul(double[,] matrixA, double[,] matrixB)
-        {
-            if (matrixA.ColumnsCount() != matrixB.RowsCount())
-            {
-                throw new Exception(
-                    "Умножение не возможно! Количество столбцов первой матрицы не равно количеству строк второй матрицы.");
-            }
-
-            var matrixC = new double[matrixA.RowsCount(), matrixB.ColumnsCount()];
-
-            for (var i = 0; i < matrixA.RowsCount(); i++)
-            {
-                for (var j = 0; j < matrixB.ColumnsCount(); j++)
+                for (var j = 0; j < m; j++)
                 {
-                    matrixC[i, j] = 0;
-
-                    for (var k = 0; k < matrixA.ColumnsCount(); k++)
-                    {
-                        matrixC[i, j] += matrixA[i, k] * matrixB[k, j];
-                    }
+                    Console.Write($"[{i},{j}] = ");
+                    matrix[i, j] = double.Parse(Console.ReadLine());
                 }
             }
 
-            return matrixC;
+            return matrix;
+        }
+
+        public static double[] GetVectorFromConsole()
+        {
+            Console.Write("Количество строк вектора: ");
+            var n = int.Parse(Console.ReadLine());
+            double[] vector = new double[n];
+            for (var j = 0; j < n; j++)
+            {
+                Console.Write($"[{j}] = ");
+                vector[j] = double.Parse(Console.ReadLine());
+            }
+
+            return vector;
         }
     }
 }

@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace lab_no6
 {
-    class StudentAlgo
+    class Student
     {
         private int[] _marks;
-        public StudentAlgo(int[] marks)
+        public Student(int[] marks)
         {
             _marks = marks;
         }
 
-        public int[] GetAlgo()
+        public int[] GetMarks()
         {
             var marks = _marks.OrderByDescending(x => x == 10).ThenByDescending(x => x == 8).ThenByDescending(x => x == 6);
             return marks.ToArray();
