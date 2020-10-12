@@ -9,7 +9,6 @@ namespace Lab_no5.Models
         private int _minutes;
         private int _seconds;
         private DateTime _timeCorrection;
-
         public TimeVelosiped()
         {
             _timeCorrection = new DateTime(2020,10,5,0,0,0);

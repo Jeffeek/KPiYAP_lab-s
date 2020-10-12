@@ -14,7 +14,6 @@ namespace Lab_no5
             TypeHours_Exception(time);
             Console.WriteLine(time);
 
-
             AddHours_test(time);
             AddMinutes_test(time);
             AddSeconds_test(time);
