@@ -1,25 +1,28 @@
-﻿
-
-using System;
+﻿using System;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace lab_no6
 {
     public class Matrix
     {
+        private readonly double[,] _matrixArray;
         public int RowsCount { get; }
         public int ColumnsCount { get; }
-        public double[,] MatrixArray { get; private set; }
 
         public Matrix(int rowsCount, int columnsCount)
         {
             RowsCount = rowsCount;
             ColumnsCount = columnsCount;
-            MatrixArray = new double[RowsCount,ColumnsCount];
+            _matrixArray = new double[RowsCount,ColumnsCount];
         }
+
+        public double[,] InnerMatrix => _matrixArray;
 
         public void FillRandomly()
         {
-            var rnd = new Random();
+            Thread.Sleep(5);
+            var rnd = new Random(DateTime.UtcNow.Millisecond);
             for (int i = 0; i < RowsCount; i++)
             {
                 for (int j = 0; j < ColumnsCount; j++)
@@ -31,8 +34,20 @@ namespace lab_no6
 
         public double this[int row, int column]
         {
-            get => MatrixArray[row, column];
-            set => MatrixArray[row, column] = value;
+            get
+            {
+                if (row >= RowsCount || column >= ColumnsCount)
+                    return _matrixArray[RowsCount-1, ColumnsCount-1];
+                if (row < 0 || column < 0)
+                    return _matrixArray[RowsCount - Math.Abs(row) - 1, ColumnsCount - Math.Abs(column) - 1];
+                return _matrixArray[row, column];
+            }
+
+            set
+            {
+                if (row >= RowsCount || column >= ColumnsCount) return;
+                _matrixArray[row, column] = value;
+            }
         }
 
 
@@ -49,19 +64,6 @@ namespace lab_no6
             }
 
             return result;
-        }
-
-        public void InitializateMatrix(double[,] matrix)
-        {
-            if (matrix == null) throw new ArgumentNullException();
-            if (matrix.GetLength(0) != RowsCount || matrix.GetLength(1) != ColumnsCount) throw new ArgumentException();
-            for (int i = 0; i < RowsCount; i++)
-            {
-                for (int j = 0; j < ColumnsCount; j++)
-                {
-                    this[i, j] = matrix[i,j];
-                }
-            }
         }
 
         public static Matrix MatrixMultiplication(Matrix matrixA, Matrix matrixB)

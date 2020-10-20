@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{500BAE3F-9644-4ED6-9B03-A4DBDCB47184}</ProjectGuid>
+    <ProjectGuid>{2298C051-DAE7-4316-9AC1-B1F69DC66374}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>lab_no6</RootNamespace>
-    <AssemblyName>lab_no6</AssemblyName>
+    <RootNamespace>Lab_no7</RootNamespace>
+    <AssemblyName>Lab_no7</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,17 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper.cs" />
-    <Compile Include="InOutArray.cs" />
-    <Compile Include="Matrix.cs" />
-    <Compile Include="MatrixConvertor.cs" />
+    <Compile Include="Poem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Student.cs" />
-    <Compile Include="TableMatrixModels\Cell.cs" />
-    <Compile Include="TableMatrixModels\Column.cs" />
-    <Compile Include="TableMatrixModels\Table.cs" />
-    <Compile Include="Weather.cs" />
+    <Compile Include="QuadraticEqualation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

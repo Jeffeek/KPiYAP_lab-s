@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 
 namespace lab_no6
 {
@@ -8,26 +10,42 @@ namespace lab_no6
     {
         static void Main(string[] args)
         {
-            MatrixWorkTask();
-            //double[] vat = new double[5] {1,7,2,10,13};
-            //Helper.Sort(vat, true);
-            //InOutArray.PrintArray(vat);
-            //Console.WriteLine(new string('-', 15));
-            //Helper.Sort(vat, false);
-            //InOutArray.PrintArray(vat);
-            //1.
-            WeatherTask();
-
-            //2.
-            StudentTask();
-
-            //3.
-            ArrayEqualityTask();
-
-            //4.
-            MatrixWorkTask();
-
+            TableMatrixTask();
+            //Console.WriteLine("Star Task");
+            //StarTask();
+            //Console.WriteLine("Matrix Task");
+            //MatrixWorkTask();
+            //Console.WriteLine("Array Task");
+            //ArrayWorkTask();
+            ////1.
+            //Console.WriteLine("Weather Task");
+            //WeatherTask();
+            //////2.
+            //Console.WriteLine("Student Task");
+            //StudentTask();
+            //////3.
+            //Console.WriteLine("ArrayEquality Task");
+            //ArrayEqualityTask();
             Console.ReadLine();
+        }
+
+        static void ArrayWorkTask()
+        {
+            double[] vat = new double[5] { 1, 7, 2, 10, 13 };
+            Helper.Sort(vat, true);
+            InOutArray.PrintArray(vat);
+            Console.WriteLine(new string('-', 15));
+            Helper.Sort(vat, false);
+            InOutArray.PrintArray(vat);
+        }
+
+        static void TableMatrixTask()
+        {
+            Matrix mat = new Matrix(3,3);
+            mat.FillRandomly();
+            var matrix = mat.InnerMatrix;
+            var table = new TableMatrixModels.Table(matrix);
+            Console.WriteLine(table.ToString());
         }
 
         static void WeatherTask()
@@ -80,6 +98,43 @@ namespace lab_no6
             Console.WriteLine(new string('-', 15));
             Console.WriteLine(matrixOnVector);
             Console.WriteLine(new string('-', 15));
+        }
+
+        static void StarTask()
+        {
+            var array = new double[31];
+            var rnd = new Random();
+            for (int i = 0; i < 31; i++)
+                array[i] = rnd.Next(102, 354);
+            var newArray = array.Where((x, y) => x * 0.1 > y).OrderBy(x => x).ToArray();
+            Console.WriteLine("");
+            Console.WriteLine(new string('-', 81));
+            for (int i = 0; i < 31; i++)
+            {
+                if (i % 5 == 0 && i != 0)
+                    Console.WriteLine('|');
+                if (i >= 9)
+                    Console.Write($"|M[{i + 1}]={array[i]}|\t");
+                if (i < 9)
+                    Console.Write($"|M[{i + 1}]={array[i]} |\t");
+                if (i == 30)
+                    Console.Write("\t\t\t\t\t\t\t\t|");
+            }
+            Console.WriteLine();
+            Console.WriteLine(new string('-', 81));
+            for (int i = 0; i < newArray.Length; i++)
+            {
+                if (i % 5 == 0 && i != 0)
+                    Console.WriteLine('|');
+                if (i >= 9)
+                    Console.Write($"|M[{i + 1}]={array[i]}|\t");
+                if (i < 9)
+                    Console.Write($"|M[{i + 1}]={array[i]} |\t");
+            }
+            Console.WriteLine();
+            Console.WriteLine(new string('-', 81));
+
+            Console.WriteLine();
         }
     }
 }

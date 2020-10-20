@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lab_no6
 {
@@ -19,8 +16,8 @@ namespace lab_no6
 
         private void FillMonthsRand()
         {
-            _weatherDictionary.Add("January", GetRandTemps(-15, 10, 31));
-            _weatherDictionary.Add("February", GetRandTemps(-20, 15, 28));
+            _weatherDictionary.Add("January", GetRandTemps(-15, 6, 31));
+            _weatherDictionary.Add("February", GetRandTemps(-20, 8, 28));
             _weatherDictionary.Add("March", GetRandTemps(-5, 15));
             _weatherDictionary.Add("April", GetRandTemps(5, 20, 31));
             _weatherDictionary.Add("May", GetRandTemps(8, 23));
@@ -38,7 +35,7 @@ namespace lab_no6
             var rnd = new Random();
             double[] temps = new double[days];
             for (int i = 0; i < days; i++)
-                temps[i] = (double)rnd.Next();
+                temps[i] = double.Parse($"{rnd.Next(min, max)},{rnd.Next(0,9)}");
             return temps;
         }
 
