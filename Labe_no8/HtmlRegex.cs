@@ -38,58 +38,62 @@ namespace Labe_no8
 
         public void Parse()
         {
+            string text = ReadFile();
+            text = ParseUnderLine(text);
+            var colorParsedArray = ParseFontColor(text);
+            text = string.Join("<Br>", colorParsedArray);
+            CreateHtmlDoc(text);
+        }
+
+        private string ParseUnderLine(string text)
+        {
+            string pattern = "\\(u\\)";
+            Regex reg = new Regex(pattern);
+            while (reg.IsMatch(text))
+            {
+                text = reg.Replace(text, "<u>", 1);
+                text = reg.Replace(text, "</u>", 1);
+            }
+
+            return text;
+        }
+
+        private string[] ParseFontColor(string text)
+        {
             Dictionary<char, string> coloursDictionary = new Dictionary<char, string>
             {
                 {'Y', "Yellow"}, {'G', "Green"}, {'R', "Red"}, {'B', "Blue"}
             };
-            string text = ReadFile();
-            string pattern = "\\((u)\\)";
-            Regex reg = new Regex(pattern);
-            bool flag = true;
-            while (reg.IsMatch(text))
+            Regex pattern = new Regex("Fc([YGRB])");
+            string[] mas = text.Split('\n');
+            for (int i = 0; i < mas.Length; i++)
             {
-                //text = flag
-                //    ? reg.Replace(text, "<u>", 1)
-                //    : reg.Replace(text, "</u>", 1);
-
-                //test
-                text = reg.Replace(text, "<u>", 1);
-                text = reg.Replace(text, "</u>", 1);
-
-                flag = !flag;
-
-                string[] mas = text.Split('\n');
-                pattern = "Fc([YGRB])";
-                reg = new Regex(pattern);
-                for (int i = 0; i < mas.Length; i++)
+                if (pattern.IsMatch(mas[i]))
                 {
-                    if (reg.IsMatch(mas[i]))
-                    {
-                        string color = reg.Match(mas[i]).Groups[1].Value;
-                        string fontColor = $"<font color=\"{coloursDictionary[color.First()]}\"";
-                        int indexOf = mas[i].IndexOf('>');
-                        mas[i] = mas[i].Substring(3,  indexOf - 2) + " " + fontColor + mas[i].Substring(indexOf);
-                    }
+                    string color = pattern.Match(mas[i]).Groups[1].Value;
+                    string fontColor = $@"<font color=""{coloursDictionary[color.First()]}""";
+                    int indexOf = mas[i].IndexOf('>');
+                    mas[i] = mas[i].Substring(3, indexOf - 2) + fontColor + mas[i].Substring(indexOf);
                 }
-                text = string.Join("<Br>", mas, 0, mas.Length);
             }
-            CreateHtmlDoc(text);
+
+            return mas;
         }
 
         private void CreateHtmlDoc(string textInBody)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("<html>");
-            sb.Append("<head>");
             string meta = @"<meta charset=""UTF-8"">";
-            sb.Append(meta);
-            sb.Append("<title>");
-            sb.Append("</title>");
-            sb.Append("</head>");
-            sb.Append("<body>");
-            sb.Append(textInBody);
-            sb.Append("</body>");
-            sb.Append("</html>");
+            sb.Append("<html>")
+                .Append("<head>")
+                .Append(meta)
+                .Append("<title>")
+                .Append("</title>")
+                .Append("</head>")
+                .Append("<body>")
+                .Append(textInBody)
+                .Append("</body>")
+                .Append("</html>");
             using (StreamWriter sw = new StreamWriter($"{Directory.GetCurrentDirectory()}\\MyHtml.html"))
                 sw.Write(sb.ToString());
             System.Diagnostics.Process.Start($"{Directory.GetCurrentDirectory()}\\MyHtml.html");

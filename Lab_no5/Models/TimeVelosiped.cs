@@ -113,8 +113,6 @@ namespace Lab_no5.Models
             }
         }
 
-
-
         public void SetTime(int hours, int minutes, int seconds)
         {
             Hours = hours;

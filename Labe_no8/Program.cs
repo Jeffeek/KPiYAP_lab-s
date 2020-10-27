@@ -7,7 +7,7 @@ namespace Labe_no8
     {
         static void Main(string[] args)
         {
-            DateRegex date = new DateRegex($"{Directory.GetCurrentDirectory()}\\regex.txt");
+            DateRegex date = new DateRegex($"{Directory.GetCurrentDirectory()}\\timeregex.txt");
             var dates = date.GetResult();
             foreach (var d in dates)
                 Console.WriteLine(d.ToShortDateString());

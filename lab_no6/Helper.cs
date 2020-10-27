@@ -8,6 +8,7 @@ namespace lab_no6
         public static double FindMax(double[] arr) => arr.Max();
         public static double FindMin(double[] arr) => arr.Min();
 
+        //пузырёк
         public static void Sort(double[] arr, bool order)
         {
 

@@ -16,7 +16,10 @@ namespace lab_no6
 
         public int[] GetMarks()
         {
-            var marks = _marks.OrderByDescending(x => x == 10).ThenByDescending(x => x == 8).ThenByDescending(x => x == 6);
+            var marks = _marks
+                                .OrderByDescending(x => x == 10)
+                                .ThenByDescending(x => x == 8)
+                                .ThenByDescending(x => x == 6);
             return marks.ToArray();
         }
     }

@@ -10,7 +10,7 @@ namespace lab_no6
     {
         public static double[] GetArray(string line)
         {
-            return line.Split().Select(x => double.Parse(x)).ToArray();
+            return line.Split().Select(double.Parse).ToArray();
         }
 
         public static void PrintArray(double[] arr)
