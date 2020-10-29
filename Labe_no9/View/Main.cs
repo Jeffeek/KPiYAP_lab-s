@@ -26,7 +26,6 @@ namespace Labe_no9.View
                 Console.WriteLine("5. Вывести общую популяцию государств по типу");
                 Console.WriteLine("6. Вывести общую площадь государств по типу");
                 Console.WriteLine("7. Выход");
-                Console.WriteLine("Выход");
 
                 switch (int.Parse(Console.ReadLine() ?? throw new InvalidOperationException()))
                 {
@@ -71,7 +70,7 @@ namespace Labe_no9.View
                     case 6:
                     {
                         PrintAreasByAllTypes();
-                            break;
+                        break;
                     }
 
                     case 7:
@@ -81,13 +80,6 @@ namespace Labe_no9.View
                     }
                 }
             }
-        }
-
-        private void PrintAreasByAllTypes()
-        {
-            var items = _worker.GetCollection().GroupBy(x => x.Type);
-            foreach (var item in items)
-                Console.WriteLine($"{item.Key} : {item.Sum(x => x.Area)}");
         }
 
         private string GetName()
@@ -168,11 +160,18 @@ namespace Labe_no9.View
             _worker.AddGovernment(item.Type, item.Name, item.Capital, item.Population, item.Area);
         }
 
-        public void PrintPopulationByAllTypes()
+        private void PrintPopulationByAllTypes()
         {
             var items = _worker.GetCollection().GroupBy(x => x.Type);
             foreach (var item in items)
-                Console.WriteLine($"{item.Key} : {item.Sum(x => x.Population)}");
+                Console.WriteLine($"{item.Key} : {item.Sum(x => x.Population)} people");
+        }
+
+        private void PrintAreasByAllTypes()
+        {
+            var items = _worker.GetCollection().GroupBy(x => x.Type);
+            foreach (var item in items)
+                Console.WriteLine($"{item.Key} : {item.Sum(x => x.Area)} km^2");
         }
     }
 }
