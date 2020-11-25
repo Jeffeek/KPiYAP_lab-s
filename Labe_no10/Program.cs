@@ -49,19 +49,6 @@ namespace Labe_no10
                 if (key.Key == ConsoleKey.S)
                     break;
             }
-            //var students = new Student[10]
-            //{
-            //    new DefaultStudent("Default Name", 12),
-            //    new DefaultStudent("Default Name2", 2),
-            //    new DefaultStudent("Default Name3", 20),
-            //    new DefaultStudent("Default Name4", 10),
-            //    new DefaultStudent("Default Name5", 13),
-            //    new BrightHeadStudent("BrightHead Name", 8),
-            //    new BrightHeadStudent("BrightHead Name2", 15),
-            //    new BrightHeadStudent("BrightHead Name3", 8),
-            //    new BrightHeadStudent("BrightHead Name4", 3),
-            //    new GeniusStudent("Genius Name", 2)
-            //};
 
             foreach (var student in students)
             {
