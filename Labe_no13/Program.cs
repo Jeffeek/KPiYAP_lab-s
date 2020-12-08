@@ -7,16 +7,17 @@ namespace Labe_no13
     {
         static void Main(string[] args)
         {
-            int n = 10;
+            int n = 3;
             var matrix = new Matrix(n,n);
-            matrix.FillRandomly(-50, 50);
+            matrix.FillRandomly(0, 10);
 
             MatrixOperation operation = matrix.DiagonalSum;
             Console.WriteLine(operation());
-            operation = matrix.Sum;
+            operation = matrix.AvgSum;
             Console.WriteLine(operation());
             operation = matrix.SumSaddlePoints;
             Console.WriteLine(operation());
+            Console.WriteLine(matrix);
 
             Console.ReadKey();
         }
