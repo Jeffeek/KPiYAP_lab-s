@@ -7,7 +7,7 @@ namespace Labe_no13
     {
         static void Main(string[] args)
         {
-            int n = 3;
+            int n = 10;
             var matrix = new Matrix(n,n);
             matrix.FillRandomly(0, 10);
 

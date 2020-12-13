@@ -5,7 +5,6 @@ namespace Labe_no13
 {
     public class Matrix : IEquatable<Matrix>
     {
-        private bool _isDisposed;
         private readonly double[][] _innerMatrix;
         public int ColumnsCount { get; }
         public int RowsCount { get; }
@@ -37,13 +36,9 @@ namespace Labe_no13
             for (int i = 0; i < RowsCount; i++)
             {
                 for (int j = 0; j < ColumnsCount; j++)
-                {
                     sb.Append( $"{this[i, j]} | ");
-                }
-
                 sb.AppendLine();
             }
-
             return sb.ToString();
         }
 
@@ -68,6 +63,7 @@ namespace Labe_no13
 
         public double DiagonalSum()
         {
+            if (!IsSquare) return default;
             double sum = 0.0;
             for (int i = 0; i < RowsCount; i++)
                 sum += this[i, i];
@@ -78,13 +74,8 @@ namespace Labe_no13
         {
             double sum = 0.0;
             for (int i = 0; i < RowsCount; i++)
-            {
                 for (int j = 0; j < ColumnsCount; j++)
-                {
                     sum += this[i, j];
-                }
-            }
-
             return Math.Round(sum / (RowsCount * ColumnsCount), 2);
         }
 
@@ -92,34 +83,27 @@ namespace Labe_no13
         {
             double sum = 0.0;
             for (int i = 0; i < RowsCount; i++)
-            {
                 for (int j = 0; j < ColumnsCount; j++)
                 {
                     if (!IsMinInRow(i, j) || !IsMaxInCol(i, j)) continue;
                     sum += this[i, j];
                 }
-            }
-
             return sum;
         }
 
         private bool IsMaxInCol(int i, int j)
         {
             for (int k = 0; k < RowsCount; k++)
-            {
                 if (this[k, j] > this[i, j])
                     return false;
-            }
             return true;
         }
 
         private bool IsMinInRow(int i, int j)
         {
             for (int k = 0; k < ColumnsCount; k++)
-            {
                 if (this[i, k] < this[i, j])
                     return false;
-            }
             return true;
         }
 
@@ -128,14 +112,8 @@ namespace Labe_no13
             var rnd = new Random();
 
             for (int i = 0; i < RowsCount; i++)
-            {
                 for (int j = 0; j < ColumnsCount; j++)
-                {
-                    double coefficient = rnd.NextDouble();
-                    coefficient = coefficient > 0.5 ? coefficient : 0.5;
-                    this[i, j] = rnd.NextDouble()  * rnd.Next((int)min, (int)max);
-                }
-            }
+                    this[i, j] = min + (max - min) * rnd.NextDouble();
         }
     }
 }
