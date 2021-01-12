@@ -18,6 +18,7 @@ namespace Lab_no14
 
         public IHero FirstHero { get; }
         public IHero SecondHero { get; }
+        public IHero Winner { get; private set; }
 
         public void Start()
         {
@@ -59,10 +60,12 @@ namespace Lab_no14
             {
                 if (hero == FirstHero)
                 {
+                    Winner = SecondHero;
                     Console.WriteLine("Выиграл второй игрок!");
                 }
                 else
                 {
+                    Winner = FirstHero;
                     Console.WriteLine("Выиграл первый игрок!");
                 }
             }
