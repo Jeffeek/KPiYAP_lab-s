@@ -6,4 +6,18 @@
     <RootNamespace>Lab_no15._2</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="save.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="save.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
 </Project>

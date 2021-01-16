@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization.Json;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
@@ -9,51 +11,14 @@ namespace Lab_no15._2
     class Program
     {
 	    static void Main(string[] args)
-        {
-	        Console.WriteLine("Какое количество крестьян Вас устроит, милорд?");
-	        var targetCount = int.Parse(Console.ReadLine());
-	        Console.WriteLine("Какое количество крестьян будет у вас во владении с начала, милорд?");
-	        var startCount = int.Parse(Console.ReadLine());
-	        var game = new FeodalGameEngine(targetCount, startCount);
-	        game.PeasentAdded += AddPeasantEventHandler;
-	        game.PeasentRemoved += RemovePeasantEventHandler;
-	        game.LostGame += LostTheGameEventHandler;
-	        game.WinGame += WonTheGameEventHandler;
-	        game.MoneyEarned += MoneyBalanceChangedEventHandler;
-	        game.MoneySpended += MoneyBalanceChangedEventHandler;
+	    {
+	        var game = LoadOrNew();
+		    var logger = new ConsoleLogger(game);
 	        StartGame(game);
 	        Console.ReadLine();
         }
-        
-        static void AddPeasantEventHandler(object sender, EventArgs args)
-        {
-	        if(sender is FeodalGameEngine engine)
-		        Console.WriteLine($"К нам поступление крестьянина! {engine.PeasantsCount} / {engine.PeasantsTargetCount}");
-        }
 
-        static void RemovePeasantEventHandler(object sender, EventArgs args)
-        {
-	        if (sender is FeodalGameEngine engine)
-		        Console.WriteLine($"Плохие новости! Крестьянин ушёл! {engine.PeasantsCount} / {engine.PeasantsTargetCount}");
-        }
-
-		static void WonTheGameEventHandler(object sender, EventArgs args)
-		{
-			Console.WriteLine("Поздравляю! Вы выиграли");
-		}
-
-		static void LostTheGameEventHandler(object sender, EventArgs args)
-		{
-			Console.WriteLine("К сожалению вы проиграли!");
-		}
-
-		static void MoneyBalanceChangedEventHandler(object sender, EventArgs args)
-		{
-			if (sender is FeodalGameEngine engine)
-				Console.WriteLine($"Ваша казна поменяла баланс! Баланс: {engine.Money}");
-		}
-
-		static Queue<FeodalActions> GetActionsAtStep()
+	    static Queue<FeodalActions> GetActionsAtStep()
 		{
 			Console.ReadKey(false);
 	        var queue = new Queue<FeodalActions>();
@@ -92,7 +57,6 @@ namespace Lab_no15._2
 						throw new ArgumentException("Ввёл не то, брат");
 		        }
 	        }
-
 	        return queue;
         }
 
@@ -101,10 +65,53 @@ namespace Lab_no15._2
 	        while(gameObject.IsGameOn)
 	        {
 		        var actions = GetActionsAtStep();
+		        if (actions.Count == 0) continue;
 		        gameObject.MakeStep(actions);
+		        SaveGame(gameObject);
 	        }
 
 	        Process.GetCurrentProcess().CloseMainWindow();
         }
+
+        static FeodalGameEngine LoadOrNew()
+        {
+	        Console.WriteLine("Хотите загрузить игру? \n1. Да 2.Нет");
+	        int answer = int.Parse(Console.ReadLine());
+	        if(answer == 1)
+	        {
+		        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DTOGameSave));
+		        using var fileStream = new FileStream($"{Directory.GetCurrentDirectory()}\\save.json", FileMode.Open);
+		        var dto = serializer.ReadObject(fileStream) as DTOGameSave;
+		        return new FeodalGameEngine(dto);
+	        }
+	        else if (answer == 2)
+	        {
+				Console.WriteLine("Какое количество крестьян Вас устроит, милорд?");
+				var targetCount = int.Parse(Console.ReadLine());
+				Console.WriteLine("Какое количество крестьян будет у вас во владении с начала, милорд?");
+				var startCount = int.Parse(Console.ReadLine());
+				return new FeodalGameEngine(targetCount, startCount);
+	        }
+
+	        throw new ArgumentException(nameof(answer));
+        }
+
+        static void SaveGame(FeodalGameEngine game)
+        {
+	        var dto = new DTOGameSave()
+	                  {
+		                  Money = game.Money,
+		                  PeasantsCount = game.PeasantsCount,
+		                  Settings = new DTOGameSettingsSave()
+		                             {
+			                             MaxPeasentCount = game.Settings.MaxPeasentCount,
+			                             PeasantsTargetCount = game.Settings.PeasantsTargetCount,
+			                             PeasentSpawnChance = game.Settings.PeasentSpawnChance
+		                             }
+	                  };
+	        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DTOGameSave));
+	        using var fileStream = new FileStream($"{Directory.GetCurrentDirectory()}\\save.json", FileMode.Truncate);
+	        serializer.WriteObject(fileStream, dto);
+		}
     }
 }

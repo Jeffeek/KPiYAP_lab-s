@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.Linq;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace Lab_no15._2
 {
+    [DataContract]
     public class FeodalGameEngine
     {
-	    private static class GameFields
-	    {
-		    public static Random Random = new Random();
-		    public static double PeasentSpawnChance = 0.5;
-		    public static int MaxPeasentCount = -1;
-	    }
-
 	    public event EventHandler LostGame;
 	    public event EventHandler WinGame;
 	    public event EventHandler MoneyEarned;
@@ -22,12 +15,13 @@ namespace Lab_no15._2
 	    public event EventHandler PeasentAdded;
 	    public event EventHandler PeasentRemoved;
 
-	    public bool IsGameOn { get; private set; }
 	    private int _peasantsCount;
-	    private int _money = 10;
-
-	    public int PeasantsTargetCount { get; }
-
+	    private int _money = 0;
+	    
+	    public bool IsGameOn { get; private set; }
+	    [DataMember]
+	    public FeodalGameSettings Settings { get; }
+	    [DataMember]
 	    public int Money
 	    {
 		    get => _money;
@@ -37,16 +31,17 @@ namespace Lab_no15._2
 			    {
 				    bool addOrRemove = _money < value;
 				    _money = value;
-					if (addOrRemove)
+				    if(addOrRemove)
 					    MoneyEarned?.Invoke(this, EventArgs.Empty);
 				    else
 					    MoneySpended?.Invoke(this, EventArgs.Empty);
-				    if (value < 0)
+
+				    if(value < 0)
 					    LostGame?.Invoke(this, EventArgs.Empty);
-				}
+			    }
 		    }
 	    }
-
+	    [DataMember]
 	    public int PeasantsCount
 		{
 			get => _peasantsCount;
@@ -54,26 +49,41 @@ namespace Lab_no15._2
 			{
 				if(IsGameOn)
 				{
-					bool addOrRemove = _peasantsCount < value;
-					_peasantsCount = value;
-					if (addOrRemove)
+                    bool addOrRemove = _peasantsCount < value;
+                    _peasantsCount = value;
+					if(addOrRemove)
 						PeasentAdded?.Invoke(this, EventArgs.Empty);
-                    else
+					else
 						PeasentRemoved?.Invoke(this, EventArgs.Empty);
-					if (value == PeasantsTargetCount)
+
+					if(value == Settings?.PeasantsTargetCount)
 						WinGame?.Invoke(this, EventArgs.Empty);
 				}
 			}
+	    }
+
+	    //For new game
+	    public FeodalGameEngine(int peasantsTargetCount, int startPeasantsCount)
+		{
+			Settings = new FeodalGameSettings(peasantsTargetCount);
+			_peasantsCount = startPeasantsCount;
+			Init();
 		}
 
-		public FeodalGameEngine(int peasantsTargetCount, int startPeasantsCount)
+	    //for load
+	    public FeodalGameEngine(DTOGameSave gameSave)
 	    {
-		    PeasantsTargetCount = peasantsTargetCount;
-		    _peasantsCount = startPeasantsCount;
+		    Settings = new FeodalGameSettings(gameSave.Settings);
+		    _peasantsCount = gameSave.PeasantsCount;
+		    Init();
+	    }
+
+	    private void Init()
+	    {
 		    LostGame += ReloadGame;
 		    WinGame += ReloadGame;
 		    IsGameOn = true;
-	    }
+		}
 
 	    public void MakeStep(Queue<FeodalActions> actions)
 	    {
@@ -113,48 +123,50 @@ namespace Lab_no15._2
 
 	    private void TryToGeneratePeasent()
 	    {
-		    var randomNumber = GameFields.Random.NextDouble();
-		    if(randomNumber <= GameFields.PeasentSpawnChance)
-			    PeasantsCount++;
+		    if(PeasantsCount == Settings.MaxPeasentCount) return;
+		    var random = new Random();
+		    var randomNumber = random.NextDouble();
+		    if(randomNumber <= Settings.PeasentSpawnChance)
+			    PeasantsCount = _peasantsCount + 1;
 	    }
 
 	    private void ReloadGame(object sender, EventArgs args)
 	    {
 		    IsGameOn = false;
-		    GameFields.PeasentSpawnChance = 0.05;
-		    GameFields.MaxPeasentCount = -1;
-		    _money = -1;
-		    _peasantsCount = -1;
+		    Settings.PeasentSpawnChance = 0.05;
+		    Settings.MaxPeasentCount = 0;
+		    _money = 0;
+		    _peasantsCount = 0;
 	    }
 
 		private void IncreaseTax()
 		{
 			Money = Money + 1;
-			GameFields.PeasentSpawnChance -= 0.002;
+			Settings.PeasentSpawnChance -= 0.002;
 		}
 
 	    private void ReduceTax()
 	    {
 		    Money = Money - 1;
-		    GameFields.PeasentSpawnChance += 0.002;
+		    Settings.PeasentSpawnChance += 0.002;
 	    }
 
 	    private void BuildShack()
 	    {
 		    Money -= 10;
-		    GameFields.MaxPeasentCount += 4;
+		    Settings.MaxPeasentCount += 4;
 	    }
 
 	    private void GiveFreeRein()
 	    {
 		    PeasantsCount--;
-		    GameFields.PeasentSpawnChance += 0.05;
+		    Settings.PeasentSpawnChance += 0.05;
 	    }
 
 	    private void HoldCelebration()
 	    {
 		    Money -= 20;
-		    GameFields.PeasentSpawnChance += 0.01;
+		    Settings.PeasentSpawnChance += 0.01;
 	    }
     }
 
