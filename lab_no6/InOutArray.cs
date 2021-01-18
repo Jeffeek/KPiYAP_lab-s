@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lab_no6
 {
-    class InOutArray
+	internal static class InOutArray
     {
-        public static double[] GetArray(string line)
-        {
-            return line.Split().Select(double.Parse).ToArray();
-        }
+        public static double[] GetArray(string line) => line.Split().Select(double.Parse).ToArray();
 
         public static void PrintArray(double[] arr)
         {

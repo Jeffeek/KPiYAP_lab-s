@@ -1,0 +1,29 @@
+[
+  {
+    "Name": "Tom",
+    "Age": 40,
+    "Address": {
+      "Street": "Vogna",
+      "Number": 13,
+      "Room": 400
+    }
+  },
+  {
+    "Name": "Bob",
+    "Age": 21,
+    "Address": {
+      "Street": "Teilop",
+      "Number": 92,
+      "Room": 12
+    }
+  },
+  {
+    "Name": "JIJA",
+    "Age": 18,
+    "Address": {
+      "Street": "Jijskaya",
+      "Number": 228,
+      "Room": 1
+    }
+  }
+]
