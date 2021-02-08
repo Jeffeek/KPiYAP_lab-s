@@ -31,21 +31,11 @@ namespace Lab_no18
 				                  });
 			}
 
-	        var rmvLast = FirstTask(document);
-	        var ct = SearchByPopulation(document, 1000, 5000);
-	        
-
+	        RemoveLastGovernment(document);
+	        SearchByPopulation(document, 1000, 5000);
         }
 
-        private static XmlDocument FirstTask(XmlDocument document)
-        {
-	        //var countries = document.SelectSingleNode("countries");
-	        //var newDoc = new XmlDocument();
-	        //newDoc.AppendChild()
-	        //newDoc.AppendChild(countries);
-	        //return newDoc;
-	        return null;
-        }
+        private static XmlNode RemoveLastGovernment(XmlDocument document) => document.SelectSingleNode("countries")?.RemoveChild(document["countries"].LastChild) ?? throw new Exception();
 
         private static XmlDocument SearchByPopulation(XmlDocument document, int startRange, int finishRange)
         {
