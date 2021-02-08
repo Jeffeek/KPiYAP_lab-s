@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<countries>
+    <Government>
+        <Name>Netherlands</Name>
+        <Capital>Amsterdam</Capital>
+        <Population>17333790</Population>
+        <Square>41543</Square>
+    </Government>
+    <Government>
+        <Name>Switzerland</Name>
+        <Capital>Bern</Capital>
+        <Population>8558758</Population>
+        <Square>41284</Square>
+    </Government>
+    <Government>
+        <Name>Vatican</Name>
+        <Capital>Vatican</Capital>
+        <Population>38013</Population>
+        <Square>160</Square>
+    </Government>
+  <Government>
+        <Name>Ukraine</Name>
+        <Capital>Kiev</Capital>
+        <Population>2795175</Population>
+        <Square>65301</Square>
+    </Government>
+    <Government>
+        <Name>Slovenia</Name>
+        <Capital>Ljubljana</Capital>
+        <Population>41723998</Population>
+        <Square>603549</Square>
+    </Government>
+    <Government>
+        <Name>Monaco</Name>
+        <Capital>Monaco</Capital>
+        <Population>2066880</Population>
+        <Square>20273</Square>
+    </Government>
+    <Government>
+        <Name>France</Name>
+        <Capital>Paris</Capital>
+        <Population>67848156</Population>
+        <Square>643801</Square>
+    </Government>
+    <Government>
+        <Name>San Marino</Name>
+        <Capital>San Marino</Capital>
+        <Population>33422</Population>
+        <Square>61</Square>
+    </Government>
+    <Government>
+        <Name>Russia</Name>
+        <Capital>Moscow</Capital>
+        <Population>146238185</Population>
+        <Square>17125191</Square>
+    </Government>
+</countries>
