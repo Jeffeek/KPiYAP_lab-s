@@ -139,6 +139,7 @@ namespace Lab_no18._2
 			if (pc == null)
 			{
 				_provider.Out("Нет такого товара");
+				PrintMenu();
 				return;
 			}
 			_provider.Out("Нашли такой товар: ");

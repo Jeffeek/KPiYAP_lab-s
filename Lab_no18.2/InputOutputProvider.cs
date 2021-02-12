@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_no18._2
 {
-    public class InputOutputProvider
+    public sealed class InputOutputProvider
     {
 	    private Func<string> _input;
 	    private Action<string> _output;
