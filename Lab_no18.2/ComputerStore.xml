@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<shop>
+  <products>
+    <pc>
+      <Name>PC_Name_1</Name>
+      <characteristics>
+        <cpu>i5-7400</cpu>
+        <gpu>GTX 1070</gpu>
+      </characteristics>
+      <InStock>100</InStock>
+    </pc>
+    <pc>
+      <Name>PC_Name_2</Name>
+      <characteristics>
+        <cpu>i7-9700</cpu>
+        <gpu>RTX 3080</gpu>
+      </characteristics>
+      <InStock>62</InStock>
+    </pc>
+    <pc>
+      <Name>PC_Name_3</Name>
+      <characteristics>
+        <cpu>i3-7100</cpu>
+        <gpu>GTX 1660</gpu>
+      </characteristics>
+      <InStock>5</InStock>
+    </pc>
+    <pc>
+      <Name>PC_Name_4</Name>
+      <characteristics>
+        <cpu>i5-9100F</cpu>
+        <gpu>GTX 1080</gpu>
+      </characteristics>
+      <InStock>129</InStock>
+    </pc>
+    <pc>
+      <Name>PC_Name_5</Name>
+      <characteristics>
+        <cpu>i9-10980X</cpu>
+        <gpu>RTX 3080 Super</gpu>
+      </characteristics>
+      <InStock>29</InStock>
+    </pc>
+    <pc>
+      <Name>PC_Name_6</Name>
+      <characteristics>
+        <cpu>i7-6700</cpu>
+        <gpu>RTX 3060 Ti</gpu>
+      </characteristics>
+      <InStock>138</InStock>
+    </pc>
+    <pc>
+      <Name>PC_Name_7</Name>
+      <characteristics>
+        <cpu>Ryzen 5 2700</cpu>
+        <gpu>GTX 1060</gpu>
+      </characteristics>
+      <InStock>7</InStock>
+    </pc>
+  </products>
+</shop>
