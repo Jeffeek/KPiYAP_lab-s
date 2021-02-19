@@ -1,25 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Using derectives
+
+using System;
 using System.IO;
-using System.Text;
 using System.Threading;
+
+#endregion
 
 namespace Lab_no19
 {
-    public sealed class ConcurrentFile
-    {
-	    private readonly string _filePath;
-	    private readonly object _syncObject = new object();
+	public sealed class ConcurrentFile
+	{
+		private readonly string _filePath;
+		private readonly object _syncObject = new object();
 
-	    public ConcurrentFile(string path)
-	    {
-		    _filePath = path ?? throw new ArgumentNullException(nameof(path));
-		    if (!File.Exists(_filePath)) throw new FileNotFoundException(nameof(path));
-	    }
+		public ConcurrentFile(string path)
+		{
+			_filePath = path ?? throw new ArgumentNullException(nameof(path));
 
-	    public void Write(string text)
-	    {
+			if (!File.Exists(_filePath)) throw new FileNotFoundException(nameof(path));
+		}
+
+		public void Write(string text)
+		{
 			var isLockRequired = false;
+
 			try
 			{
 				Monitor.Enter(_syncObject, ref isLockRequired);
@@ -32,19 +36,21 @@ namespace Lab_no19
 			}
 		}
 
-	    public string Read()
-	    {
-		    var isLockRequired = false;
-		    try
-		    {
-			    Monitor.Enter(_syncObject, ref isLockRequired);
+		public string Read()
+		{
+			var isLockRequired = false;
+
+			try
+			{
+				Monitor.Enter(_syncObject, ref isLockRequired);
 				var result = File.ReadAllLines(_filePath);
+
 				return String.Join(Environment.NewLine, result);
-		    }
-		    finally
-		    {
-			    if (isLockRequired) Monitor.Exit(_syncObject);
-		    }
-	    } 
-    }
+			}
+			finally
+			{
+				if (isLockRequired) Monitor.Exit(_syncObject);
+			}
+		}
+	}
 }

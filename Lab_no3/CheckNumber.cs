@@ -1,94 +1,105 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Using derectives
+
+using System;
+
+#endregion
 
 namespace Lab_no3
 {
-    public class CheckNumber
-    {
-        public bool Check()
-        {
-            Console.WriteLine("Введите цифру (0-9)");
-            if (int.TryParse(Console.ReadLine(), out int x))
-            {
-                switch (x)
-                {
-                    case 0:
-                    {
-                        WriteNum("Ноль");
-                        break;
-                    }
+	public class CheckNumber
+	{
+		public bool Check()
+		{
+			Console.WriteLine("Введите цифру (0-9)");
 
-                    case 1:
-                    {
-                        WriteNum("Один");
-                        break;
-                    }
+			if (Int32.TryParse(Console.ReadLine(), out var x))
+			{
+				switch (x)
+				{
+					case 0:
+					{
+						WriteNum("Ноль");
 
-                    case 2:
-                    {
-                        WriteNum("Два");
-                        break;
-                    }
+						break;
+					}
 
-                    case 3:
-                    {
-                        WriteNum("Три");
-                        break;
-                    }
+					case 1:
+					{
+						WriteNum("Один");
 
-                    case 4:
-                    {
-                        WriteNum("Четыре");
-                        break;
-                    }
+						break;
+					}
 
-                    case 5:
-                    {
-                        WriteNum("Пять");
-                        break;
-                    }
+					case 2:
+					{
+						WriteNum("Два");
 
-                    case 6:
-                    {
-                        WriteNum("Шесть");
-                        break;
-                    }
+						break;
+					}
 
-                    case 7:
-                    {
-                        WriteNum("Семь");
-                        break;
-                    }
+					case 3:
+					{
+						WriteNum("Три");
 
-                    case 8:
-                    {
-                        WriteNum("Восемь");
-                        break;
-                    }
+						break;
+					}
 
-                    case 9:
-                    {
-                        WriteNum("Девять");
-                        break;
-                    }
-                }
+					case 4:
+					{
+						WriteNum("Четыре");
 
-                return x >= 0 && x <= 9;
-            }
+						break;
+					}
 
-            return false;
-        }
+					case 5:
+					{
+						WriteNum("Пять");
 
-        private void WriteNum(string num) => Console.WriteLine(num);
+						break;
+					}
 
-        public (bool, int) CheckInt()
-        {
-            if (int.TryParse(Console.ReadLine(), out int x))
-                return (true, x);
-            return (false, int.MaxValue);
-        }
-    }
+					case 6:
+					{
+						WriteNum("Шесть");
+
+						break;
+					}
+
+					case 7:
+					{
+						WriteNum("Семь");
+
+						break;
+					}
+
+					case 8:
+					{
+						WriteNum("Восемь");
+
+						break;
+					}
+
+					case 9:
+					{
+						WriteNum("Девять");
+
+						break;
+					}
+				}
+
+				return x >= 0 && x <= 9;
+			}
+
+			return false;
+		}
+
+		private void WriteNum(string num) => Console.WriteLine(num);
+
+		public (bool, int) CheckInt()
+		{
+			if (Int32.TryParse(Console.ReadLine(), out var x)) return (true, x);
+
+			return (false, Int32.MaxValue);
+		}
+	}
 }

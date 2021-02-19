@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Using derectives
+
+using System;
 using Labe_no9.View;
+
+#endregion
 
 namespace Labe_no9
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Main view = new Main();
-            Console.ReadLine();
-        }
-    }
+	internal class Program
+	{
+		private static void Main(string[] args)
+		{
+			var view = new Main();
+			Console.ReadLine();
+		}
+	}
 }

@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿#region Using derectives
+
+using System;
+
+#endregion
 
 namespace Labe_no12
 {
-    public class BadQException : Exception
-    {
-        public override string Message => "Q must be NOT 0";
+	public class BadQException : Exception
+	{
+		public override string Message => "Q must be NOT 0";
 
-        //public override string StackTrace => Message;
+		//public override string StackTrace => Message;
 
-        public override string ToString() => Message;
-    }
+		public override string ToString() => Message;
+	}
 }

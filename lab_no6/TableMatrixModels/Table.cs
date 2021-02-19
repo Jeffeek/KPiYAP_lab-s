@@ -1,53 +1,47 @@
-﻿using System;
+﻿#region Using derectives
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace lab_no6.TableMatrixModels
 {
-    class Table
-    {
-        public List<Column> Columns { get; }
+	internal class Table
+	{
+		public Table(double[,] matrix)
+		{
+			Columns = new List<Column>();
+			FillColumns(matrix);
+		}
 
-        public Table(double[,] matrix)
-        {
-            Columns = new List<Column>();
-            FillColumns(matrix);
-        }
+		public List<Column> Columns { get; }
 
-        private double[] MatrixToColumn(double[,] matrix, int columnIndex)
-        {
-            double[] vector = new double[matrix.GetLength(0)];
-            for (int i = 0; i < matrix.GetLength(0); i++)
-            {
-                vector[i] = matrix[i, columnIndex];
-            }
+		private double[] MatrixToColumn(double[,] matrix, int columnIndex)
+		{
+			var vector = new double[matrix.GetLength(0)];
+			for (var i = 0; i < matrix.GetLength(0); i++) vector[i] = matrix[i, columnIndex];
 
-            return vector;
-        }
+			return vector;
+		}
 
-        private void FillColumns(double[,] matrix)
-        {
-            for (int i = 0; i < matrix.GetLength(1); i++)
-            {
-                Columns.Add(new Column(MatrixToColumn(matrix, i)));
-            }
-        }
+		private void FillColumns(double[,] matrix)
+		{
+			for (var i = 0; i < matrix.GetLength(1); i++) Columns.Add(new Column(MatrixToColumn(matrix, i)));
+		}
 
-        public override string ToString()
-        {
-            string str = "";
-            for (int i = 0; i < Columns.Count; i++)
-            {
-                str += Columns[i].ToString();
-                str += "\n";
-            }
+		public override string ToString()
+		{
+			var str = "";
 
+			for (var i = 0; i < Columns.Count; i++)
+			{
+				str += Columns[i].ToString();
+				str += "\n";
+			}
 
-            return "----------------------------------------------------------------\n" +
-                   str +
-                   "\n----------------------------------------------------------------";
-        }
-    }
+			return "----------------------------------------------------------------\n"
+				   + str
+				   + "\n----------------------------------------------------------------";
+		}
+	}
 }

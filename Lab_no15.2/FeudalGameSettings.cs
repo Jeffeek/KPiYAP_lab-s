@@ -1,33 +1,35 @@
 ﻿namespace Lab_no15._2
 {
-    public class FeudalGameSettings
-    {
-        private double _peasantSpawnChance = 0.3;
-        public double PeasantSpawnChance
-        {
-            get => _peasantSpawnChance;
-            internal set
-            {
-                if (value > 1.0 ||
-                   value < 0.0) return;
+	public class FeudalGameSettings
+	{
+		private double _peasantSpawnChance = 0.3;
 
-                _peasantSpawnChance = value;
-            }
-        }
+		//for new game
+		public FeudalGameSettings(int peasantsTargetCount) => PeasantsTargetCount = peasantsTargetCount;
 
-        public int MaxPeasantCount { get; internal set; } = 10;
+		//for load
+		public FeudalGameSettings(DTOGameSettingsSave dto)
+		{
+			PeasantSpawnChance = dto.PeasantSpawnChance;
+			MaxPeasantCount = dto.MaxPeasantCount;
+			PeasantsTargetCount = dto.PeasantsTargetCount;
+		}
 
-        public int PeasantsTargetCount { get; }
+		public double PeasantSpawnChance
+		{
+			get => _peasantSpawnChance;
+			internal set
+			{
+				if (value > 1.0
+					|| value < 0.0)
+					return;
 
-        //for new game
-        public FeudalGameSettings(int peasantsTargetCount) => PeasantsTargetCount = peasantsTargetCount;
+				_peasantSpawnChance = value;
+			}
+		}
 
-        //for load
-        public FeudalGameSettings(DTOGameSettingsSave dto)
-        {
-            PeasantSpawnChance = dto.PeasantSpawnChance;
-            MaxPeasantCount = dto.MaxPeasantCount;
-            PeasantsTargetCount = dto.PeasantsTargetCount;
-        }
-    }
+		public int MaxPeasantCount { get; internal set; } = 10;
+
+		public int PeasantsTargetCount { get; }
+	}
 }

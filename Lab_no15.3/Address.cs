@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Using derectives
+
 using System.Runtime.Serialization;
-using System.Text;
+
+#endregion
 
 namespace Lab_no15._3
 {
@@ -10,8 +11,10 @@ namespace Lab_no15._3
 	{
 		[DataMember]
 		public string Street { get; set; }
+
 		[DataMember]
 		public int Number { get; set; }
+
 		[DataMember]
 		public int Room { get; set; }
 	}

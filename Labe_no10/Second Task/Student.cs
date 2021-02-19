@@ -1,26 +1,29 @@
-﻿using System;
+﻿#region Using derectives
+
+using System;
+
+#endregion
 
 namespace Labe_no10.Second_Task
 {
-    public abstract class Student
-    {
-        public override string ToString()
-        {
-            return $"{nameof(FullName)}: {FullName}, {nameof(VisitedClasses)}: {VisitedClasses} / {TotalCLasses}";
-        }
+	public abstract class Student
+	{
+		protected const int TotalCLasses = 20;
 
-        protected const int TotalCLasses = 20;
-        public string FullName { get; }
-        public int VisitedClasses { get; }
+		protected Student(string fullName, int visitedClasses)
+		{
+			if (String.IsNullOrEmpty(fullName)) throw new ArgumentException(nameof(fullName));
+			if (visitedClasses > TotalCLasses) throw new ArgumentException("Visited Classes count can't be more than Total", nameof(visitedClasses));
+			FullName = fullName;
+			VisitedClasses = visitedClasses;
+		}
 
-        public abstract bool PassOffset();
+		public string FullName { get; }
 
-        protected Student(string fullName, int visitedClasses)
-        {
-            if (String.IsNullOrEmpty(fullName)) throw new ArgumentException(nameof(fullName));
-            if (visitedClasses > TotalCLasses) throw new ArgumentException("Visited Classes count can't be more than Total", nameof(visitedClasses));
-            FullName = fullName;
-            VisitedClasses = visitedClasses;
-        }
-    }
+		public int VisitedClasses { get; }
+
+		public override string ToString() => $"{nameof(FullName)}: {FullName}, {nameof(VisitedClasses)}: {VisitedClasses} / {TotalCLasses}";
+
+		public abstract bool PassOffset();
+	}
 }

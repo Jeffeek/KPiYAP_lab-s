@@ -1,22 +1,22 @@
-﻿using System;
+﻿#region Using derectives
+
+using System;
+
+#endregion
 
 namespace Lab_no16._2
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-	        var set = new StrangeSet<int>();
-	        for (int i = 0; i < 10; i++)
-	        {
-		        set.Add(i);
-	        }
+	internal class Program
+	{
+		private static void Main(string[] args)
+		{
+			var set = new StrangeSet<int>();
+			for (var i = 0; i < 10; i++) set.Add(i);
 
-	        set += 5;
-	        var remove = set - 5;
+			set += 5;
+			var remove = set - 5;
 
-	        Console.WriteLine();
-
-        }
-    }
+			Console.WriteLine();
+		}
+	}
 }

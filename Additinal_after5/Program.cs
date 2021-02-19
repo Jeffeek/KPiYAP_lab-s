@@ -1,12 +1,16 @@
-﻿using Additinal_after5.Models;
+﻿#region Using derectives
+
+using Additinal_after5.Models;
+
+#endregion
 
 namespace Additinal_after5
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var runner = new Runner();
-        }
-    }
+	internal class Program
+	{
+		private static void Main(string[] args)
+		{
+			var runner = new Runner();
+		}
+	}
 }

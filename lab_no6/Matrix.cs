@@ -1,105 +1,100 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿#region Using derectives
+
+using System;
 using System.Threading;
+
+#endregion
 
 namespace lab_no6
 {
-    public class Matrix
-    {
-        private readonly double[,] _matrixArray;
-        public int RowsCount { get; }
-        public int ColumnsCount { get; }
+	public class Matrix
+	{
+		public Matrix(int rowsCount, int columnsCount)
+		{
+			RowsCount = rowsCount;
+			ColumnsCount = columnsCount;
+			InnerMatrix = new double[RowsCount, ColumnsCount];
+		}
 
-        public Matrix(int rowsCount, int columnsCount)
-        {
-            RowsCount = rowsCount;
-            ColumnsCount = columnsCount;
-            _matrixArray = new double[RowsCount,ColumnsCount];
-        }
+		public int RowsCount { get; }
 
-        public double[,] InnerMatrix => _matrixArray;
+		public int ColumnsCount { get; }
 
-        public void FillRandomly()
-        {
-            Thread.Sleep(5);
-            var rnd = new Random(DateTime.UtcNow.Millisecond);
-            for (int i = 0; i < RowsCount; i++)
-            {
-                for (int j = 0; j < ColumnsCount; j++)
-                {
-                    this[i, j] = rnd.Next(-100, 100);
-                }
-            }
-        }
+		public double[,] InnerMatrix { get; }
 
-        public double this[int row, int column]
-        {
-            get
-            {
-                if (row >= RowsCount || column >= ColumnsCount)
-                    return _matrixArray[RowsCount-1, ColumnsCount-1];
-                if (row < 0 || column < 0)
-                    return _matrixArray[RowsCount - Math.Abs(row) - 1, ColumnsCount - Math.Abs(column) - 1];
-                return _matrixArray[row, column];
-            }
+		public double this[int row, int column]
+		{
+			get
+			{
+				if (row >= RowsCount
+					|| column >= ColumnsCount)
+					return InnerMatrix[RowsCount - 1, ColumnsCount - 1];
 
-            set
-            {
-                if (row >= RowsCount || column >= ColumnsCount) return;
-                _matrixArray[row, column] = value;
-            }
-        }
+				if (row < 0
+					|| column < 0)
+					return InnerMatrix[RowsCount - Math.Abs(row) - 1, ColumnsCount - Math.Abs(column) - 1];
 
+				return InnerMatrix[row, column];
+			}
 
-        public string GetMatrixAsString()
-        {
-            string result = "";
-            for (int i = 0; i < RowsCount; i++)
-            {
-                result += "\n";
-                for (int j = 0; j < ColumnsCount; j++)
-                {
-                    result += $"{this[i, j]} | ";
-                }
-            }
+			set
+			{
+				if (row >= RowsCount
+					|| column >= ColumnsCount)
+					return;
 
-            return result;
-        }
+				InnerMatrix[row, column] = value;
+			}
+		}
 
-        public static Matrix MatrixMultiplication(Matrix matrixA, Matrix matrixB)
-        {
-            if (matrixA.ColumnsCount != matrixB.RowsCount)
-            {
-                throw new Exception(
-                    "Умножение не возможно! Количество столбцов первой матрицы не равно количеству строк второй матрицы.");
-            }
+		public void FillRandomly()
+		{
+			Thread.Sleep(5);
+			var rnd = new Random(DateTime.UtcNow.Millisecond);
 
-            var matrixC = new Matrix(matrixA.RowsCount, matrixB.ColumnsCount);
+			for (var i = 0; i < RowsCount; i++)
+			{
+				for (var j = 0; j < ColumnsCount; j++) this[i, j] = rnd.Next(-100, 100);
+			}
+		}
 
-            for (var i = 0; i < matrixA.RowsCount; i++)
-            {
-                for (var j = 0; j < matrixB.ColumnsCount; j++)
-                {
-                    matrixC[i, j] = 0.0;
+		public string GetMatrixAsString()
+		{
+			var result = "";
 
-                    for (var k = 0; k < matrixA.ColumnsCount; k++)
-                    {
-                        matrixC[i, j] += matrixA[i, k] * matrixB[k, j];
-                    }
-                }
-            }
+			for (var i = 0; i < RowsCount; i++)
+			{
+				result += "\n";
+				for (var j = 0; j < ColumnsCount; j++) result += $"{this[i, j]} | ";
+			}
 
-            return matrixC;
-        }
+			return result;
+		}
 
-        public static Matrix MulVector(Matrix matrix, double[] vector)
-        {
-            return MatrixMultiplication(matrix, MatrixConvertor.VectorToMatrix(vector));
-        }
+		public static Matrix MatrixMultiplication(Matrix matrixA, Matrix matrixB)
+		{
+			if (matrixA.ColumnsCount != matrixB.RowsCount)
+			{
+				throw new Exception("Умножение не возможно! Количество столбцов первой матрицы не равно количеству строк второй матрицы.");
+			}
 
-        public override string ToString()
-        {
-            return GetMatrixAsString();
-        }
-    }
+			var matrixC = new Matrix(matrixA.RowsCount, matrixB.ColumnsCount);
+
+			for (var i = 0; i < matrixA.RowsCount; i++)
+			{
+				for (var j = 0; j < matrixB.ColumnsCount; j++)
+				{
+					matrixC[i, j] = 0.0;
+
+					for (var k = 0; k < matrixA.ColumnsCount; k++) matrixC[i, j] += matrixA[i, k] * matrixB[k, j];
+				}
+			}
+
+			return matrixC;
+		}
+
+		public static Matrix MulVector(Matrix matrix, double[] vector) => MatrixMultiplication(matrix, MatrixConvertor.VectorToMatrix(vector));
+
+		public override string ToString() => GetMatrixAsString();
+	}
 }

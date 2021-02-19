@@ -1,49 +1,52 @@
-﻿using Labe_no9.Enums;
+﻿#region Using derectives
+
+using Labe_no9.Enums;
+
+#endregion
 
 namespace Labe_no9.Model
 {
-    public class GovernmentBuilder
-    {
-        private Government _government;
+	public class GovernmentBuilder
+	{
+		private Government _government;
 
-        public GovernmentBuilder()
-        {
-            _government = new Government();
-        }
+		public GovernmentBuilder() => _government = new Government();
 
-        public Government Build()
-        {
-            return _government;
-        }
+		public Government Build() => _government;
 
-        public GovernmentBuilder SetName(string name)
-        {
-            _government.Name = name;
-            return this;
-        }
+		public GovernmentBuilder SetName(string name)
+		{
+			_government.Name = name;
 
-        public GovernmentBuilder SetCapital(string capital)
-        {
-            _government.Capital = capital;
-            return this;
-        }
+			return this;
+		}
 
-        public GovernmentBuilder SetType(GovernmentType type)
-        {
-            _government.Type = type;
-            return this;
-        }
+		public GovernmentBuilder SetCapital(string capital)
+		{
+			_government.Capital = capital;
 
-        public GovernmentBuilder SetArea(long area)
-        {
-            _government.Area = area;
-            return this;
-        }
+			return this;
+		}
 
-        public GovernmentBuilder SetPopulation(long population)
-        {
-            _government.Population = population;
-            return this;
-        }
-    }
+		public GovernmentBuilder SetType(GovernmentType type)
+		{
+			_government.Type = type;
+
+			return this;
+		}
+
+		public GovernmentBuilder SetArea(long area)
+		{
+			_government.Area = area;
+
+			return this;
+		}
+
+		public GovernmentBuilder SetPopulation(long population)
+		{
+			_government.Population = population;
+
+			return this;
+		}
+	}
 }
