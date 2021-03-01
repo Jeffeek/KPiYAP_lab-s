@@ -1,55 +1,52 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace Lab_no20
 {
     class Program
     {
-        public static double Power(double num, int power)
+        static async Task Main(string[] args)
         {
-            var result = num;
+            var tokenSource = new CancellationTokenSource();
+            var token = tokenSource.Token;
+            Console.Write("Введите число -1 < x < 1: ");
+            var x = Double.Parse(Console.ReadLine());
+            Console.Write("E = ");
+            var E = Double.Parse(Console.ReadLine());
+            Task.Run(() => Log10(x, E, token));
+            var key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.UpArrow)
+                tokenSource.Cancel();
 
-            while (power > 0)
-            {
-                result *= num;
-                power--;
-            }
-
-            return result;
+            Console.ReadLine();
         }
 
-        public static void Shit(int x, int delta)
+        private static async Task<double> Log10(double x, double precision, CancellationToken token)
         {
-            double power = 1;
-            var i = 2;
-            var kol = 1;
-
-            while (power.ToString().Length - 3 < delta)
+            var n = 1;
+            var t = x;
+            var s = t;
+            while (MathBicycle.Abs(t) / n > precision)
             {
-                Console.WriteLine(power);
+                Console.Clear();
+                if (token.IsCancellationRequested)
+                {
+                    Console.WriteLine("До конца операция не выполнилась, но запрос остановить его всё таки пришёл..");
 
-                if (kol % 2 == 1)
-                    power -= Power(x, i) / i;
-                else
-                    power += Power(x, i) / i;
+                    break;
+                }
 
-                i++;
-                kol++;
-                var progress = (double)(power.ToString().Length - 3) / delta * 100;
-                Console.WriteLine($"Прогресс: {progress}");
-                Thread.Sleep(1000);
+                n++;
+                t = -t * x;
+                s += t / n;
+                Console.WriteLine($"{n} {t} {s}");
+                await Task.Delay(2000);
             }
 
-            Console.WriteLine(power);
-        }
-
-        static void Main(string[] args)
-        {
-            var task = new Task(() => Shit(2, 3));
-            task.Start();
-            Console.ReadKey();
+            return s;
         }
     }
 }
