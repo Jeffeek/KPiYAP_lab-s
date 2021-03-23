@@ -11,6 +11,8 @@ namespace Lab_no25.Model.Entities
     [Index(nameof(Id))]
     public class ToyCategoryEntity
     {
+        public override string ToString() => $"{nameof(Id)}: {Id}, {nameof(WarrantyPeriod)}: {WarrantyPeriod}, {nameof(CareRules)}: {CareRules}, {nameof(Age)}: {Age}";
+
         [Key]
         public int Id { get; set; }
 
@@ -24,5 +26,7 @@ namespace Lab_no25.Model.Entities
         [Range(0, 1000)]
         [Required]
         public int Age { get; set; }
+
+        public ICollection<ToyEntity> Toys { get; set; }
     }
 }

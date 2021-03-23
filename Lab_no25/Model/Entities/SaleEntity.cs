@@ -8,7 +8,9 @@ namespace Lab_no25.Model.Entities
 	[Microsoft.EntityFrameworkCore.Index(nameof(Id))]
 	public class SaleEntity
 	{
-		[Required]
+        public override string ToString() => $"{nameof(Id)}: {Id}, {nameof(Toy)}: {Toy}, {nameof(ToyId)}: {ToyId}, {nameof(SaleCount)}: {SaleCount}, {nameof(Discount)}: {Discount}, {nameof(SaleDate)}: {SaleDate}, {nameof(SaleSum)}: {SaleSum}";
+
+        [Required]
 		[Key]
 		public int Id { get; set; }
 
