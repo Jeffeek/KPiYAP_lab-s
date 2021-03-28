@@ -16,5 +16,7 @@ namespace Lab_no25.Services.Interfaces
         Task<bool> UpdateToyCategoryAsync(ToyCategoryEntity toyCategory);
 
         Task<ToyCategoryEntity> GetByIdAsync(int id);
+
+        Task<IEnumerable<ToyCategoryEntity>> GetAllToysCategoriesAsync();
     }
 }

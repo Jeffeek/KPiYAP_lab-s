@@ -39,5 +39,7 @@ namespace Lab_no25.Services.Implementations
         }
 
         public async Task<ToyCategoryEntity> GetByIdAsync(int id) => await _context.ToyCategories.FindAsync(id);
+
+        public async Task<IEnumerable<ToyCategoryEntity>> GetAllToysCategoriesAsync() => await _context.ToyCategories.ToListAsync();
     }
 }

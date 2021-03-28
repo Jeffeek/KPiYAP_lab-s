@@ -39,5 +39,7 @@ namespace Lab_no25.Services.Implementations
         }
 
         public async Task<SaleEntity> GetByIdAsync(int id) => await _context.Sales.FindAsync(id);
+
+        public async Task<IEnumerable<SaleEntity>> GetAllSalesAsync() => await _context.Sales.Include(x => x.Toy).ThenInclude(x => x.Category).ToListAsync();
     }
 }

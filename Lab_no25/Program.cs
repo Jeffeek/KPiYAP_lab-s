@@ -17,16 +17,16 @@ namespace Lab_no25
 
         static async Task Main(string[] args)
         {
-            _kernel = new StandardKernel();
-            _kernel.Load(Assembly.GetExecutingAssembly());
+            //_kernel = new StandardKernel();
+            //_kernel.Load(Assembly.GetExecutingAssembly());
 
-            var context = _kernel.Get<ToyStoreDbContext>();
-            var toysService = _kernel.Get<IToysService>();
-            var toysCategoriesService = _kernel.Get<IToysCategoriesService>();
-            var salesService = _kernel.Get<ISalesService>();
+            //var context = _kernel.Get<ToyStoreDbContext>();
+            //var toysService = _kernel.Get<IToysService>();
+            //var toysCategoriesService = _kernel.Get<IToysCategoriesService>();
+            //var salesService = _kernel.Get<ISalesService>();
 
-            var initializer = new ToyStoreContextInitializer();
-            await initializer.Initialize(context);
+            //var initializer = new ToyStoreContextInitializer();
+            //await initializer.Initialize(context);
         }
     }
 }

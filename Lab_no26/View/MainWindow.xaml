@@ -1,0 +1,860 @@
+﻿<Window
+    x:Class="Lab_no26.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <TabControl>
+        <TabItem Header="Toys">
+            <TabPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.8*" />
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.05*" />
+                        <RowDefinition Height="0.95*" />
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0">
+                        <Button.Content>
+                            <Viewbox Stretch="Uniform">
+                                <Canvas Width="20" Height="20">
+                                    <Canvas.RenderTransform>
+                                        <TranslateTransform X="0" Y="0" />
+                                    </Canvas.RenderTransform>
+                                    <Canvas.Resources />
+                                    <Canvas>
+                                        <Canvas.RenderTransform>
+                                            <MatrixTransform Matrix="0.46408163 0 0 0.46734694 -1.0236735 -1.1673468" />
+                                        </Canvas.RenderTransform>
+                                        <Path Fill="#FF4CAF50">
+                                            <Path.Data>
+                                                <PathGeometry Figures="M 44 24 C 44 35 35 44 24 44 13 44 4 35 4 24 4 13 13 4 24 4 35 4 44 13 44 24 Z" FillRule="NonZero" />
+                                            </Path.Data>
+                                        </Path>
+                                        <Line
+                                            Stroke="#FFFFFFFF"
+                                            StrokeThickness="6"
+                                            X1="24"
+                                            X2="24"
+                                            Y1="34"
+                                            Y2="14" />
+                                        <Line
+                                            Stroke="#FFFFFFFF"
+                                            StrokeThickness="6"
+                                            X1="14"
+                                            X2="34"
+                                            Y1="24"
+                                            Y2="24" />
+                                    </Canvas>
+                                </Canvas>
+                            </Viewbox>
+                        </Button.Content>
+                    </Button>
+                    <DataGrid
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Toys}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Entity.Id}" Header="Id" />
+                            <DataGridTextColumn Binding="{Binding Entity.Producer}" Header="Producer" />
+                            <DataGridTextColumn Binding="{Binding Entity.Price}" Header="Price" />
+                            <DataGridTextColumn Binding="{Binding Entity.WarehouseCount}" Header="Warehouse Count" />
+                            <DataGridTextColumn Binding="{Binding Entity.CategoryId}" Header="Category Id" />
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button>
+                                            <Viewbox Stretch="Uniform">
+                                                <Canvas
+                                                    Name="svg24"
+                                                    Width="20"
+                                                    Height="20">
+                                                    <Canvas.RenderTransform>
+                                                        <TranslateTransform X="0" Y="0" />
+                                                    </Canvas.RenderTransform>
+                                                    <Canvas.Resources />
+                                                    <Path
+                                                        Name="path2"
+                                                        Fill="#FFF5CE85"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 3.1801079 14.60387 4.4397152 13.336869 6.8951941 15.48733 5.4828187 16.907946 1.4631685 18.633808 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path4"
+                                                        Fill="#FF967A44"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 4.4513913 13.67147 2.0876678 1.828099 -1.195385 1.201929 -3.4183079 1.468071 1.4600546 -3.425791 1.0659705 -1.072308 M 4.4285243 13.002744 2.9747951 14.464446 1 19.099014 5.6214781 17.113892 7.2518161 15.474624 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path6"
+                                                        Fill="#FF36404D"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 2.1209476 16.473056 1.0014595 19.1 3.6208979 17.975356 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path8"
+                                                        Fill="#FFF78F8F"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 14.895566 2.8173385 1.088839 -1.094317 c 0.307007 -0.3086785 0.714713 -0.4784272 1.148191 -0.4784272 0.433498 0 0.841204 0.1697487 1.148209 0.4784272 0.633437 0.6369247 0.633437 1.6725386 0 2.3094615 l -1.088357 1.0943169 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path10"
+                                                        Fill="#FFC74343"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 17.132596 1.4891892 c 0.368798 0 0.715674 0.1443108 0.976464 0.4065165 0.538583 0.5415329 0.538583 1.4220728 0 1.9636049 L 17.192448 4.7809429 15.240036 2.8173385 16.156631 1.8957057 C 16.416922 1.6335 16.763816 1.4891892 17.132596 1.4891892 M 17.132596 1 c -0.477751 0 -0.956002 0.1834461 -1.320417 0.5498494 l -1.260584 1.2674891 2.640853 2.6553183 1.260583 -1.2674892 c 0.729292 -0.7332955 0.729292 -1.9220246 0 -2.6553182 v 0 C 18.088617 1.1834461 17.61085 1 17.132596 1 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Canvas Name="g16">
+                                                        <Canvas.RenderTransform>
+                                                            <MatrixTransform Matrix="0.4865227 0 0 0.48918923 0.26972922 0.26621616" />
+                                                        </Canvas.RenderTransform>
+                                                        <Path Name="path12" Fill="#FFFFEEA3">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="M 11.346 33.388 C 11.28 33.235 11.189 33.08 11.064 32.934 10.754 32.571 10.315 32.35 9.754 32.273 9.554 31.006 8.548 30.47 7.765 30.309 7.633 29.445 7.116 28.967 6.564 28.727 l 21.49 -21.503 4.721 4.721 z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                        </Path>
+                                                        <Path Name="path14" Fill="#FFBA9B48">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="m 28.054 7.931 4.014 4.014 -20.637 20.649 C 11.189 32.316 10.793 32.004 10.17 31.846 9.864 30.768 9.015 30.161 8.187 29.903 8.036 29.357 7.74 28.935 7.366 28.631 L 28.054 7.931 M 28.053 6.517 5.56 29.023 c 0 0 0.007 0 0.021 0 0.197 0 1.715 0.054 1.715 1.731 0 0 1.993 0.062 1.993 1.99 1.982 0 1.71 1.697 1.71 1.697 L 33.481 11.946 Z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                        </Path>
+                                                    </Canvas>
+                                                    <Canvas Name="g22">
+                                                        <Canvas.RenderTransform>
+                                                            <MatrixTransform Matrix="0.4865227 0 0 0.48918923 0.26972922 0.26621616" />
+                                                        </Canvas.RenderTransform>
+                                                        <Path Name="path18" Fill="#FFD9E7F5">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="m 29.107 4.764 h 5.578 v 6.677 h -5.578 z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                            <Path.RenderTransform>
+                                                                <RotateTransform Angle="-45.009" />
+                                                            </Path.RenderTransform>
+                                                        </Path>
+                                                        <Path Name="path20" Fill="#FF788B9C">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="m 31.507 4.477 4.014 4.014 -3.237 3.237 -4.014 -4.014 3.237 -3.237 m 0 -1.414 -4.651 4.651 5.428 5.428 4.651 -4.651 z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                        </Path>
+                                                    </Canvas>
+                                                </Canvas>
+                                            </Viewbox>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding RemoveCommand}">
+                                            <Viewbox Stretch="Uniform">
+                                                <Canvas
+                                                    Name="svg28"
+                                                    Width="20"
+                                                    Height="20">
+                                                    <Canvas.RenderTransform>
+                                                        <TranslateTransform X="0" Y="0" />
+                                                    </Canvas.RenderTransform>
+                                                    <Canvas.Resources>
+                                                        <LinearGradientBrush x:Key="WxWrlTsssL_WlnpfbClFCa" MappingMode="Absolute" StartPoint="24,593" EndPoint="24,651">
+                                                            <LinearGradientBrush.GradientStops>
+                                                                <GradientStopCollection>
+                                                                    <GradientStop Offset="0" Color="#F44F5A" />
+                                                                    <GradientStop Offset=".443" Color="#EE3D4A" />
+                                                                    <GradientStop Offset="1" Color="#E52030" />
+                                                                </GradientStopCollection>
+                                                            </LinearGradientBrush.GradientStops>
+                                                            <LinearGradientBrush.Transform>
+                                                                <MatrixTransform Matrix="0.49236548 0 0 -0.47933019 -1.6981074 316.00742" />
+                                                            </LinearGradientBrush.Transform>
+                                                        </LinearGradientBrush>
+                                                        <LinearGradientBrush x:Key="WxWrlTsssL_WlnpfbClFCb" MappingMode="Absolute" StartPoint="24,658" EndPoint="24,648">
+                                                            <LinearGradientBrush.GradientStops>
+                                                                <GradientStopCollection>
+                                                                    <GradientStop Offset="0" Color="#F44F5A" />
+                                                                    <GradientStop Offset=".443" Color="#EE3D4A" />
+                                                                    <GradientStop Offset="1" Color="#E52030" />
+                                                                </GradientStopCollection>
+                                                            </LinearGradientBrush.GradientStops>
+                                                            <LinearGradientBrush.Transform>
+                                                                <MatrixTransform Matrix="0.49236548 0 0 -0.47933019 -1.6981074 316.00742" />
+                                                            </LinearGradientBrush.Transform>
+                                                        </LinearGradientBrush>
+                                                    </Canvas.Resources>
+                                                    <Path
+                                                        Name="path9"
+                                                        Fill="{StaticResource WxWrlTsssL_WlnpfbClFCa}"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 17.504145 3.4841446 V 18.343379 c 0 0.529661 -0.440667 0.958661 -0.984731 0.958661 H 3.7179126 c -0.5440638 0 -0.9847309 -0.429 -0.9847309 -0.958661 V 3.4841446 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path18"
+                                                        Fill="{StaticResource WxWrlTsssL_WlnpfbClFCb}"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 12.088125 0.60816327 H 8.149202 c -0.5440639 0 -0.9847311 0.42900053 -0.9847311 0.95866043 V 2.5254842 H 13.072855 V 1.5668237 c 0 -0.5296599 -0.440667 -0.95866043 -0.98473 -0.95866043 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path20"
+                                                        Fill="#FFFFA8A8"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 2.2408163 3.9634747 V 3.4841446 c 0 -0.7942501 0.6612467 -1.4379906 1.4770963 -1.4379906 H 16.519414 c 0.81585 0 1.477097 0.6437405 1.477097 1.4379906 v 0.4793301 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path22"
+                                                        Fill="#000000"
+                                                        Opacity="0.05"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 14.25207 13.144085 -2.044301 -1.990659 2.063504 -2.0088707 c 0.384537 -0.3743571 0.384537 -0.9811893 0 -1.3555463 L 13.575068 7.1112362 c -0.384538 -0.3743571 -1.007872 -0.3743571 -1.392409 0 L 10.118664 9.1196298 8.0551602 7.1107567 c -0.3845375 -0.3743571 -1.0078722 -0.3743571 -1.3924096 0 L 5.9665459 7.7885294 c -0.3845375 0.374357 -0.3845375 0.9811892 0 1.3555464 l 2.0635036 2.0088712 -2.0639961 2.009352 c -0.3845374 0.374357 -0.3845374 0.98119 0 1.355546 l 0.6962048 0.677773 c 0.3845374 0.374356 1.0078722 0.374356 1.3924095 0 l 2.0639963 -2.009352 2.044792 1.990658 c 0.384538 0.374357 1.007873 0.374357 1.39241 0 l 0.696204 -0.677773 c 0.384539 -0.373878 0.384539 -0.980709 0 -1.355066 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path24"
+                                                        Fill="#000000"
+                                                        Opacity="0.07"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 14.078266 13.313289 -2.218599 -2.159863 2.237309 -2.1780747 c 0.288526 -0.2808876 0.288526 -0.7362509 0 -1.0166591 L 13.400771 7.2809186 c -0.288526 -0.2808867 -0.756273 -0.2808867 -1.044308 0 L 10.118664 9.4585162 7.8813551 7.28044 C 7.592829 6.9995524 7.1250817 6.9995524 6.8370479 7.28044 L 6.1408431 7.9582128 c -0.2885261 0.2808876 -0.2885261 0.7362509 0 1.0166591 l 2.2368164 2.1785541 -2.237801 2.178557 c -0.2885263 0.280886 -0.2885263 0.736251 0 1.016659 l 0.6962048 0.677772 c 0.2885261 0.280888 0.7562733 0.280888 1.0443072 0 l 2.2382935 -2.178076 2.218598 2.159862 c 0.288525 0.280888 0.756273 0.280888 1.044307 0 l 0.696205 -0.677773 c 0.289018 -0.280887 0.289018 -0.736251 4.92e-4 -1.017138 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path26"
+                                                        Fill="#FFFFFFFF"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 11.511072 11.153426 2.411607 -2.3477581 c 0.192515 -0.1869388 0.192515 -0.4903543 0 -0.6777727 L 13.226474 7.4501225 c -0.192023 -0.1874183 -0.504183 -0.1874183 -0.696204 0 L 10.118664 9.7978823 7.7070577 7.4501225 c -0.1920224 -0.1874183 -0.5036898 -0.1874183 -0.6962047 0 L 6.3146482 8.1278952 c -0.192515 0.1869388 -0.192515 0.4903554 0 0.6777727 l 2.4116061 2.3477581 -2.4120985 2.348239 c -0.1925148 0.186939 -0.1925148 0.490355 0 0.677773 l 0.6962047 0.677773 c 0.1920226 0.187418 0.50369 0.187418 0.6962049 0 l 2.4120986 -2.348238 2.392895 2.329544 c 0.192023 0.187418 0.503689 0.187418 0.696205 0 l 0.696205 -0.677773 c 0.192514 -0.186939 0.192514 -0.490834 0 -0.677773 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                </Canvas>
+                                            </Viewbox>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        MinWidth="300"
+                        MaxWidth="800"
+                        MinHeight="100"
+                        MaxHeight="120"
+                        Margin="20 0 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.2*"/>
+                        </Grid.RowDefinitions>
+                        <Grid
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Text="Producer: "
+                                Grid.Column="0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"/>
+                            <TextBox
+                                Text="{Binding ToyEditor.Producer}"
+                                MaxHeight="30"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid 
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Text="Price: "
+                                Grid.Column="0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"/>
+                            <TextBox
+                                Text="{Binding ToyEditor.Price}"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid 
+                            Grid.Column="0"
+                            Grid.Row="2"
+                            Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Text="Warehouse Count: "
+                                Grid.Column="0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"/>
+                            <TextBox
+                                Text="{Binding ToyEditor.WarehouseCount}"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid 
+                            Grid.Column="0"
+                            Grid.Row="3"
+                            Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Text="Category Id: "
+                                Grid.Column="0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"/>
+                            <TextBox
+                                Text="{Binding ToyEditor.CategoryId}"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </TabPanel>
+        </TabItem>
+        <TabItem Header="ToysCategories">
+            <TabPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="0.5" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.05*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0">
+                        <Button.Content>
+                            <Viewbox Stretch="Uniform">
+                                <Canvas Width="20" Height="20">
+                                    <Canvas.RenderTransform>
+                                        <TranslateTransform X="0" Y="0" />
+                                    </Canvas.RenderTransform>
+                                    <Canvas.Resources />
+                                    <Canvas>
+                                        <Canvas.RenderTransform>
+                                            <MatrixTransform Matrix="0.46408163 0 0 0.46734694 -1.0236735 -1.1673468" />
+                                        </Canvas.RenderTransform>
+                                        <Path Fill="#FF4CAF50">
+                                            <Path.Data>
+                                                <PathGeometry Figures="M 44 24 C 44 35 35 44 24 44 13 44 4 35 4 24 4 13 13 4 24 4 35 4 44 13 44 24 Z" FillRule="NonZero" />
+                                            </Path.Data>
+                                        </Path>
+                                        <Line
+                                            Stroke="#FFFFFFFF"
+                                            StrokeThickness="6"
+                                            X1="24"
+                                            X2="24"
+                                            Y1="34"
+                                            Y2="14" />
+                                        <Line
+                                            Stroke="#FFFFFFFF"
+                                            StrokeThickness="6"
+                                            X1="14"
+                                            X2="34"
+                                            Y1="24"
+                                            Y2="24" />
+                                    </Canvas>
+                                </Canvas>
+                            </Viewbox>
+                        </Button.Content>
+                    </Button>
+                    <DataGrid
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding ToysCategories}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Entity.Id}" Header="Id" />
+                            <DataGridTextColumn Binding="{Binding Entity.WarrantyPeriod}" Header="Warranty Period" />
+                            <DataGridTextColumn Binding="{Binding Entity.CareRules}" Header="Care Rules" />
+                            <DataGridTextColumn Binding="{Binding Entity.Age}" Header="Age" />
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button>
+                                            <Viewbox Stretch="Uniform">
+                                                <Canvas
+                                                    Name="svg24"
+                                                    Width="20"
+                                                    Height="20">
+                                                    <Canvas.RenderTransform>
+                                                        <TranslateTransform X="0" Y="0" />
+                                                    </Canvas.RenderTransform>
+                                                    <Canvas.Resources />
+                                                    <Path
+                                                        Name="path2"
+                                                        Fill="#FFF5CE85"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 3.1801079 14.60387 4.4397152 13.336869 6.8951941 15.48733 5.4828187 16.907946 1.4631685 18.633808 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path4"
+                                                        Fill="#FF967A44"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 4.4513913 13.67147 2.0876678 1.828099 -1.195385 1.201929 -3.4183079 1.468071 1.4600546 -3.425791 1.0659705 -1.072308 M 4.4285243 13.002744 2.9747951 14.464446 1 19.099014 5.6214781 17.113892 7.2518161 15.474624 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path6"
+                                                        Fill="#FF36404D"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 2.1209476 16.473056 1.0014595 19.1 3.6208979 17.975356 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path8"
+                                                        Fill="#FFF78F8F"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 14.895566 2.8173385 1.088839 -1.094317 c 0.307007 -0.3086785 0.714713 -0.4784272 1.148191 -0.4784272 0.433498 0 0.841204 0.1697487 1.148209 0.4784272 0.633437 0.6369247 0.633437 1.6725386 0 2.3094615 l -1.088357 1.0943169 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path10"
+                                                        Fill="#FFC74343"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 17.132596 1.4891892 c 0.368798 0 0.715674 0.1443108 0.976464 0.4065165 0.538583 0.5415329 0.538583 1.4220728 0 1.9636049 L 17.192448 4.7809429 15.240036 2.8173385 16.156631 1.8957057 C 16.416922 1.6335 16.763816 1.4891892 17.132596 1.4891892 M 17.132596 1 c -0.477751 0 -0.956002 0.1834461 -1.320417 0.5498494 l -1.260584 1.2674891 2.640853 2.6553183 1.260583 -1.2674892 c 0.729292 -0.7332955 0.729292 -1.9220246 0 -2.6553182 v 0 C 18.088617 1.1834461 17.61085 1 17.132596 1 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Canvas Name="g16">
+                                                        <Canvas.RenderTransform>
+                                                            <MatrixTransform Matrix="0.4865227 0 0 0.48918923 0.26972922 0.26621616" />
+                                                        </Canvas.RenderTransform>
+                                                        <Path Name="path12" Fill="#FFFFEEA3">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="M 11.346 33.388 C 11.28 33.235 11.189 33.08 11.064 32.934 10.754 32.571 10.315 32.35 9.754 32.273 9.554 31.006 8.548 30.47 7.765 30.309 7.633 29.445 7.116 28.967 6.564 28.727 l 21.49 -21.503 4.721 4.721 z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                        </Path>
+                                                        <Path Name="path14" Fill="#FFBA9B48">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="m 28.054 7.931 4.014 4.014 -20.637 20.649 C 11.189 32.316 10.793 32.004 10.17 31.846 9.864 30.768 9.015 30.161 8.187 29.903 8.036 29.357 7.74 28.935 7.366 28.631 L 28.054 7.931 M 28.053 6.517 5.56 29.023 c 0 0 0.007 0 0.021 0 0.197 0 1.715 0.054 1.715 1.731 0 0 1.993 0.062 1.993 1.99 1.982 0 1.71 1.697 1.71 1.697 L 33.481 11.946 Z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                        </Path>
+                                                    </Canvas>
+                                                    <Canvas Name="g22">
+                                                        <Canvas.RenderTransform>
+                                                            <MatrixTransform Matrix="0.4865227 0 0 0.48918923 0.26972922 0.26621616" />
+                                                        </Canvas.RenderTransform>
+                                                        <Path Name="path18" Fill="#FFD9E7F5">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="m 29.107 4.764 h 5.578 v 6.677 h -5.578 z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                            <Path.RenderTransform>
+                                                                <RotateTransform Angle="-45.009" />
+                                                            </Path.RenderTransform>
+                                                        </Path>
+                                                        <Path Name="path20" Fill="#FF788B9C">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="m 31.507 4.477 4.014 4.014 -3.237 3.237 -4.014 -4.014 3.237 -3.237 m 0 -1.414 -4.651 4.651 5.428 5.428 4.651 -4.651 z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                        </Path>
+                                                    </Canvas>
+                                                </Canvas>
+                                            </Viewbox>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding RemoveCommand}">
+                                            <Viewbox Stretch="Uniform">
+                                                <Canvas
+                                                    Name="svg28"
+                                                    Width="20"
+                                                    Height="20">
+                                                    <Canvas.RenderTransform>
+                                                        <TranslateTransform X="0" Y="0" />
+                                                    </Canvas.RenderTransform>
+                                                    <Canvas.Resources>
+                                                        <LinearGradientBrush x:Key="WxWrlTsssL_WlnpfbClFCa" MappingMode="Absolute" StartPoint="24,593" EndPoint="24,651">
+                                                            <LinearGradientBrush.GradientStops>
+                                                                <GradientStopCollection>
+                                                                    <GradientStop Offset="0" Color="#F44F5A" />
+                                                                    <GradientStop Offset=".443" Color="#EE3D4A" />
+                                                                    <GradientStop Offset="1" Color="#E52030" />
+                                                                </GradientStopCollection>
+                                                            </LinearGradientBrush.GradientStops>
+                                                            <LinearGradientBrush.Transform>
+                                                                <MatrixTransform Matrix="0.49236548 0 0 -0.47933019 -1.6981074 316.00742" />
+                                                            </LinearGradientBrush.Transform>
+                                                        </LinearGradientBrush>
+                                                        <LinearGradientBrush x:Key="WxWrlTsssL_WlnpfbClFCb" MappingMode="Absolute" StartPoint="24,658" EndPoint="24,648">
+                                                            <LinearGradientBrush.GradientStops>
+                                                                <GradientStopCollection>
+                                                                    <GradientStop Offset="0" Color="#F44F5A" />
+                                                                    <GradientStop Offset=".443" Color="#EE3D4A" />
+                                                                    <GradientStop Offset="1" Color="#E52030" />
+                                                                </GradientStopCollection>
+                                                            </LinearGradientBrush.GradientStops>
+                                                            <LinearGradientBrush.Transform>
+                                                                <MatrixTransform Matrix="0.49236548 0 0 -0.47933019 -1.6981074 316.00742" />
+                                                            </LinearGradientBrush.Transform>
+                                                        </LinearGradientBrush>
+                                                    </Canvas.Resources>
+                                                    <Path
+                                                        Name="path9"
+                                                        Fill="{StaticResource WxWrlTsssL_WlnpfbClFCa}"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 17.504145 3.4841446 V 18.343379 c 0 0.529661 -0.440667 0.958661 -0.984731 0.958661 H 3.7179126 c -0.5440638 0 -0.9847309 -0.429 -0.9847309 -0.958661 V 3.4841446 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path18"
+                                                        Fill="{StaticResource WxWrlTsssL_WlnpfbClFCb}"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 12.088125 0.60816327 H 8.149202 c -0.5440639 0 -0.9847311 0.42900053 -0.9847311 0.95866043 V 2.5254842 H 13.072855 V 1.5668237 c 0 -0.5296599 -0.440667 -0.95866043 -0.98473 -0.95866043 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path20"
+                                                        Fill="#FFFFA8A8"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 2.2408163 3.9634747 V 3.4841446 c 0 -0.7942501 0.6612467 -1.4379906 1.4770963 -1.4379906 H 16.519414 c 0.81585 0 1.477097 0.6437405 1.477097 1.4379906 v 0.4793301 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path22"
+                                                        Fill="#000000"
+                                                        Opacity="0.05"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 14.25207 13.144085 -2.044301 -1.990659 2.063504 -2.0088707 c 0.384537 -0.3743571 0.384537 -0.9811893 0 -1.3555463 L 13.575068 7.1112362 c -0.384538 -0.3743571 -1.007872 -0.3743571 -1.392409 0 L 10.118664 9.1196298 8.0551602 7.1107567 c -0.3845375 -0.3743571 -1.0078722 -0.3743571 -1.3924096 0 L 5.9665459 7.7885294 c -0.3845375 0.374357 -0.3845375 0.9811892 0 1.3555464 l 2.0635036 2.0088712 -2.0639961 2.009352 c -0.3845374 0.374357 -0.3845374 0.98119 0 1.355546 l 0.6962048 0.677773 c 0.3845374 0.374356 1.0078722 0.374356 1.3924095 0 l 2.0639963 -2.009352 2.044792 1.990658 c 0.384538 0.374357 1.007873 0.374357 1.39241 0 l 0.696204 -0.677773 c 0.384539 -0.373878 0.384539 -0.980709 0 -1.355066 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path24"
+                                                        Fill="#000000"
+                                                        Opacity="0.07"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 14.078266 13.313289 -2.218599 -2.159863 2.237309 -2.1780747 c 0.288526 -0.2808876 0.288526 -0.7362509 0 -1.0166591 L 13.400771 7.2809186 c -0.288526 -0.2808867 -0.756273 -0.2808867 -1.044308 0 L 10.118664 9.4585162 7.8813551 7.28044 C 7.592829 6.9995524 7.1250817 6.9995524 6.8370479 7.28044 L 6.1408431 7.9582128 c -0.2885261 0.2808876 -0.2885261 0.7362509 0 1.0166591 l 2.2368164 2.1785541 -2.237801 2.178557 c -0.2885263 0.280886 -0.2885263 0.736251 0 1.016659 l 0.6962048 0.677772 c 0.2885261 0.280888 0.7562733 0.280888 1.0443072 0 l 2.2382935 -2.178076 2.218598 2.159862 c 0.288525 0.280888 0.756273 0.280888 1.044307 0 l 0.696205 -0.677773 c 0.289018 -0.280887 0.289018 -0.736251 4.92e-4 -1.017138 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path26"
+                                                        Fill="#FFFFFFFF"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 11.511072 11.153426 2.411607 -2.3477581 c 0.192515 -0.1869388 0.192515 -0.4903543 0 -0.6777727 L 13.226474 7.4501225 c -0.192023 -0.1874183 -0.504183 -0.1874183 -0.696204 0 L 10.118664 9.7978823 7.7070577 7.4501225 c -0.1920224 -0.1874183 -0.5036898 -0.1874183 -0.6962047 0 L 6.3146482 8.1278952 c -0.192515 0.1869388 -0.192515 0.4903554 0 0.6777727 l 2.4116061 2.3477581 -2.4120985 2.348239 c -0.1925148 0.186939 -0.1925148 0.490355 0 0.677773 l 0.6962047 0.677773 c 0.1920226 0.187418 0.50369 0.187418 0.6962049 0 l 2.4120986 -2.348238 2.392895 2.329544 c 0.192023 0.187418 0.503689 0.187418 0.696205 0 l 0.696205 -0.677773 c 0.192514 -0.186939 0.192514 -0.490834 0 -0.677773 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                </Canvas>
+                                            </Viewbox>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabPanel>
+        </TabItem>
+        <TabItem Header="Sales">
+            <TabPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.05*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0">
+                        <Button.Content>
+                            <Viewbox Stretch="Uniform">
+                                <Canvas Width="20" Height="20">
+                                    <Canvas.RenderTransform>
+                                        <TranslateTransform X="0" Y="0" />
+                                    </Canvas.RenderTransform>
+                                    <Canvas.Resources />
+                                    <Canvas>
+                                        <Canvas.RenderTransform>
+                                            <MatrixTransform Matrix="0.46408163 0 0 0.46734694 -1.0236735 -1.1673468" />
+                                        </Canvas.RenderTransform>
+                                        <Path Fill="#FF4CAF50">
+                                            <Path.Data>
+                                                <PathGeometry Figures="M 44 24 C 44 35 35 44 24 44 13 44 4 35 4 24 4 13 13 4 24 4 35 4 44 13 44 24 Z" FillRule="NonZero" />
+                                            </Path.Data>
+                                        </Path>
+                                        <Line
+                                            Stroke="#FFFFFFFF"
+                                            StrokeThickness="6"
+                                            X1="24"
+                                            X2="24"
+                                            Y1="34"
+                                            Y2="14" />
+                                        <Line
+                                            Stroke="#FFFFFFFF"
+                                            StrokeThickness="6"
+                                            X1="14"
+                                            X2="34"
+                                            Y1="24"
+                                            Y2="24" />
+                                    </Canvas>
+                                </Canvas>
+                            </Viewbox>
+                        </Button.Content>
+                    </Button>
+                    <DataGrid
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Sales}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Entity.Id}" Header="Id" />
+                            <DataGridTextColumn Binding="{Binding Entity.ToyId}" Header="Toy Id" />
+                            <DataGridTextColumn Binding="{Binding Entity.SaleCount}" Header="Sale Count" />
+                            <DataGridTextColumn Binding="{Binding Entity.Discount}" Header="Discount" />
+                            <DataGridTextColumn Binding="{Binding Entity.SaleSum}" Header="Sale Sum" />
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button>
+                                            <Viewbox Stretch="Uniform">
+                                                <Canvas
+                                                    Name="svg24"
+                                                    Width="20"
+                                                    Height="20">
+                                                    <Canvas.RenderTransform>
+                                                        <TranslateTransform X="0" Y="0" />
+                                                    </Canvas.RenderTransform>
+                                                    <Canvas.Resources />
+                                                    <Path
+                                                        Name="path2"
+                                                        Fill="#FFF5CE85"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 3.1801079 14.60387 4.4397152 13.336869 6.8951941 15.48733 5.4828187 16.907946 1.4631685 18.633808 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path4"
+                                                        Fill="#FF967A44"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 4.4513913 13.67147 2.0876678 1.828099 -1.195385 1.201929 -3.4183079 1.468071 1.4600546 -3.425791 1.0659705 -1.072308 M 4.4285243 13.002744 2.9747951 14.464446 1 19.099014 5.6214781 17.113892 7.2518161 15.474624 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path6"
+                                                        Fill="#FF36404D"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 2.1209476 16.473056 1.0014595 19.1 3.6208979 17.975356 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path8"
+                                                        Fill="#FFF78F8F"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 14.895566 2.8173385 1.088839 -1.094317 c 0.307007 -0.3086785 0.714713 -0.4784272 1.148191 -0.4784272 0.433498 0 0.841204 0.1697487 1.148209 0.4784272 0.633437 0.6369247 0.633437 1.6725386 0 2.3094615 l -1.088357 1.0943169 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path10"
+                                                        Fill="#FFC74343"
+                                                        StrokeThickness="0.487853">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 17.132596 1.4891892 c 0.368798 0 0.715674 0.1443108 0.976464 0.4065165 0.538583 0.5415329 0.538583 1.4220728 0 1.9636049 L 17.192448 4.7809429 15.240036 2.8173385 16.156631 1.8957057 C 16.416922 1.6335 16.763816 1.4891892 17.132596 1.4891892 M 17.132596 1 c -0.477751 0 -0.956002 0.1834461 -1.320417 0.5498494 l -1.260584 1.2674891 2.640853 2.6553183 1.260583 -1.2674892 c 0.729292 -0.7332955 0.729292 -1.9220246 0 -2.6553182 v 0 C 18.088617 1.1834461 17.61085 1 17.132596 1 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Canvas Name="g16">
+                                                        <Canvas.RenderTransform>
+                                                            <MatrixTransform Matrix="0.4865227 0 0 0.48918923 0.26972922 0.26621616" />
+                                                        </Canvas.RenderTransform>
+                                                        <Path Name="path12" Fill="#FFFFEEA3">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="M 11.346 33.388 C 11.28 33.235 11.189 33.08 11.064 32.934 10.754 32.571 10.315 32.35 9.754 32.273 9.554 31.006 8.548 30.47 7.765 30.309 7.633 29.445 7.116 28.967 6.564 28.727 l 21.49 -21.503 4.721 4.721 z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                        </Path>
+                                                        <Path Name="path14" Fill="#FFBA9B48">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="m 28.054 7.931 4.014 4.014 -20.637 20.649 C 11.189 32.316 10.793 32.004 10.17 31.846 9.864 30.768 9.015 30.161 8.187 29.903 8.036 29.357 7.74 28.935 7.366 28.631 L 28.054 7.931 M 28.053 6.517 5.56 29.023 c 0 0 0.007 0 0.021 0 0.197 0 1.715 0.054 1.715 1.731 0 0 1.993 0.062 1.993 1.99 1.982 0 1.71 1.697 1.71 1.697 L 33.481 11.946 Z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                        </Path>
+                                                    </Canvas>
+                                                    <Canvas Name="g22">
+                                                        <Canvas.RenderTransform>
+                                                            <MatrixTransform Matrix="0.4865227 0 0 0.48918923 0.26972922 0.26621616" />
+                                                        </Canvas.RenderTransform>
+                                                        <Path Name="path18" Fill="#FFD9E7F5">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="m 29.107 4.764 h 5.578 v 6.677 h -5.578 z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                            <Path.RenderTransform>
+                                                                <RotateTransform Angle="-45.009" />
+                                                            </Path.RenderTransform>
+                                                        </Path>
+                                                        <Path Name="path20" Fill="#FF788B9C">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="m 31.507 4.477 4.014 4.014 -3.237 3.237 -4.014 -4.014 3.237 -3.237 m 0 -1.414 -4.651 4.651 5.428 5.428 4.651 -4.651 z" FillRule="NonZero" />
+                                                            </Path.Data>
+                                                        </Path>
+                                                    </Canvas>
+                                                </Canvas>
+                                            </Viewbox>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding RemoveCommand}">
+                                            <Viewbox Stretch="Uniform">
+                                                <Canvas
+                                                    Name="svg28"
+                                                    Width="20"
+                                                    Height="20">
+                                                    <Canvas.RenderTransform>
+                                                        <TranslateTransform X="0" Y="0" />
+                                                    </Canvas.RenderTransform>
+                                                    <Canvas.Resources>
+                                                        <LinearGradientBrush x:Key="WxWrlTsssL_WlnpfbClFCa" MappingMode="Absolute" StartPoint="24,593" EndPoint="24,651">
+                                                            <LinearGradientBrush.GradientStops>
+                                                                <GradientStopCollection>
+                                                                    <GradientStop Offset="0" Color="#F44F5A" />
+                                                                    <GradientStop Offset=".443" Color="#EE3D4A" />
+                                                                    <GradientStop Offset="1" Color="#E52030" />
+                                                                </GradientStopCollection>
+                                                            </LinearGradientBrush.GradientStops>
+                                                            <LinearGradientBrush.Transform>
+                                                                <MatrixTransform Matrix="0.49236548 0 0 -0.47933019 -1.6981074 316.00742" />
+                                                            </LinearGradientBrush.Transform>
+                                                        </LinearGradientBrush>
+                                                        <LinearGradientBrush x:Key="WxWrlTsssL_WlnpfbClFCb" MappingMode="Absolute" StartPoint="24,658" EndPoint="24,648">
+                                                            <LinearGradientBrush.GradientStops>
+                                                                <GradientStopCollection>
+                                                                    <GradientStop Offset="0" Color="#F44F5A" />
+                                                                    <GradientStop Offset=".443" Color="#EE3D4A" />
+                                                                    <GradientStop Offset="1" Color="#E52030" />
+                                                                </GradientStopCollection>
+                                                            </LinearGradientBrush.GradientStops>
+                                                            <LinearGradientBrush.Transform>
+                                                                <MatrixTransform Matrix="0.49236548 0 0 -0.47933019 -1.6981074 316.00742" />
+                                                            </LinearGradientBrush.Transform>
+                                                        </LinearGradientBrush>
+                                                    </Canvas.Resources>
+                                                    <Path
+                                                        Name="path9"
+                                                        Fill="{StaticResource WxWrlTsssL_WlnpfbClFCa}"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 17.504145 3.4841446 V 18.343379 c 0 0.529661 -0.440667 0.958661 -0.984731 0.958661 H 3.7179126 c -0.5440638 0 -0.9847309 -0.429 -0.9847309 -0.958661 V 3.4841446 Z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path18"
+                                                        Fill="{StaticResource WxWrlTsssL_WlnpfbClFCb}"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 12.088125 0.60816327 H 8.149202 c -0.5440639 0 -0.9847311 0.42900053 -0.9847311 0.95866043 V 2.5254842 H 13.072855 V 1.5668237 c 0 -0.5296599 -0.440667 -0.95866043 -0.98473 -0.95866043 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path20"
+                                                        Fill="#FFFFA8A8"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 2.2408163 3.9634747 V 3.4841446 c 0 -0.7942501 0.6612467 -1.4379906 1.4770963 -1.4379906 H 16.519414 c 0.81585 0 1.477097 0.6437405 1.477097 1.4379906 v 0.4793301 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path22"
+                                                        Fill="#000000"
+                                                        Opacity="0.05"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 14.25207 13.144085 -2.044301 -1.990659 2.063504 -2.0088707 c 0.384537 -0.3743571 0.384537 -0.9811893 0 -1.3555463 L 13.575068 7.1112362 c -0.384538 -0.3743571 -1.007872 -0.3743571 -1.392409 0 L 10.118664 9.1196298 8.0551602 7.1107567 c -0.3845375 -0.3743571 -1.0078722 -0.3743571 -1.3924096 0 L 5.9665459 7.7885294 c -0.3845375 0.374357 -0.3845375 0.9811892 0 1.3555464 l 2.0635036 2.0088712 -2.0639961 2.009352 c -0.3845374 0.374357 -0.3845374 0.98119 0 1.355546 l 0.6962048 0.677773 c 0.3845374 0.374356 1.0078722 0.374356 1.3924095 0 l 2.0639963 -2.009352 2.044792 1.990658 c 0.384538 0.374357 1.007873 0.374357 1.39241 0 l 0.696204 -0.677773 c 0.384539 -0.373878 0.384539 -0.980709 0 -1.355066 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path24"
+                                                        Fill="#000000"
+                                                        Opacity="0.07"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 14.078266 13.313289 -2.218599 -2.159863 2.237309 -2.1780747 c 0.288526 -0.2808876 0.288526 -0.7362509 0 -1.0166591 L 13.400771 7.2809186 c -0.288526 -0.2808867 -0.756273 -0.2808867 -1.044308 0 L 10.118664 9.4585162 7.8813551 7.28044 C 7.592829 6.9995524 7.1250817 6.9995524 6.8370479 7.28044 L 6.1408431 7.9582128 c -0.2885261 0.2808876 -0.2885261 0.7362509 0 1.0166591 l 2.2368164 2.1785541 -2.237801 2.178557 c -0.2885263 0.280886 -0.2885263 0.736251 0 1.016659 l 0.6962048 0.677772 c 0.2885261 0.280888 0.7562733 0.280888 1.0443072 0 l 2.2382935 -2.178076 2.218598 2.159862 c 0.288525 0.280888 0.756273 0.280888 1.044307 0 l 0.696205 -0.677773 c 0.289018 -0.280887 0.289018 -0.736251 4.92e-4 -1.017138 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path
+                                                        Name="path26"
+                                                        Fill="#FFFFFFFF"
+                                                        StrokeThickness="0.485803">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="m 11.511072 11.153426 2.411607 -2.3477581 c 0.192515 -0.1869388 0.192515 -0.4903543 0 -0.6777727 L 13.226474 7.4501225 c -0.192023 -0.1874183 -0.504183 -0.1874183 -0.696204 0 L 10.118664 9.7978823 7.7070577 7.4501225 c -0.1920224 -0.1874183 -0.5036898 -0.1874183 -0.6962047 0 L 6.3146482 8.1278952 c -0.192515 0.1869388 -0.192515 0.4903554 0 0.6777727 l 2.4116061 2.3477581 -2.4120985 2.348239 c -0.1925148 0.186939 -0.1925148 0.490355 0 0.677773 l 0.6962047 0.677773 c 0.1920226 0.187418 0.50369 0.187418 0.6962049 0 l 2.4120986 -2.348238 2.392895 2.329544 c 0.192023 0.187418 0.503689 0.187418 0.696205 0 l 0.696205 -0.677773 c 0.192514 -0.186939 0.192514 -0.490834 0 -0.677773 z" FillRule="NonZero" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                </Canvas>
+                                            </Viewbox>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabPanel>
+        </TabItem>
+    </TabControl>
+</Window>
