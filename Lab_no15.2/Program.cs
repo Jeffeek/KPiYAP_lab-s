@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using System;
 using System.Collections.Generic;
@@ -10,133 +10,135 @@ using System.Runtime.Serialization.Json;
 
 namespace Lab_no15._2
 {
-	internal static class Program
-	{
-		private static void Main(string[] args)
-		{
-			var game = LoadOrNew();
-			var consoleLogger = new ConsoleLogger(game);
-			StartGame(game);
-			Console.ReadLine();
-		}
+    internal static class Program
+    {
+        private static void Main(string[] args)
+        {
+            var game = LoadOrNew();
+            var consoleLogger = new ConsoleLogger(game);
+            StartGame(game);
+            Console.ReadLine();
+        }
 
-		private static Queue<FeudalActions> GetActionsAtStep()
-		{
-			Console.ReadKey(false);
-			var queue = new Queue<FeudalActions>();
-			Console.WriteLine("Веберите Ваши действия для следующего шага: ");
-			var isEndOfStep = false;
+        private static Queue<FeudalActions> GetActionsAtStep()
+        {
+            Console.ReadKey(false);
+            var queue = new Queue<FeudalActions>();
+            Console.WriteLine("Веберите Ваши действия для следующего шага: ");
+            var isEndOfStep = false;
 
-			while (!isEndOfStep)
-			{
-				Console.WriteLine("1. Увеличить налог");
-				Console.WriteLine("2. Уменьшить налог");
-				Console.WriteLine("3. Построить хижину");
-				Console.WriteLine("4. Дать крестьянину свободу");
-				Console.WriteLine("5. Провести пати-хард");
-				Console.WriteLine("6. Закончить действия на этот шаг");
-				int input;
-				while (!Int32.TryParse(Console.ReadLine()?.Trim(), out input)) Console.WriteLine("Введи ещё раз, чукча");
+            while (!isEndOfStep)
+            {
+                Console.WriteLine("1. Увеличить налог");
+                Console.WriteLine("2. Уменьшить налог");
+                Console.WriteLine("3. Построить хижину");
+                Console.WriteLine("4. Дать крестьянину свободу");
+                Console.WriteLine("5. Провести пати-хард");
+                Console.WriteLine("6. Закончить действия на этот шаг");
+                int input;
+                while (!Int32.TryParse(Console.ReadLine()?.Trim(), out input))
+                    Console.WriteLine("Введи ещё раз, чукча");
 
-				switch (input)
-				{
-					case 1:
-						queue.Enqueue(FeudalActions.IncreaseTax);
+                switch (input)
+                {
+                    case 1:
+                        queue.Enqueue(FeudalActions.IncreaseTax);
 
-						break;
+                        break;
 
-					case 2:
-						queue.Enqueue(FeudalActions.ReduceTax);
+                    case 2:
+                        queue.Enqueue(FeudalActions.ReduceTax);
 
-						break;
+                        break;
 
-					case 3:
-						queue.Enqueue(FeudalActions.BuildShack);
+                    case 3:
+                        queue.Enqueue(FeudalActions.BuildShack);
 
-						break;
+                        break;
 
-					case 4:
-						queue.Enqueue(FeudalActions.GiveFreeRein);
+                    case 4:
+                        queue.Enqueue(FeudalActions.GiveFreeRein);
 
-						break;
+                        break;
 
-					case 5:
-						queue.Enqueue(FeudalActions.HoldCelebration);
+                    case 5:
+                        queue.Enqueue(FeudalActions.HoldCelebration);
 
-						break;
+                        break;
 
-					case 6:
-						isEndOfStep = true;
+                    case 6:
+                        isEndOfStep = true;
 
-						break;
-				}
-			}
+                        break;
+                }
+            }
 
-			return queue;
-		}
+            return queue;
+        }
 
-		private static void StartGame(FeudalGameEngine gameObject)
-		{
-			while (gameObject.IsGameOn)
-			{
-				var actions = GetActionsAtStep();
+        private static void StartGame(FeudalGameEngine gameObject)
+        {
+            while (gameObject.IsGameOn)
+            {
+                var actions = GetActionsAtStep();
 
-				if (actions.Count == 0) continue;
-				gameObject.MakeStep(actions);
-				SaveGame(gameObject);
-			}
+                if (actions.Count == 0) continue;
+                gameObject.MakeStep(actions);
+                SaveGame(gameObject);
+            }
 
-			Process.GetCurrentProcess().CloseMainWindow();
-		}
+            Process.GetCurrentProcess().CloseMainWindow();
+        }
 
-		private static FeudalGameEngine LoadOrNew()
-		{
-			Console.WriteLine("Хотите загрузить игру? \n1. Да 2.Нет");
-			var answer = Int32.Parse(Console.ReadLine() ?? String.Empty);
+        private static FeudalGameEngine LoadOrNew()
+        {
+            Console.WriteLine("Хотите загрузить игру? \n1. Да 2.Нет");
+            var answer = Int32.Parse(Console.ReadLine() ?? String.Empty);
 
-			switch (answer)
-			{
-				case 1:
-				{
-					var serializer = new DataContractJsonSerializer(typeof(DTOGameSave));
-					using var fileStream = new FileStream($"{Directory.GetCurrentDirectory()}\\save.json", FileMode.Open);
-					var dto = serializer.ReadObject(fileStream) as DTOGameSave;
+            switch (answer)
+            {
+                case 1:
+                {
+                    var serializer = new DataContractJsonSerializer(typeof(DTOGameSave));
+                    using var fileStream =
+                        new FileStream($"{Directory.GetCurrentDirectory()}\\save.json", FileMode.Open);
+                    var dto = serializer.ReadObject(fileStream) as DTOGameSave;
 
-					return new FeudalGameEngine(dto);
-				}
+                    return new FeudalGameEngine(dto);
+                }
 
-				case 2:
-				{
-					Console.WriteLine("Какое количество крестьян Вас устроит, милорд?");
-					var targetCount = Int32.Parse(Console.ReadLine());
-					Console.WriteLine("Какое количество крестьян будет у вас во владении с начала, милорд?");
-					var startCount = Int32.Parse(Console.ReadLine());
+                case 2:
+                {
+                    Console.WriteLine("Какое количество крестьян Вас устроит, милорд?");
+                    var targetCount = Int32.Parse(Console.ReadLine());
+                    Console.WriteLine("Какое количество крестьян будет у вас во владении с начала, милорд?");
+                    var startCount = Int32.Parse(Console.ReadLine());
 
-					return new FeudalGameEngine(targetCount, startCount);
-				}
+                    return new FeudalGameEngine(targetCount, startCount);
+                }
 
-				default:
-					throw new ArgumentException(nameof(answer));
-			}
-		}
+                default:
+                    throw new ArgumentException(nameof(answer));
+            }
+        }
 
-		private static void SaveGame(FeudalGameEngine game)
-		{
-			var dto = new DTOGameSave
-					  {
-							  Money = game.Money,
-							  PeasantsCount = game.PeasantsCount,
-							  Settings = new DTOGameSettingsSave
-										 {
-												 MaxPeasantCount = game.Settings.MaxPeasantCount,
-												 PeasantsTargetCount = game.Settings.PeasantsTargetCount,
-												 PeasantSpawnChance = game.Settings.PeasantSpawnChance
-										 }
-					  };
+        private static void SaveGame(FeudalGameEngine game)
+        {
+            var dto = new DTOGameSave
+                      {
+                          Money = game.Money,
+                          PeasantsCount = game.PeasantsCount,
+                          Settings = new DTOGameSettingsSave
+                                     {
+                                         MaxPeasantCount = game.Settings.MaxPeasantCount,
+                                         PeasantsTargetCount = game.Settings.PeasantsTargetCount,
+                                         PeasantSpawnChance = game.Settings.PeasantSpawnChance
+                                     }
+                      };
 
-			var serializer = new DataContractJsonSerializer(typeof(DTOGameSave));
-			using var fileStream = new FileStream($"{Directory.GetCurrentDirectory()}\\save.json", FileMode.Truncate);
-			serializer.WriteObject(fileStream, dto);
-		}
-	}
+            var serializer = new DataContractJsonSerializer(typeof(DTOGameSave));
+            using var fileStream = new FileStream($"{Directory.GetCurrentDirectory()}\\save.json", FileMode.Truncate);
+            serializer.WriteObject(fileStream, dto);
+        }
+    }
 }

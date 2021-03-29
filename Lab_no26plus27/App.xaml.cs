@@ -1,29 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿#region Using namespaces
+
 using System.Windows;
 using Lab_no25;
 using Lab_no25.Model;
 using Lab_no25.Services;
-using Lab_no25.Services.Interfaces;
-using Lab_no26.View;
-using Lab_no26.ViewModel;
+using Lab_no26plus27.View;
+using Lab_no26plus27.ViewModel;
 using Ninject;
-using Ninject.Activation;
 
-namespace Lab_no26
+#endregion
+
+namespace Lab_no26plus27
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
-        public App() { }
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -32,9 +25,6 @@ namespace Lab_no26
             kernel.Load(typeof(NinjectRegistration).Assembly);
 
             var context = kernel.Get<ToyStoreDbContext>();
-            //var toysService = kernel.Get<IToysService>();
-            //var toysCategoriesService = kernel.Get<IToysCategoriesService>();
-            //var salesService = kernel.Get<ISalesService>();
 
             var initializer = new ToyStoreContextInitializer();
             _ = initializer.Initialize(context);

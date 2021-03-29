@@ -1,12 +1,13 @@
-﻿using System;
+﻿#region Using namespaces
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Lab_no25.Model;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+
+#endregion
 
 namespace Lab_no25.Services.Implementations
 {
@@ -40,6 +41,7 @@ namespace Lab_no25.Services.Implementations
 
         public async Task<ToyCategoryEntity> GetByIdAsync(int id) => await _context.ToyCategories.FindAsync(id);
 
-        public async Task<IEnumerable<ToyCategoryEntity>> GetAllToysCategoriesAsync() => await _context.ToyCategories.ToListAsync();
+        public async Task<IEnumerable<ToyCategoryEntity>> GetAllToysCategoriesAsync() =>
+            await _context.ToyCategories.ToListAsync();
     }
 }

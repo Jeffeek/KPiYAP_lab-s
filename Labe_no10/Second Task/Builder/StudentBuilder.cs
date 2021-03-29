@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using System;
 
@@ -6,88 +6,88 @@ using System;
 
 namespace Labe_no10.Second_Task.Builder
 {
-	internal class StudentBuilder
-	{
-		private StudentType _type;
-		private string _fullName;
-		private int _passedClasses;
+    internal class StudentBuilder
+    {
+        private string _fullName;
+        private int _passedClasses;
+        private StudentType _type;
 
-		public Student Build()
-		{
-			switch (_type)
-			{
-				case StudentType.Default:
-				{
-					return new DefaultStudent(_fullName, _passedClasses);
-				}
+        public Student Build()
+        {
+            switch (_type)
+            {
+                case StudentType.Default:
+                {
+                    return new DefaultStudent(_fullName, _passedClasses);
+                }
 
-				case StudentType.BrightHead:
-				{
-					return new BrightHeadStudent(_fullName, _passedClasses);
-				}
+                case StudentType.BrightHead:
+                {
+                    return new BrightHeadStudent(_fullName, _passedClasses);
+                }
 
-				case StudentType.Genius:
-				{
-					return new GeniusStudent(_fullName, _passedClasses);
-				}
-			}
+                case StudentType.Genius:
+                {
+                    return new GeniusStudent(_fullName, _passedClasses);
+                }
+            }
 
-			throw new NotSupportedException();
-		}
+            throw new NotSupportedException();
+        }
 
-		public StudentBuilder SetFullName()
-		{
-			Console.WriteLine("Введите имя студента: ");
-			var name = Console.ReadLine();
+        public StudentBuilder SetFullName()
+        {
+            Console.WriteLine("Введите имя студента: ");
+            var name = Console.ReadLine();
 
-			if (!String.IsNullOrWhiteSpace(name))
-			{
-				_fullName = name;
+            if (!String.IsNullOrWhiteSpace(name))
+            {
+                _fullName = name;
 
-				return this;
-			}
+                return this;
+            }
 
-			throw new NotSupportedException();
-		}
+            throw new NotSupportedException();
+        }
 
-		public StudentBuilder SetPassedClasses()
-		{
-			Console.WriteLine("Введите сколько занятий посетил студент: ");
+        public StudentBuilder SetPassedClasses()
+        {
+            Console.WriteLine("Введите сколько занятий посетил студент: ");
 
-			if (Int32.TryParse(Console.ReadLine(), out var passed))
-			{
-				_passedClasses = passed;
+            if (Int32.TryParse(Console.ReadLine(), out var passed))
+            {
+                _passedClasses = passed;
 
-				return this;
-			}
+                return this;
+            }
 
-			throw new NotSupportedException();
-		}
+            throw new NotSupportedException();
+        }
 
-		public StudentBuilder SetCategory()
-		{
-			Console.WriteLine("Введите категорию студента(числом или названием): ");
-			foreach (var type in Enum.GetNames(typeof(StudentType))) Console.WriteLine(type);
+        public StudentBuilder SetCategory()
+        {
+            Console.WriteLine("Введите категорию студента(числом или названием): ");
+            foreach (var type in Enum.GetNames(typeof(StudentType))) Console.WriteLine(type);
 
-			if (Enum.TryParse(Console.ReadLine(), out StudentType studentType))
-			{
-				_type = studentType;
+            if (Enum.TryParse(Console.ReadLine(), out StudentType studentType))
+            {
+                _type = studentType;
 
-				return this;
-			}
+                return this;
+            }
 
-			_type = StudentType.Default;
+            _type = StudentType.Default;
 
-			return this;
+            return this;
 
-			//throw new NotSupportedException();
-		}
+            //throw new NotSupportedException();
+        }
 
-		private enum StudentType
-		{
-			Default,
-			BrightHead,
-			Genius
-		}
-	}
+        private enum StudentType
+        {
+            Default,
+            BrightHead,
+            Genius
+        }
+    }
 }

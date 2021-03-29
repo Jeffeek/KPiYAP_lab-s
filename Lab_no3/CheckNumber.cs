@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using System;
 
@@ -6,100 +6,100 @@ using System;
 
 namespace Lab_no3
 {
-	public class CheckNumber
-	{
-		public bool Check()
-		{
-			Console.WriteLine("Введите цифру (0-9)");
+    public class CheckNumber
+    {
+        public bool Check()
+        {
+            Console.WriteLine("Введите цифру (0-9)");
 
-			if (Int32.TryParse(Console.ReadLine(), out var x))
-			{
-				switch (x)
-				{
-					case 0:
-					{
-						WriteNum("Ноль");
+            if (Int32.TryParse(Console.ReadLine(), out var x))
+            {
+                switch (x)
+                {
+                    case 0:
+                    {
+                        WriteNum("Ноль");
 
-						break;
-					}
+                        break;
+                    }
 
-					case 1:
-					{
-						WriteNum("Один");
+                    case 1:
+                    {
+                        WriteNum("Один");
 
-						break;
-					}
+                        break;
+                    }
 
-					case 2:
-					{
-						WriteNum("Два");
+                    case 2:
+                    {
+                        WriteNum("Два");
 
-						break;
-					}
+                        break;
+                    }
 
-					case 3:
-					{
-						WriteNum("Три");
+                    case 3:
+                    {
+                        WriteNum("Три");
 
-						break;
-					}
+                        break;
+                    }
 
-					case 4:
-					{
-						WriteNum("Четыре");
+                    case 4:
+                    {
+                        WriteNum("Четыре");
 
-						break;
-					}
+                        break;
+                    }
 
-					case 5:
-					{
-						WriteNum("Пять");
+                    case 5:
+                    {
+                        WriteNum("Пять");
 
-						break;
-					}
+                        break;
+                    }
 
-					case 6:
-					{
-						WriteNum("Шесть");
+                    case 6:
+                    {
+                        WriteNum("Шесть");
 
-						break;
-					}
+                        break;
+                    }
 
-					case 7:
-					{
-						WriteNum("Семь");
+                    case 7:
+                    {
+                        WriteNum("Семь");
 
-						break;
-					}
+                        break;
+                    }
 
-					case 8:
-					{
-						WriteNum("Восемь");
+                    case 8:
+                    {
+                        WriteNum("Восемь");
 
-						break;
-					}
+                        break;
+                    }
 
-					case 9:
-					{
-						WriteNum("Девять");
+                    case 9:
+                    {
+                        WriteNum("Девять");
 
-						break;
-					}
-				}
+                        break;
+                    }
+                }
 
-				return x >= 0 && x <= 9;
-			}
+                return x >= 0 && x <= 9;
+            }
 
-			return false;
-		}
+            return false;
+        }
 
-		private void WriteNum(string num) => Console.WriteLine(num);
+        private void WriteNum(string num) => Console.WriteLine(num);
 
-		public (bool, int) CheckInt()
-		{
-			if (Int32.TryParse(Console.ReadLine(), out var x)) return (true, x);
+        public (bool, int) CheckInt()
+        {
+            if (Int32.TryParse(Console.ReadLine(), out var x)) return (true, x);
 
-			return (false, Int32.MaxValue);
-		}
-	}
+            return (false, Int32.MaxValue);
+        }
+    }
 }

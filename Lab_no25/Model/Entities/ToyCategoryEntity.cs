@@ -1,32 +1,34 @@
-﻿using System;
+﻿#region Using namespaces
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+
+#endregion
 
 namespace Lab_no25.Model.Entities
 {
     [Index(nameof(Id))]
     public class ToyCategoryEntity
     {
-        public override string ToString() => $"{nameof(Id)}: {Id}, {nameof(WarrantyPeriod)}: {WarrantyPeriod}, {nameof(CareRules)}: {CareRules}, {nameof(Age)}: {Age}";
-
         [Key]
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         [Range(0, Int32.MaxValue)]
         [Required]
-        public int WarrantyPeriod { get; set; }
+        public uint WarrantyPeriod { get; set; }
 
         [Required]
         public string CareRules { get; set; }
 
         [Range(0, 1000)]
         [Required]
-        public int Age { get; set; }
+        public uint Age { get; set; }
 
         public ICollection<ToyEntity> Toys { get; set; }
+
+        public override string ToString() =>
+            $"{nameof(Id)}: {Id}, {nameof(WarrantyPeriod)}: {WarrantyPeriod}, {nameof(CareRules)}: {CareRules}, {nameof(Age)}: {Age}";
     }
 }

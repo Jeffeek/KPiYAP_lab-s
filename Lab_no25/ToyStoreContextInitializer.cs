@@ -1,10 +1,12 @@
-﻿using System;
+﻿#region Using namespaces
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Lab_no25.Model;
 using Lab_no25.Model.Entities;
+
+#endregion
 
 namespace Lab_no25
 {
@@ -21,9 +23,9 @@ namespace Lab_no25
             {
                 var toyCategory = new ToyCategoryEntity
                                   {
-                                      Age = random.Next(1, 20),
+                                      Age = (uint)random.Next(1, 20),
                                       CareRules = Guid.NewGuid().ToString().Replace("-", "").ToUpper(),
-                                      WarrantyPeriod = random.Next(1, 128)
+                                      WarrantyPeriod = (uint)random.Next(1, 128)
                                   };
                 categories.Add(toyCategory);
             }
@@ -36,7 +38,7 @@ namespace Lab_no25
                               Photo = $"photo{i + random.Next(0, 20000)}{Guid.NewGuid()}",
                               Price = (decimal)(random.NextDouble() * random.Next(1, 5000)),
                               Producer = Guid.NewGuid().ToString().Substring(0, 7).Replace("-", ""),
-                              WarehouseCount = random.Next(0, 10000)
+                              WarehouseCount = (uint)random.Next(0, 10000)
                           };
                 toys.Add(toy);
             }
@@ -49,11 +51,11 @@ namespace Lab_no25
                 var price = selectedToy.Price * count * 100 / (discount == 0 ? 1 : discount);
                 var sale = new SaleEntity
                            {
-                               Discount = discount,
+                               Discount = (uint)discount,
                                SaleDate = DateTime.Now,
                                SaleSum = price,
                                Toy = selectedToy,
-                               SaleCount = count
+                               SaleCount = (uint)count
                            };
                 sales.Add(sale);
             }

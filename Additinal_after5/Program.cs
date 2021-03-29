@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using Additinal_after5.Models;
 
@@ -6,11 +6,11 @@ using Additinal_after5.Models;
 
 namespace Additinal_after5
 {
-	internal class Program
-	{
-		private static void Main(string[] args)
-		{
-			var runner = new Runner();
-		}
-	}
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            var runner = new Runner();
+        }
+    }
 }

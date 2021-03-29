@@ -1,14 +1,16 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿#region Using namespaces
+
+using System;
 using System.Threading;
-using System.Threading.Channels;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace Lab_no20
 {
-    class Program
+    internal class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             var tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
@@ -18,8 +20,7 @@ namespace Lab_no20
             var E = Double.Parse(Console.ReadLine());
             Task.Run(() => Log10(x, E, token));
             var key = Console.ReadKey(true);
-            if (key.Key == ConsoleKey.UpArrow)
-                tokenSource.Cancel();
+            if (key.Key == ConsoleKey.UpArrow) tokenSource.Cancel();
 
             Console.ReadLine();
         }

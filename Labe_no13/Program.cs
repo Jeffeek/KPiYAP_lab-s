@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using System;
 
@@ -6,25 +6,25 @@ using System;
 
 namespace Labe_no13
 {
-	public delegate double MatrixOperation();
+    public delegate double MatrixOperation();
 
-	internal class Program
-	{
-		private static void Main(string[] args)
-		{
-			var n = 10;
-			var matrix = new Matrix(n, n);
-			matrix.FillRandomly(0, 10);
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            var n = 10;
+            var matrix = new Matrix(n, n);
+            matrix.FillRandomly(0, 10);
 
-			MatrixOperation operation = matrix.DiagonalSum;
-			Console.WriteLine(operation());
-			operation = matrix.AvgSum;
-			Console.WriteLine(operation());
-			operation = matrix.SumSaddlePoints;
-			Console.WriteLine(operation());
-			Console.WriteLine(matrix);
+            MatrixOperation operation = matrix.DiagonalSum;
+            Console.WriteLine(operation());
+            operation = matrix.AvgSum;
+            Console.WriteLine(operation());
+            operation = matrix.SumSaddlePoints;
+            Console.WriteLine(operation());
+            Console.WriteLine(matrix);
 
-			Console.ReadKey();
-		}
-	}
+            Console.ReadKey();
+        }
+    }
 }

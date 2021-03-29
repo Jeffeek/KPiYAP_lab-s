@@ -1,9 +1,13 @@
-﻿using System.Windows;
+﻿#region Using namespaces
 
-namespace Lab_no26.View
+using System.Windows;
+
+#endregion
+
+namespace Lab_no26plus27.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {

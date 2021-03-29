@@ -13,25 +13,25 @@ namespace Lab_no25.Model.Entities
     [Index(nameof(Id))]
     public class SaleEntity
     {
-        private readonly decimal _saleSum;
+        private decimal _saleSum;
 
         [Required]
         [Key]
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         [ForeignKey(nameof(ToyId))]
         public ToyEntity Toy { get; set; }
 
         [Required]
-        public int ToyId { get; set; }
+        public uint ToyId { get; set; }
 
         [DefaultValue(typeof(int), "0")]
         [Required]
-        public int SaleCount { get; set; }
+        public uint SaleCount { get; set; }
 
         [DefaultValue(typeof(int), "0")]
         [Required]
-        public int Discount { get; set; }
+        public uint Discount { get; set; }
 
         [Required]
         public DateTime SaleDate { get; set; }
@@ -40,7 +40,7 @@ namespace Lab_no25.Model.Entities
         public decimal SaleSum
         {
             get => _saleSum;
-            init => _saleSum = Math.Round(value, 2);
+            set => _saleSum = Math.Round(value, 2);
         }
 
         public override string ToString() =>

@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using System;
 using Lab_no4.View;
@@ -7,12 +7,12 @@ using Lab_no4.View;
 
 namespace Lab_no4
 {
-	internal class Program
-	{
-		private static void Main(string[] args)
-		{
-			var view = new MainView();
-			Console.ReadLine();
-		}
-	}
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            var view = new MainView();
+            Console.ReadLine();
+        }
+    }
 }

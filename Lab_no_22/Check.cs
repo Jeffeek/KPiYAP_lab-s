@@ -1,17 +1,21 @@
-﻿using System;
+﻿#region Using namespaces
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace Lab_no_22
 {
     public class Check
     {
-        private int _innerSum = 0;
-        private bool _isDiscount;
         private readonly Dictionary<Product, int> _products;
-        
+        private int _innerSum;
+        private bool _isDiscount;
+
+        public Check() => _products = new Dictionary<Product, int>();
+
         public int Sum
         {
             get => _innerSum;
@@ -23,8 +27,6 @@ namespace Lab_no_22
         }
 
         public event EventHandler<int> SumOfProductsChanged;
-
-        public Check() => _products = new Dictionary<Product, int>();
 
         public void AddProduct(Product product)
         {
@@ -38,8 +40,9 @@ namespace Lab_no_22
 
         #region Overrides of Object
 
-        /// <inheritdoc />
-        public override string ToString() => $"Магазин Чебурек\nЧек:\n{String.Join("\n", _products.Select(x => x.Key.ToString() + ". Sum = " + x.Key.Price * x.Value))}\nСумма:{Sum}\nБлагодарим за покупку!";
+        /// <inheritdoc/>
+        public override string ToString() =>
+            $"Магазин Чебурек\nЧек:\n{String.Join("\n", _products.Select(x => x.Key + ". Sum = " + x.Key.Price * x.Value))}\nСумма:{Sum}\nБлагодарим за покупку!";
 
         #endregion
 

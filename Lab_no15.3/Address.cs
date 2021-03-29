@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using System.Runtime.Serialization;
 
@@ -6,16 +6,16 @@ using System.Runtime.Serialization;
 
 namespace Lab_no15._3
 {
-	[DataContract]
-	public class Address
-	{
-		[DataMember]
-		public string Street { get; set; }
+    [DataContract]
+    public class Address
+    {
+        [DataMember]
+        public string Street { get; set; }
 
-		[DataMember]
-		public int Number { get; set; }
+        [DataMember]
+        public int Number { get; set; }
 
-		[DataMember]
-		public int Room { get; set; }
-	}
+        [DataMember]
+        public int Room { get; set; }
+    }
 }

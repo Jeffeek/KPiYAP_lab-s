@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using System.Collections.Generic;
 
@@ -6,41 +6,41 @@ using System.Collections.Generic;
 
 namespace lab_no6.TableMatrixModels
 {
-	internal class Column
-	{
-		public Column(double[] input)
-		{
-			CellsList = new List<Cell>();
-			Count = input.Length;
-			FillCells(input);
-		}
+    internal class Column
+    {
+        public Column(double[] input)
+        {
+            CellsList = new List<Cell>();
+            Count = input.Length;
+            FillCells(input);
+        }
 
-		public List<Cell> CellsList { get; }
+        public List<Cell> CellsList { get; }
 
-		public int Count { get; }
+        public int Count { get; }
 
-		private void FillCells(double[] input)
-		{
-			var j = 0;
+        private void FillCells(double[] input)
+        {
+            var j = 0;
 
-			for (var i = 0; i < Count; i++)
-			{
-				CellsList.Add(new Cell(i + j, input[i]));
-				j++;
-			}
-		}
+            for (var i = 0; i < Count; i++)
+            {
+                CellsList.Add(new Cell(i + j, input[i]));
+                j++;
+            }
+        }
 
-		public override string ToString()
-		{
-			var str = "";
+        public override string ToString()
+        {
+            var str = "";
 
-			for (var i = 0; i < Count; i++)
-			{
-				str += CellsList[i].ToString();
-				str += "\n";
-			}
+            for (var i = 0; i < Count; i++)
+            {
+                str += CellsList[i].ToString();
+                str += "\n";
+            }
 
-			return "----------\n" + str + "\n----------";
-		}
-	}
+            return "----------\n" + str + "\n----------";
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using System;
 
@@ -6,8 +6,8 @@ using System;
 
 namespace Labe_no12
 {
-	public class GeometricProgression : IProgression
-	{
+    public class GeometricProgression : IProgression
+    {
         /// <summary>
         ///     знаменатель прогрессии
         /// </summary>
@@ -24,33 +24,33 @@ namespace Labe_no12
         /// <param name="startPoint">начальная точка прогрессии</param>
         /// <param name="q">знаменатель прогрессии</param>
         public GeometricProgression(double startPoint, double q)
-		{
-			StartPoint = startPoint;
-			Q = q;
-		}
+        {
+            StartPoint = startPoint;
+            Q = q;
+        }
 
-		public double Q
-		{
-			get => _q;
-			private set
-			{
-				var roundedValue = Math.Round(value, 2);
+        public double Q
+        {
+            get => _q;
+            private set
+            {
+                var roundedValue = Math.Round(value, 2);
 
-				if (Math.Abs(roundedValue - 0.00) < 0.001) throw new BadQException();
+                if (Math.Abs(roundedValue - 0.00) < 0.001) throw new BadQException();
 
-				_q = roundedValue;
-			}
-		}
+                _q = roundedValue;
+            }
+        }
 
-		public double StartPoint
-		{
-			get => _startPoint;
-			private set
-			{
-				var roundedValue = Math.Round(value, 2);
-				_startPoint = roundedValue;
-			}
-		}
+        public double StartPoint
+        {
+            get => _startPoint;
+            private set
+            {
+                var roundedValue = Math.Round(value, 2);
+                _startPoint = roundedValue;
+            }
+        }
 
         /// <summary>
         ///     вычисление суммы прогрессии до заданного числа
@@ -65,5 +65,5 @@ namespace Labe_no12
         /// <param name="n">заданный "индекс" в прогрессии</param>
         /// <returns>n-ый член прогрессии</returns>
         public double Get(long n) => Math.Round(StartPoint * Math.Pow(Q, n - 1), 2);
-	}
+    }
 }

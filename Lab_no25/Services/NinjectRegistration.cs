@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Using namespaces
+
 using Lab_no25.Model;
 using Lab_no25.Services.Implementations;
 using Lab_no25.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Ninject.Modules;
 using Ninject.Parameters;
+
+#endregion
 
 namespace Lab_no25.Services
 {
@@ -17,7 +16,10 @@ namespace Lab_no25.Services
         public override void Load()
         {
             var options = new DbContextOptionsBuilder<ToyStoreDbContext>().UseInMemoryDatabase("Toys").Options;
-            Bind<ToyStoreDbContext>().ToSelf().InThreadScope().WithParameter(new ConstructorArgument("options", options));
+            Bind<ToyStoreDbContext>()
+                .ToSelf()
+                .InThreadScope()
+                .WithParameter(new ConstructorArgument("options", options));
             Bind<IToysCategoriesService>().To<ToysCategoriesService>();
             Bind<IToysService>().To<ToysService>();
             Bind<ISalesService>().To<SalesService>();

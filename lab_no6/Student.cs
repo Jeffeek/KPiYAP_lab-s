@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using System.Linq;
 
@@ -6,20 +6,20 @@ using System.Linq;
 
 namespace lab_no6
 {
-	internal class Student
-	{
-		private readonly int[] _marks;
+    internal class Student
+    {
+        private readonly int[] _marks;
 
-		public Student(int[] marks) => _marks = marks;
+        public Student(int[] marks) => _marks = marks;
 
-		public int[] GetMarks()
-		{
-			var marks = _marks
-						.OrderByDescending(x => x == 10)
-						.ThenByDescending(x => x == 8)
-						.ThenByDescending(x => x == 6);
+        public int[] GetMarks()
+        {
+            var marks = _marks
+                        .OrderByDescending(x => x == 10)
+                        .ThenByDescending(x => x == 8)
+                        .ThenByDescending(x => x == 6);
 
-			return marks.ToArray();
-		}
-	}
+            return marks.ToArray();
+        }
+    }
 }

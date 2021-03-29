@@ -1,29 +1,39 @@
-﻿using System.Collections.Generic;
+﻿#region Using namespaces
+
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+#endregion
 
 namespace Lab_no25.Model.Entities
 {
-    [Microsoft.EntityFrameworkCore.Index(nameof(Id))]
+    [Index(nameof(Id))]
     public class ToyEntity
     {
-        public override string ToString() => $"{nameof(Id)}: {Id}, {nameof(Producer)}: {Producer}, {nameof(Price)}: {Price}, {nameof(WarehouseCount)}: {WarehouseCount}, {nameof(Photo)}: {Photo}, {nameof(Category)}: {Category}, {nameof(CategoryId)}: {CategoryId}";
+        private decimal _price;
 
         [Required]
         [Key]
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         [Required]
         public string Producer { get; set; }
 
         [DefaultValue(typeof(decimal), "0,0")]
         [Required]
-        public decimal Price { get; set; }
+        public decimal Price
+        {
+            get => _price;
+            set => _price = Math.Round(value, 2);
+        }
 
         [DefaultValue(typeof(decimal), "0,0")]
         [Required]
-        public int WarehouseCount { get; set; }
+        public uint WarehouseCount { get; set; }
 
         [Required]
         public string Photo { get; set; }
@@ -32,8 +42,11 @@ namespace Lab_no25.Model.Entities
         public ToyCategoryEntity Category { get; set; }
 
         [Required]
-        public int CategoryId { get; set; }
+        public uint CategoryId { get; set; }
 
         public ICollection<SaleEntity> Sales { get; set; }
+
+        public override string ToString() =>
+            $"{nameof(Id)}: {Id}, {nameof(Producer)}: {Producer}, {nameof(Price)}: {Price}, {nameof(WarehouseCount)}: {WarehouseCount}, {nameof(Photo)}: {Photo}, {nameof(Category)}: {Category}, {nameof(CategoryId)}: {CategoryId}";
     }
 }

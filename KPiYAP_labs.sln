@@ -61,7 +61,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab_no25", "Lab_no25\Lab_no
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseLabs", "DatabaseLabs", "{5EC4EBC2-ADB5-478D-8366-2C37C8F4302A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_no26", "Lab_no26\Lab_no26.csproj", "{21D07B10-4973-49E5-8BC3-618CA1B86DD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab_no26plus27", "Lab_no26plus27\Lab_no26plus27.csproj", "{21D07B10-4973-49E5-8BC3-618CA1B86DD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

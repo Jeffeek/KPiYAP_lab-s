@@ -1,12 +1,13 @@
-﻿using System;
+﻿#region Using namespaces
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Lab_no25.Model;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+
+#endregion
 
 namespace Lab_no25.Services.Implementations
 {
@@ -33,6 +34,11 @@ namespace Lab_no25.Services.Implementations
 
         public async Task<bool> UpdateToyAsync(ToyEntity toy)
         {
+            var newCategory = await _context.ToyCategories.FindAsync(toy.CategoryId);
+
+            if (newCategory is null) return false;
+
+            _context.Attach(toy);
             _context.Entry(toy).State = EntityState.Modified;
 
             return await _context.SaveChangesAsync() > 0;

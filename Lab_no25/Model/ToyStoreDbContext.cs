@@ -1,5 +1,9 @@
-﻿using Lab_no25.Model.Entities;
+﻿#region Using namespaces
+
+using Lab_no25.Model.Entities;
 using Microsoft.EntityFrameworkCore;
+
+#endregion
 
 namespace Lab_no25.Model
 {

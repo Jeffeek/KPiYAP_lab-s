@@ -1,11 +1,11 @@
 ﻿namespace Labe_no11
 {
-	public abstract class ComplexNumberBuilder : IBuilder<Complex>
-	{
-		public abstract Complex Build();
+    public abstract class ComplexNumberBuilder : IBuilder<Complex>
+    {
+        public abstract Complex Build();
 
-		protected abstract double TakeRealPart();
+        protected abstract double TakeRealPart();
 
-		protected abstract double TakeVirtualPart();
-	}
+        protected abstract double TakeVirtualPart();
+    }
 }

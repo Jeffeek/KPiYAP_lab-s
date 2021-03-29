@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using System;
 
@@ -6,8 +6,8 @@ using System;
 
 namespace Lab_no5.Exceptions
 {
-	internal class TimeException : Exception
-	{
-		public override string Message => "Ошибка изменения значений времени.";
-	}
+    internal class TimeException : Exception
+    {
+        public override string Message => "Ошибка изменения значений времени.";
+    }
 }

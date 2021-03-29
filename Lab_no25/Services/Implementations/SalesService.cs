@@ -1,12 +1,13 @@
-﻿using System;
+﻿#region Using namespaces
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Lab_no25.Model;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+
+#endregion
 
 namespace Lab_no25.Services.Implementations
 {
@@ -33,6 +34,22 @@ namespace Lab_no25.Services.Implementations
 
         public async Task<bool> UpdateSaleAsync(SaleEntity sale)
         {
+            var toy = await _context.Toys.FindAsync(sale.ToyId);
+
+            if (toy is null) return false;
+
+            var priceWithoutDiscount = sale.SaleCount * toy.Price;
+            if (sale.Discount == 0)
+            {
+                sale.SaleSum = priceWithoutDiscount;
+            }
+            else
+            {
+                var discount = sale.Discount / 100m;
+                sale.SaleSum = priceWithoutDiscount - priceWithoutDiscount * discount;
+            }
+
+            _context.Sales.Attach(sale);
             _context.Entry(sale).State = EntityState.Modified;
 
             return await _context.SaveChangesAsync() > 0;
@@ -40,6 +57,7 @@ namespace Lab_no25.Services.Implementations
 
         public async Task<SaleEntity> GetByIdAsync(int id) => await _context.Sales.FindAsync(id);
 
-        public async Task<IEnumerable<SaleEntity>> GetAllSalesAsync() => await _context.Sales.Include(x => x.Toy).ThenInclude(x => x.Category).ToListAsync();
+        public async Task<IEnumerable<SaleEntity>> GetAllSalesAsync() =>
+            await _context.Sales.Include(x => x.Toy).ThenInclude(x => x.Category).ToListAsync();
     }
 }

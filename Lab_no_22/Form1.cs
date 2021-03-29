@@ -1,22 +1,21 @@
-﻿using System;
+﻿#region Using namespaces
+
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+
+#endregion
 
 namespace Lab_no_22
 {
     public partial class ShopForm : Form
     {
+        private readonly Check _check;
         private readonly string _productsFilePath = $"{Directory.GetCurrentDirectory()}\\products.json";
         private List<Product> _allProducts;
-        private readonly Check _check;
 
         public ShopForm()
         {
@@ -52,10 +51,7 @@ namespace Lab_no_22
 
         private void FillProductsComboBox()
         {
-            foreach (var product in _allProducts)
-            {
-                comboBoxProducts.Items.Add($"{product.Title} : {product.Price}");
-            }
+            foreach (var product in _allProducts) comboBoxProducts.Items.Add($"{product.Title} : {product.Price}");
         }
 
         private void buttonAddProduct_Click(object sender, EventArgs e)
@@ -92,10 +88,10 @@ namespace Lab_no_22
         {
             if (richTextBoxCheck.Text == String.Empty) return;
 
-            var fileDialog = new SaveFileDialog()
+            var fileDialog = new SaveFileDialog
                              {
-                                     Filter = "*.txt;|*.txt",
-                                     InitialDirectory = $"{Directory.GetCurrentDirectory()}",
+                                 Filter = "*.txt;|*.txt",
+                                 InitialDirectory = $"{Directory.GetCurrentDirectory()}"
                              };
 
             if (fileDialog.ShowDialog() != DialogResult.OK) return;

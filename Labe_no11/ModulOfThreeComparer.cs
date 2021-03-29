@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using System.Collections.Generic;
 
@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 namespace Labe_no11
 {
-	public class ModulOfThreeComparer : IComparer<int>
-	{
-		public int Compare(int x, int y)
-		{
-			var modX = x % 3;
-			var modY = y % 3;
+    public class ModulOfThreeComparer : IComparer<int>
+    {
+        public int Compare(int x, int y)
+        {
+            var modX = x % 3;
+            var modY = y % 3;
 
-			return modX == modY ? x.CompareTo(y) : modX.CompareTo(modY);
-		}
-	}
+            return modX == modY ? x.CompareTo(y) : modX.CompareTo(modY);
+        }
+    }
 }

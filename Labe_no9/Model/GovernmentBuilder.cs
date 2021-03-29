@@ -1,4 +1,4 @@
-﻿#region Using derectives
+﻿#region Using namespaces
 
 using Labe_no9.Enums;
 
@@ -6,47 +6,47 @@ using Labe_no9.Enums;
 
 namespace Labe_no9.Model
 {
-	public class GovernmentBuilder
-	{
-		private Government _government;
+    public class GovernmentBuilder
+    {
+        private Government _government;
 
-		public GovernmentBuilder() => _government = new Government();
+        public GovernmentBuilder() => _government = new Government();
 
-		public Government Build() => _government;
+        public Government Build() => _government;
 
-		public GovernmentBuilder SetName(string name)
-		{
-			_government.Name = name;
+        public GovernmentBuilder SetName(string name)
+        {
+            _government.Name = name;
 
-			return this;
-		}
+            return this;
+        }
 
-		public GovernmentBuilder SetCapital(string capital)
-		{
-			_government.Capital = capital;
+        public GovernmentBuilder SetCapital(string capital)
+        {
+            _government.Capital = capital;
 
-			return this;
-		}
+            return this;
+        }
 
-		public GovernmentBuilder SetType(GovernmentType type)
-		{
-			_government.Type = type;
+        public GovernmentBuilder SetType(GovernmentType type)
+        {
+            _government.Type = type;
 
-			return this;
-		}
+            return this;
+        }
 
-		public GovernmentBuilder SetArea(long area)
-		{
-			_government.Area = area;
+        public GovernmentBuilder SetArea(long area)
+        {
+            _government.Area = area;
 
-			return this;
-		}
+            return this;
+        }
 
-		public GovernmentBuilder SetPopulation(long population)
-		{
-			_government.Population = population;
+        public GovernmentBuilder SetPopulation(long population)
+        {
+            _government.Population = population;
 
-			return this;
-		}
-	}
+            return this;
+        }
+    }
 }
