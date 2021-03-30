@@ -11,6 +11,11 @@
     MinHeight="450"
     MaxWidth="800"
     MaxHeight="450"
+     ResizeMode="NoResize"
+     WindowStyle="SingleBorderWindow"
+     WindowStartupLocation="CenterScreen"
+     WindowState="Normal"
+     SizeToContent="WidthAndHeight"
     mc:Ignorable="d">
     <TabControl>
         <TabItem Header="Toys">
@@ -257,7 +262,7 @@
                                     </Viewbox>
                                 </Button.Content>
                             </Button>
-                            <Button Width="18" Command="{Binding ToysContext.ReloadToysCommand}">
+                            <Button Width="20" Command="{Binding ToysContext.ReloadToysCommand}">
                                 <Button.Content>
                                     <Viewbox Stretch="Uniform">
                                         <Canvas Width="20" Height="20">
@@ -695,7 +700,7 @@
                                     </Viewbox>
                                 </Button.Content>
                             </Button>
-                            <Button Width="18" Command="{Binding ToysCategoriesContext.ReloadToysCategoriesCommand}">
+                            <Button Width="20" Command="{Binding ToysCategoriesContext.ReloadToysCategoriesCommand}">
                                 <Button.Content>
                                     <Viewbox Stretch="Uniform">
                                         <Canvas Width="20" Height="20">
@@ -809,7 +814,6 @@
                             <TextBlock Grid.Column="0" Text="Warranty Period: " />
                             <TextBox
                                 Grid.Column="1"
-                                MaxHeight="30"
                                 IsReadOnly="{Binding ToysCategoriesContext.IsEditMode}"
                                 Text="{Binding ToysCategoriesContext.SelectedToyCategory.Entity.WarrantyPeriod}" />
                         </Grid>
@@ -1114,7 +1118,7 @@
                                     </Viewbox>
                                 </Button.Content>
                             </Button>
-                            <Button Width="18" Command="{Binding SalesContext.ReloadSalesCommand}">
+                            <Button Width="20" Command="{Binding SalesContext.ReloadSalesCommand}">
                                 <Button.Content>
                                     <Viewbox Stretch="Uniform">
                                         <Canvas Width="20" Height="20">
