@@ -1,23 +1,39 @@
-﻿using System;
+﻿#region Using namespaces
+
 using System.Collections.Generic;
 using System.Windows;
 using Lab_no26plus27.Model;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using Prism.Regions;
+
+#endregion
 
 namespace Lab_no26plus27.ViewModels.PagesViewModels
 {
     public class SignInPageViewModel : BindableBase
     {
-        private readonly IEventAggregator _eventAggregator;
-        private DelegateCommand _signInCommand;
         private readonly Dictionary<string, string> _credentials;
+        private readonly IEventAggregator _eventAggregator;
 
         private string _login = "Admin";
 
         private string _password = "qwerty";
+        private DelegateCommand _signInCommand;
+
+        public SignInPageViewModel(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+            _credentials = new Dictionary<string, string>
+                           {
+                               {
+                                   ApplicationRoles.Administrator, "qwerty"
+                               },
+                               {
+                                   ApplicationRoles.Manager, "qwerty1"
+                               }
+                           };
+        }
 
         public DelegateCommand SignInCommand =>
             _signInCommand ??= new DelegateCommand(OnCheckCredentials, CanCheckCredentials)
@@ -40,20 +56,6 @@ namespace Lab_no26plus27.ViewModels.PagesViewModels
                 SetProperty(ref _password,
                             value,
                             nameof(Password));
-        }
-
-        public SignInPageViewModel(IEventAggregator eventAggregator)
-        {
-            _eventAggregator = eventAggregator;
-            _credentials = new Dictionary<string, string>
-                           {
-                               {
-                                   ApplicationRoles.Administrator, "qwerty"
-                               },
-                               {
-                                   ApplicationRoles.Manager, "qwerty1"
-                               }
-                           };
         }
 
         private bool CanCheckCredentials() => Login.Length > 3 && Password.Length > 4;

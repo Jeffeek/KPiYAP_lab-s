@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -28,5 +29,9 @@ namespace Lab_no25.Model.Entities
 
         [Required]
         public DateTime PreOrderDate { get; set; }
+
+        [DefaultValue(false)]
+        [Required]
+        public bool IsDone { get; set; }
     }
 }

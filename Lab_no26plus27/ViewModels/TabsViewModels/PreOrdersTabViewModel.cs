@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Using namespaces
+
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Linq;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces.EntityServices;
 using Lab_no26plus27.Model.AsyncCommand;
@@ -12,36 +13,39 @@ using Lab_no26plus27.ViewModels.EntitiesViewModels;
 using Prism.Commands;
 using Prism.Mvvm;
 
+#endregion
+
 namespace Lab_no26plus27.ViewModels.TabsViewModels
 {
     public class PreOrdersTabViewModel : BindableBase
     {
         private readonly IPreOrdersService _preOrdersService;
         private bool _isEditMode;
-        private PreOrderEntityViewModel _selectedPreOrder;
         private ObservableCollection<PreOrderEntityViewModel> _preOrders;
+        private PreOrderEntityViewModel _selectedPreOrder;
 
         public PreOrdersTabViewModel(IPreOrdersService preOrdersService)
         {
             _preOrdersService = preOrdersService;
             PreOrders = new ObservableCollection<PreOrderEntityViewModel>();
-            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted);
-            ApplyPreOrderChangesCommand = new AsyncRelayCommand(OnApplyToyChangesCommandExecuted);
-            RemovePreOrderCommand = new AsyncRelayCommand(OnRemoveToyCommandExecuted);
+            ChangeEditModeCommand =
+                new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnPreOrder).ObservesProperty(() => SelectedPreOrder);
+            ApplyPreOrderChangesCommand = new AsyncRelayCommand(OnApplyToyChangesCommandExecuted, CanManipulateOnPreOrder);
+            RemovePreOrderCommand = new AsyncRelayCommand(OnRemoveToyCommandExecuted, CanManipulateOnPreOrder);
             AddPreOrderCommand = new DelegateCommand(OnAddToyCommandExecuted);
             ReloadPreOrdersCommand = new AsyncRelayCommand(ReloadToysAsync);
             ReloadToysAsync().Wait();
         }
 
-        public ICommand AddPreOrderCommand { get; }
+        public DelegateCommand AddPreOrderCommand { get; }
 
-        public ICommand RemovePreOrderCommand { get; }
+        public AsyncRelayCommand RemovePreOrderCommand { get; }
 
-        public ICommand ApplyPreOrderChangesCommand { get; }
+        public AsyncRelayCommand ApplyPreOrderChangesCommand { get; }
 
-        public ICommand ChangeEditModeCommand { get; }
+        public DelegateCommand ChangeEditModeCommand { get; }
 
-        public ICommand ReloadPreOrdersCommand { get; }
+        public AsyncRelayCommand ReloadPreOrdersCommand { get; }
 
         public ObservableCollection<PreOrderEntityViewModel> PreOrders
         {
@@ -49,10 +53,15 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             set => SetProperty(ref _preOrders, value);
         }
 
-        public PreOrderEntityViewModel SelectedCustomer
+        public PreOrderEntityViewModel SelectedPreOrder
         {
             get => _selectedPreOrder;
-            set => SetProperty(ref _selectedPreOrder, value);
+            set
+            {
+                SetProperty(ref _selectedPreOrder, value);
+                RemovePreOrderCommand.RaiseCanExecuteChanged();
+                ApplyPreOrderChangesCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public bool IsEditMode
@@ -61,37 +70,33 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             set => SetProperty(ref _isEditMode, value);
         }
 
-        private bool CanManipulateOnPreOrder() => SelectedCustomer is not null;
+        private bool CanManipulateOnPreOrder() => SelectedPreOrder is not null;
 
         private void OnChangeEditModeCommandExecuted() => IsEditMode = !IsEditMode;
 
         private void OnAddToyCommandExecuted()
         {
             PreOrders.Insert(0,
-                             new PreOrderEntityViewModel(new PreOrderEntity()
+                             new PreOrderEntityViewModel(new PreOrderEntity
                                                          {
                                                              PreOrderDate = DateTime.Now
                                                          }));
-            SelectedCustomer = PreOrders.First();
+            SelectedPreOrder = PreOrders.First();
         }
 
         private async Task OnRemoveToyCommandExecuted()
         {
-            if (!CanManipulateOnPreOrder()) return;
-
-            await _preOrdersService.RemovePreOrderAsync(SelectedCustomer.Entity);
-            PreOrders.Remove(SelectedCustomer);
-            SelectedCustomer = null;
+            await _preOrdersService.RemovePreOrderAsync(SelectedPreOrder.Entity);
+            PreOrders.Remove(SelectedPreOrder);
+            SelectedPreOrder = null;
         }
 
         private async Task OnApplyToyChangesCommandExecuted()
         {
-            if (!CanManipulateOnPreOrder()) return;
-
-            if (SelectedCustomer.Entity.Id == 0)
-                await _preOrdersService.AddPreOrderAsync(SelectedCustomer.Entity);
+            if (SelectedPreOrder.Entity.Id == 0)
+                await _preOrdersService.AddPreOrderAsync(SelectedPreOrder.Entity);
             else
-                await _preOrdersService.UpdatePreOrderAsync(SelectedCustomer.Entity);
+                await _preOrdersService.UpdatePreOrderAsync(SelectedPreOrder.Entity);
             await ReloadToysAsync();
         }
 

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Using namespaces
+
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Lab_no25.Model.Entities;
@@ -12,36 +12,38 @@ using Lab_no26plus27.ViewModels.EntitiesViewModels;
 using Prism.Commands;
 using Prism.Mvvm;
 
+#endregion
+
 namespace Lab_no26plus27.ViewModels.TabsViewModels
 {
     public class CustomersTabViewModel : BindableBase
     {
         private readonly ICustomersService _customersService;
+        private ObservableCollection<CustomerEntityViewModel> _customers;
         private bool _isEditMode;
         private CustomerEntityViewModel _selectedCustomer;
-        private ObservableCollection<CustomerEntityViewModel> _customers;
 
         public CustomersTabViewModel(ICustomersService customersService)
         {
             _customersService = customersService;
             Customers = new ObservableCollection<CustomerEntityViewModel>();
-            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted);
-            ApplyCustomerChangesCommand = new AsyncRelayCommand(OnApplyToyChangesCommandExecuted);
-            RemoveCustomerCommand = new AsyncRelayCommand(OnRemoveToyCommandExecuted);
+            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnCustomer).ObservesProperty(() => SelectedCustomer);
+            ApplyCustomerChangesCommand = new AsyncRelayCommand(OnApplyToyChangesCommandExecuted, CanManipulateOnCustomer);
+            RemoveCustomerCommand = new AsyncRelayCommand(OnRemoveToyCommandExecuted, CanManipulateOnCustomer);
             AddCustomerCommand = new DelegateCommand(OnAddToyCommandExecuted);
             ReloadCustomersCommand = new AsyncRelayCommand(ReloadToysAsync);
             ReloadToysAsync().Wait();
         }
 
-        public ICommand AddCustomerCommand { get; }
+        public DelegateCommand AddCustomerCommand { get; }
 
-        public ICommand RemoveCustomerCommand { get; }
+        public AsyncRelayCommand RemoveCustomerCommand { get; }
 
-        public ICommand ApplyCustomerChangesCommand { get; }
+        public AsyncRelayCommand ApplyCustomerChangesCommand { get; }
 
-        public ICommand ChangeEditModeCommand { get; }
+        public DelegateCommand ChangeEditModeCommand { get; }
 
-        public ICommand ReloadCustomersCommand { get; }
+        public AsyncRelayCommand ReloadCustomersCommand { get; }
 
         public ObservableCollection<CustomerEntityViewModel> Customers
         {
@@ -52,7 +54,12 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         public CustomerEntityViewModel SelectedCustomer
         {
             get => _selectedCustomer;
-            set => SetProperty(ref _selectedCustomer, value);
+            set
+            {
+                SetProperty(ref _selectedCustomer, value);
+                RemoveCustomerCommand.RaiseCanExecuteChanged();
+                ApplyCustomerChangesCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public bool IsEditMode
@@ -68,7 +75,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         private void OnAddToyCommandExecuted()
         {
             Customers.Insert(0,
-                             new CustomerEntityViewModel(new CustomerEntity()
+                             new CustomerEntityViewModel(new CustomerEntity
                                                          {
                                                              FullName = String.Empty,
                                                              PhoneNumber = "+375"
@@ -78,8 +85,6 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnRemoveToyCommandExecuted()
         {
-            if (!CanManipulateOnCustomer()) return;
-
             await _customersService.RemoveCustomerAsync(SelectedCustomer.Entity);
             Customers.Remove(SelectedCustomer);
             SelectedCustomer = null;
@@ -87,8 +92,6 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnApplyToyChangesCommandExecuted()
         {
-            if (!CanManipulateOnCustomer()) return;
-
             if (SelectedCustomer.Entity.Id == 0)
                 await _customersService.AddCustomerAsync(SelectedCustomer.Entity);
             else

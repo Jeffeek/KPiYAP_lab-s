@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Using namespaces
+
 using Lab_no25.Model.Entities;
 using Prism.Mvvm;
+
+#endregion
 
 namespace Lab_no26plus27.ViewModels.EntitiesViewModels
 {
@@ -12,11 +11,12 @@ namespace Lab_no26plus27.ViewModels.EntitiesViewModels
     {
         private CustomerEntity _entity;
 
-        public CustomerEntityViewModel(CustomerEntity entity)
-        {
-            _entity = entity;
-        }
+        public CustomerEntityViewModel(CustomerEntity entity) => _entity = entity;
 
-        public CustomerEntity Entity { get => _entity; set => SetProperty(ref _entity, value); }
+        public CustomerEntity Entity
+        {
+            get => _entity;
+            set => SetProperty(ref _entity, value);
+        }
     }
 }

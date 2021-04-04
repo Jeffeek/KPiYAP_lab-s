@@ -1,11 +1,9 @@
 ﻿#region Using namespaces
 
-using System.Windows.Controls;
 using Lab_no26plus27.Model;
 using Lab_no26plus27.Views;
 using Prism.Events;
 using Prism.Ioc;
-using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
 
@@ -31,7 +29,9 @@ namespace Lab_no26plus27.ViewModels.WindowsViewModels
             _eventAggregator.GetEvent<PubSubEvent<string>>()
                             .Subscribe(x =>
                                            _regionManager.RequestNavigate("CurrentPage",
-                                                                          x == ApplicationRoles.Administrator ? "AdministratorPage" : "ManagerPage"));
+                                                                          x == ApplicationRoles.Administrator
+                                                                              ? "AdministratorPage"
+                                                                              : "ManagerPage"));
             regionManager.RequestNavigate("CurrentPage", "SignInPage");
         }
     }

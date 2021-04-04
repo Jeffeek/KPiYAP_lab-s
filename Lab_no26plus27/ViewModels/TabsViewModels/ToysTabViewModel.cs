@@ -35,15 +35,15 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             ReloadToysAsync().Wait();
         }
 
-        public ICommand AddToyCommand { get; }
+        public DelegateCommand AddToyCommand { get; }
 
-        public ICommand RemoveToyCommand { get; }
+        public AsyncRelayCommand RemoveToyCommand { get; }
 
-        public ICommand ApplyToyChangesCommand { get; }
+        public AsyncRelayCommand ApplyToyChangesCommand { get; }
 
-        public ICommand ChangeEditModeCommand { get; }
+        public DelegateCommand ChangeEditModeCommand { get; }
 
-        public ICommand ReloadToysCommand { get; }
+        public AsyncRelayCommand ReloadToysCommand { get; }
 
         public ObservableCollection<ToyEntityViewModel> Toys
         {
@@ -54,7 +54,12 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         public ToyEntityViewModel SelectedToy
         {
             get => _selectedToy;
-            set => SetProperty(ref _selectedToy, value);
+            set
+            {
+                SetProperty(ref _selectedToy, value);
+                RemoveToyCommand.RaiseCanExecuteChanged();
+                ApplyToyChangesCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public bool IsEditMode

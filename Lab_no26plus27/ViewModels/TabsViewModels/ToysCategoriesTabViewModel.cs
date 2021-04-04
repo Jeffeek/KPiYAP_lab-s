@@ -26,23 +26,23 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         {
             _toysCategoriesService = toysCategoriesService;
             ToysCategories = new ObservableCollection<ToyCategoryEntityViewModel>();
-            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted);
-            ApplyToyCategoryChangesCommand = new AsyncRelayCommand(OnApplyToyCategoryChangesCommandExecuted);
-            RemoveToyCategoryCommand = new AsyncRelayCommand(OnRemoveToyCategoryCommandExecuted);
+            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnToyCategory).ObservesProperty(() => SelectedToyCategory);
+            ApplyToyCategoryChangesCommand = new AsyncRelayCommand(OnApplyToyCategoryChangesCommandExecuted, CanManipulateOnToyCategory);
+            RemoveToyCategoryCommand = new AsyncRelayCommand(OnRemoveToyCategoryCommandExecuted, CanManipulateOnToyCategory);
             AddToyCategoryCommand = new DelegateCommand(OnAddToyCategoryCommandExecuted);
             ReloadToysCategoriesCommand = new AsyncRelayCommand(ReloadToysCategoriesAsync);
             ReloadToysCategoriesAsync().Wait();
         }
 
-        public ICommand AddToyCategoryCommand { get; }
+        public DelegateCommand AddToyCategoryCommand { get; }
 
-        public ICommand RemoveToyCategoryCommand { get; }
+        public AsyncRelayCommand RemoveToyCategoryCommand { get; }
 
-        public ICommand ApplyToyCategoryChangesCommand { get; }
+        public AsyncRelayCommand ApplyToyCategoryChangesCommand { get; }
 
-        public ICommand ChangeEditModeCommand { get; }
+        public DelegateCommand ChangeEditModeCommand { get; }
 
-        public ICommand ReloadToysCategoriesCommand { get; }
+        public AsyncRelayCommand ReloadToysCategoriesCommand { get; }
 
         public ObservableCollection<ToyCategoryEntityViewModel> ToysCategories
         {
@@ -53,7 +53,12 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         public ToyCategoryEntityViewModel SelectedToyCategory
         {
             get => _selectedToyCategory;
-            set => SetProperty(ref _selectedToyCategory, value);
+            set
+            {
+                SetProperty(ref _selectedToyCategory, value);
+                RemoveToyCategoryCommand.RaiseCanExecuteChanged();
+                ApplyToyCategoryChangesCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public bool IsEditMode
@@ -80,8 +85,6 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnRemoveToyCategoryCommandExecuted()
         {
-            if (!CanManipulateOnToyCategory()) return;
-
             await _toysCategoriesService.RemoveToyCategoryAsync(SelectedToyCategory.Entity);
             ToysCategories.Remove(SelectedToyCategory);
             SelectedToyCategory = null;
@@ -89,8 +92,6 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnApplyToyCategoryChangesCommandExecuted()
         {
-            if (!CanManipulateOnToyCategory()) return;
-
             if (SelectedToyCategory.Entity.Id == 0)
                 await _toysCategoriesService.AddToyCategoryAsync(SelectedToyCategory.Entity);
             else
@@ -102,8 +103,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         {
             var dbToysCategories = await _toysCategoriesService.GetAllToysCategoriesAsync();
             ToysCategories.Clear();
-            foreach (var toyCategory in dbToysCategories)
-                ToysCategories.Add(new ToyCategoryEntityViewModel(toyCategory));
+            foreach (var toyCategory in dbToysCategories) ToysCategories.Add(new ToyCategoryEntityViewModel(toyCategory));
         }
     }
 }

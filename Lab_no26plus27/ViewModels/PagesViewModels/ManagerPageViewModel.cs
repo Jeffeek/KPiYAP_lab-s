@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Using namespaces
+
 using Lab_no25.Services.Interfaces.EntityServices;
 using Lab_no26plus27.ViewModels.TabsViewModels;
 using Prism.Mvvm;
+
+#endregion
 
 namespace Lab_no26plus27.ViewModels.PagesViewModels
 {
     public class ManagerPageViewModel : BindableBase
     {
-        private SalesTabViewModel _salesContext;
-        private ToysTabViewModel _toysContext;
         private CustomersTabViewModel _customersContext;
         private PreOrdersTabViewModel _preOrdersContext;
+        private SalesTabViewModel _salesContext;
+        private ToysTabViewModel _toysContext;
 
         public ManagerPageViewModel(IToysService toysService,
                                     ISalesService salesService,
@@ -29,7 +28,7 @@ namespace Lab_no26plus27.ViewModels.PagesViewModels
 
         public PreOrdersTabViewModel PreOrdersContext
         {
-            get => _preOrdersContext; 
+            get => _preOrdersContext;
             set => SetProperty(ref _preOrdersContext, value);
         }
 

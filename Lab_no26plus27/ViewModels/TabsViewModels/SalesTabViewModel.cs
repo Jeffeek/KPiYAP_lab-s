@@ -27,7 +27,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         {
             _salesService = salesService;
             Sales = new ObservableCollection<SaleEntityViewModel>();
-            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnSale);
+            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnSale).ObservesProperty(() => SelectedSale);
             ApplySaleChangesCommand = new AsyncRelayCommand(OnApplyToyCategoryChangesCommandExecuted, CanManipulateOnSale);
             RemoveSaleCommand = new AsyncRelayCommand(OnRemoveToyCategoryCommandExecuted, CanManipulateOnSale);
             AddSaleCommand = new DelegateCommand(OnAddSaleCommandExecuted);
@@ -35,15 +35,15 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             ReloadToysCategoriesAsync().Wait();
         }
 
-        public ICommand AddSaleCommand { get; }
+        public DelegateCommand AddSaleCommand { get; }
 
-        public ICommand RemoveSaleCommand { get; }
+        public AsyncRelayCommand RemoveSaleCommand { get; }
 
-        public ICommand ApplySaleChangesCommand { get; }
+        public AsyncRelayCommand ApplySaleChangesCommand { get; }
 
-        public ICommand ChangeEditModeCommand { get; }
+        public DelegateCommand ChangeEditModeCommand { get; }
 
-        public ICommand ReloadSalesCommand { get; }
+        public AsyncRelayCommand ReloadSalesCommand { get; }
 
         public ObservableCollection<SaleEntityViewModel> Sales
         {
@@ -54,7 +54,12 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         public SaleEntityViewModel SelectedSale
         {
             get => _selectedSale;
-            set => SetProperty(ref _selectedSale, value);
+            set
+            {
+                SetProperty(ref _selectedSale, value);
+                RemoveSaleCommand.RaiseCanExecuteChanged();
+                ApplySaleChangesCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public bool IsEditMode

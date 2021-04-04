@@ -1,12 +1,10 @@
 ﻿#region Using namespaces
 
 using System.Windows;
-using System.Windows.Navigation;
 using Lab_no25;
 using Lab_no25.Model;
 using Lab_no25.Services.Implementations;
 using Lab_no25.Services.Interfaces.EntityServices;
-using Lab_no26plus27.ViewModels;
 using Lab_no26plus27.ViewModels.PagesViewModels;
 using Lab_no26plus27.ViewModels.WindowsViewModels;
 using Lab_no26plus27.Views;
@@ -44,7 +42,7 @@ namespace Lab_no26plus27
             containerRegistry.RegisterForNavigation<AdminPage, AdminPageViewModel>("AdministratorPage");
             containerRegistry.RegisterForNavigation<ManagerPage, ManagerPageViewModel>("ManagerPage");
 
-            containerRegistry.Register<MainWindow>(() => new MainWindow()
+            containerRegistry.Register<MainWindow>(() => new MainWindow
                                                          {
                                                              DataContext = new MainWindowViewModel(Container.Resolve<IRegionManager>(),
                                                                  Container.Resolve<IEventAggregator>())
