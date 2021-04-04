@@ -4,7 +4,7 @@ using System.Windows;
 
 #endregion
 
-namespace Lab_no26plus27.View
+namespace Lab_no26plus27.Views
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml

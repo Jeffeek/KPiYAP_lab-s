@@ -5,18 +5,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using Lab_no25.Model.Entities;
-using Lab_no25.Services.Interfaces;
+using Lab_no25.Services.Interfaces.EntityServices;
 using Lab_no26plus27.Model.AsyncCommand;
-using Lab_no26plus27.ViewModel.EntitiesViewModels;
+using Lab_no26plus27.ViewModels.EntitiesViewModels;
+using Prism.Commands;
+using Prism.Mvvm;
 
 #endregion
 
-namespace Lab_no26plus27.ViewModel.TabsViewModels
+namespace Lab_no26plus27.ViewModels.TabsViewModels
 {
-    public class SalesTabViewModel : ViewModelBase
+    public class SalesTabViewModel : BindableBase
     {
         private readonly ISalesService _salesService;
         private bool _isEditMode;
@@ -27,12 +27,12 @@ namespace Lab_no26plus27.ViewModel.TabsViewModels
         {
             _salesService = salesService;
             Sales = new ObservableCollection<SaleEntityViewModel>();
-            ChangeEditModeCommand = new RelayCommand(OnChangeEditModeCommandExecuted);
-            ApplySaleChangesCommand = new AsyncRelayCommand(OnApplyToyCategoryChangesCommandExecuted);
-            RemoveSaleCommand = new AsyncRelayCommand(OnRemoveToyCategoryCommandExecuted);
-            AddSaleCommand = new RelayCommand(OnAddSaleCommandExecuted);
+            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnSale);
+            ApplySaleChangesCommand = new AsyncRelayCommand(OnApplyToyCategoryChangesCommandExecuted, CanManipulateOnSale);
+            RemoveSaleCommand = new AsyncRelayCommand(OnRemoveToyCategoryCommandExecuted, CanManipulateOnSale);
+            AddSaleCommand = new DelegateCommand(OnAddSaleCommandExecuted);
             ReloadSalesCommand = new AsyncRelayCommand(ReloadToysCategoriesAsync);
-            ReloadToysCategoriesAsync();
+            ReloadToysCategoriesAsync().Wait();
         }
 
         public ICommand AddSaleCommand { get; }
@@ -48,19 +48,19 @@ namespace Lab_no26plus27.ViewModel.TabsViewModels
         public ObservableCollection<SaleEntityViewModel> Sales
         {
             get => _sales;
-            set => Set(ref _sales, value);
+            set => SetProperty(ref _sales, value);
         }
 
         public SaleEntityViewModel SelectedSale
         {
             get => _selectedSale;
-            set => Set(ref _selectedSale, value);
+            set => SetProperty(ref _selectedSale, value);
         }
 
         public bool IsEditMode
         {
             get => _isEditMode;
-            set => Set(ref _isEditMode, value);
+            set => SetProperty(ref _isEditMode, value);
         }
 
         private bool CanManipulateOnSale() => SelectedSale is not null;
@@ -82,8 +82,6 @@ namespace Lab_no26plus27.ViewModel.TabsViewModels
 
         private async Task OnRemoveToyCategoryCommandExecuted()
         {
-            if (!CanManipulateOnSale()) return;
-
             await _salesService.RemoveSaleAsync(SelectedSale.Entity);
             Sales.Remove(SelectedSale);
             SelectedSale = null;
@@ -91,8 +89,6 @@ namespace Lab_no26plus27.ViewModel.TabsViewModels
 
         private async Task OnApplyToyCategoryChangesCommandExecuted()
         {
-            if (!CanManipulateOnSale()) return;
-
             if (SelectedSale.Entity.Id == 0)
                 await _salesService.AddSaleAsync(SelectedSale.Entity);
             else

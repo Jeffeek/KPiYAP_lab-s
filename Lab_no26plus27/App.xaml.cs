@@ -1,42 +1,56 @@
 ﻿#region Using namespaces
 
 using System.Windows;
+using System.Windows.Navigation;
 using Lab_no25;
 using Lab_no25.Model;
-using Lab_no25.Services;
-using Lab_no26plus27.View;
-using Lab_no26plus27.ViewModel;
-using Ninject;
+using Lab_no25.Services.Implementations;
+using Lab_no25.Services.Interfaces.EntityServices;
+using Lab_no26plus27.ViewModels;
+using Lab_no26plus27.ViewModels.PagesViewModels;
+using Lab_no26plus27.ViewModels.WindowsViewModels;
+using Lab_no26plus27.Views;
+using Microsoft.EntityFrameworkCore;
+using Prism.Events;
+using Prism.Ioc;
+using Prism.Regions;
+using Prism.Unity;
 
 #endregion
 
 namespace Lab_no26plus27
 {
-    /// <summary>
-    ///     Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
-        protected override void OnStartup(StartupEventArgs e)
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            base.OnStartup(e);
+            var options = new DbContextOptionsBuilder<ToyStoreDbContext>().UseInMemoryDatabase("Customers").Options;
+            containerRegistry.RegisterSingleton<ToyStoreDbContext>(() =>
+                                                                   {
+                                                                       var initializer = new ToyStoreContextInitializer();
+                                                                       var context = new ToyStoreDbContext(options);
+                                                                       initializer.Initialize(context).Wait();
 
-            IKernel kernel = new StandardKernel();
-            kernel.Load(typeof(NinjectRegistration).Assembly);
+                                                                       return context;
+                                                                   });
 
-            var context = kernel.Get<ToyStoreDbContext>();
+            containerRegistry.RegisterScoped<IToysCategoriesService, ToysCategoriesService>();
+            containerRegistry.RegisterScoped<IToysService, ToysService>();
+            containerRegistry.RegisterScoped<ISalesService, SalesService>();
+            containerRegistry.RegisterScoped<ICustomersService, CustomersService>();
+            containerRegistry.RegisterScoped<IPreOrdersService, PreOrdersService>();
 
-            var initializer = new ToyStoreContextInitializer();
-            _ = initializer.Initialize(context);
+            containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>("SignInPage");
+            containerRegistry.RegisterForNavigation<AdminPage, AdminPageViewModel>("AdministratorPage");
+            containerRegistry.RegisterForNavigation<ManagerPage, ManagerPageViewModel>("ManagerPage");
 
-            kernel.Bind<MainWindowViewModel>().ToSelf().InSingletonScope();
-            var viewModel = kernel.GetService(typeof(MainWindowViewModel));
-
-            var mainWindow = new MainWindow
-                             {
-                                 DataContext = viewModel
-                             };
-            mainWindow.Show();
+            containerRegistry.Register<MainWindow>(() => new MainWindow()
+                                                         {
+                                                             DataContext = new MainWindowViewModel(Container.Resolve<IRegionManager>(),
+                                                                 Container.Resolve<IEventAggregator>())
+                                                         });
         }
+
+        protected override Window CreateShell() => Container.Resolve<MainWindow>();
     }
 }

@@ -4,18 +4,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using Lab_no25.Model.Entities;
-using Lab_no25.Services.Interfaces;
+using Lab_no25.Services.Interfaces.EntityServices;
 using Lab_no26plus27.Model.AsyncCommand;
-using Lab_no26plus27.ViewModel.EntitiesViewModels;
+using Lab_no26plus27.ViewModels.EntitiesViewModels;
+using Prism.Commands;
+using Prism.Mvvm;
 
 #endregion
 
-namespace Lab_no26plus27.ViewModel.TabsViewModels
+namespace Lab_no26plus27.ViewModels.TabsViewModels
 {
-    public class ToysCategoriesTabViewModel : ViewModelBase
+    public class ToysCategoriesTabViewModel : BindableBase
     {
         private readonly IToysCategoriesService _toysCategoriesService;
         private bool _isEditMode;
@@ -26,12 +26,12 @@ namespace Lab_no26plus27.ViewModel.TabsViewModels
         {
             _toysCategoriesService = toysCategoriesService;
             ToysCategories = new ObservableCollection<ToyCategoryEntityViewModel>();
-            ChangeEditModeCommand = new RelayCommand(OnChangeEditModeCommandExecuted);
+            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted);
             ApplyToyCategoryChangesCommand = new AsyncRelayCommand(OnApplyToyCategoryChangesCommandExecuted);
             RemoveToyCategoryCommand = new AsyncRelayCommand(OnRemoveToyCategoryCommandExecuted);
-            AddToyCategoryCommand = new RelayCommand(OnAddToyCategoryCommandExecuted);
+            AddToyCategoryCommand = new DelegateCommand(OnAddToyCategoryCommandExecuted);
             ReloadToysCategoriesCommand = new AsyncRelayCommand(ReloadToysCategoriesAsync);
-            ReloadToysCategoriesAsync();
+            ReloadToysCategoriesAsync().Wait();
         }
 
         public ICommand AddToyCategoryCommand { get; }
@@ -47,19 +47,19 @@ namespace Lab_no26plus27.ViewModel.TabsViewModels
         public ObservableCollection<ToyCategoryEntityViewModel> ToysCategories
         {
             get => _toysCategories;
-            set => Set(ref _toysCategories, value);
+            set => SetProperty(ref _toysCategories, value);
         }
 
         public ToyCategoryEntityViewModel SelectedToyCategory
         {
             get => _selectedToyCategory;
-            set => Set(ref _selectedToyCategory, value);
+            set => SetProperty(ref _selectedToyCategory, value);
         }
 
         public bool IsEditMode
         {
             get => _isEditMode;
-            set => Set(ref _isEditMode, value);
+            set => SetProperty(ref _isEditMode, value);
         }
 
         private bool CanManipulateOnToyCategory() => SelectedToyCategory is not null;

@@ -5,18 +5,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using Lab_no25.Model.Entities;
-using Lab_no25.Services.Interfaces;
+using Lab_no25.Services.Interfaces.EntityServices;
 using Lab_no26plus27.Model.AsyncCommand;
-using Lab_no26plus27.ViewModel.EntitiesViewModels;
+using Lab_no26plus27.ViewModels.EntitiesViewModels;
+using Prism.Commands;
+using Prism.Mvvm;
 
 #endregion
 
-namespace Lab_no26plus27.ViewModel.TabsViewModels
+namespace Lab_no26plus27.ViewModels.TabsViewModels
 {
-    public class ToysTabViewModel : ViewModelBase
+    public class ToysTabViewModel : BindableBase
     {
         private readonly IToysService _toysService;
         private bool _isEditMode;
@@ -27,12 +27,12 @@ namespace Lab_no26plus27.ViewModel.TabsViewModels
         {
             _toysService = toysService;
             Toys = new ObservableCollection<ToyEntityViewModel>();
-            ChangeEditModeCommand = new RelayCommand(OnChangeEditModeCommandExecuted);
+            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted);
             ApplyToyChangesCommand = new AsyncRelayCommand(OnApplyToyChangesCommandExecuted);
             RemoveToyCommand = new AsyncRelayCommand(OnRemoveToyCommandExecuted);
-            AddToyCommand = new RelayCommand(OnAddToyCommandExecuted);
+            AddToyCommand = new DelegateCommand(OnAddToyCommandExecuted);
             ReloadToysCommand = new AsyncRelayCommand(ReloadToysAsync);
-            ReloadToysAsync();
+            ReloadToysAsync().Wait();
         }
 
         public ICommand AddToyCommand { get; }
@@ -48,19 +48,19 @@ namespace Lab_no26plus27.ViewModel.TabsViewModels
         public ObservableCollection<ToyEntityViewModel> Toys
         {
             get => _toys;
-            set => Set(ref _toys, value);
+            set => SetProperty(ref _toys, value);
         }
 
         public ToyEntityViewModel SelectedToy
         {
             get => _selectedToy;
-            set => Set(ref _selectedToy, value);
+            set => SetProperty(ref _selectedToy, value);
         }
 
         public bool IsEditMode
         {
             get => _isEditMode;
-            set => Set(ref _isEditMode, value);
+            set => SetProperty(ref _isEditMode, value);
         }
 
         private bool CanManipulateOnToy() => SelectedToy is not null;

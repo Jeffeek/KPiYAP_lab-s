@@ -3,6 +3,7 @@
 using Lab_no25.Model;
 using Lab_no25.Services.Implementations;
 using Lab_no25.Services.Interfaces;
+using Lab_no25.Services.Interfaces.EntityServices;
 using Microsoft.EntityFrameworkCore;
 using Ninject.Modules;
 using Ninject.Parameters;
@@ -23,6 +24,8 @@ namespace Lab_no25.Services
             Bind<IToysCategoriesService>().To<ToysCategoriesService>();
             Bind<IToysService>().To<ToysService>();
             Bind<ISalesService>().To<SalesService>();
+            Bind<ICustomersService>().To<CustomersService>();
+            Bind<IPreOrdersService>().To<PreOrdersService>();
         }
     }
 }

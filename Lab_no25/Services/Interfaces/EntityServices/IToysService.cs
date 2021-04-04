@@ -6,7 +6,7 @@ using Lab_no25.Model.Entities;
 
 #endregion
 
-namespace Lab_no25.Services.Interfaces
+namespace Lab_no25.Services.Interfaces.EntityServices
 {
     public interface IToysService
     {

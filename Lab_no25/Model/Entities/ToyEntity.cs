@@ -31,7 +31,7 @@ namespace Lab_no25.Model.Entities
             set => _price = Math.Round(value, 2);
         }
 
-        [DefaultValue(typeof(decimal), "0,0")]
+        [DefaultValue(typeof(uint), "0")]
         [Required]
         public uint WarehouseCount { get; set; }
 

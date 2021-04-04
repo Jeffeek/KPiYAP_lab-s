@@ -1,10 +1,14 @@
 ﻿#region Using namespaces
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Lab_no25.Model;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces;
+using Lab_no25.Services.Interfaces.EntityServices;
 using Microsoft.EntityFrameworkCore;
 
 #endregion
@@ -54,6 +58,9 @@ namespace Lab_no25.Services.Implementations
 
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<IEnumerable<SaleEntity>> GetSalesByAsync(Expression<Func<SaleEntity, bool>> predicate) =>
+            await _context.Sales.Where(predicate).ToListAsync();
 
         public async Task<SaleEntity> GetByIdAsync(int id) => await _context.Sales.FindAsync(id);
 

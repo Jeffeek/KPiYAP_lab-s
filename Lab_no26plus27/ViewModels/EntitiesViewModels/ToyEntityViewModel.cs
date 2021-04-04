@@ -1,13 +1,13 @@
 ﻿#region Using namespaces
 
-using GalaSoft.MvvmLight;
 using Lab_no25.Model.Entities;
+using Prism.Mvvm;
 
 #endregion
 
-namespace Lab_no26plus27.ViewModel.EntitiesViewModels
+namespace Lab_no26plus27.ViewModels.EntitiesViewModels
 {
-    public class ToyEntityViewModel : ViewModelBase
+    public class ToyEntityViewModel : BindableBase
     {
         private ToyEntity _entity;
 
@@ -16,7 +16,7 @@ namespace Lab_no26plus27.ViewModel.EntitiesViewModels
         public ToyEntity Entity
         {
             get => _entity;
-            set => Set(ref _entity, value);
+            set => SetProperty(ref _entity, value);
         }
     }
 }

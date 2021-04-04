@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Lab_no25.Model;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces;
+using Lab_no25.Services.Interfaces.EntityServices;
 using Microsoft.EntityFrameworkCore;
 
 #endregion

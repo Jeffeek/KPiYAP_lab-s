@@ -16,5 +16,9 @@ namespace Lab_no25.Model
         public DbSet<ToyEntity> Toys { get; set; }
 
         public DbSet<ToyCategoryEntity> ToyCategories { get; set; }
+
+        public DbSet<CustomerEntity> Customers { get; set; }
+
+        public DbSet<PreOrderEntity> PreOrders { get; set; }
     }
 }
