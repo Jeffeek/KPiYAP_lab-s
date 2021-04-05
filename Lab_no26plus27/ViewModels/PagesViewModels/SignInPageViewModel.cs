@@ -16,9 +16,9 @@ namespace Lab_no26plus27.ViewModels.PagesViewModels
         private readonly Dictionary<string, string> _credentials;
         private readonly IEventAggregator _eventAggregator;
 
-        private string _login = "Admin";
+        private string _login = "Manager";
 
-        private string _password = "qwerty";
+        private string _password = "qwerty1";
         private DelegateCommand _signInCommand;
 
         public SignInPageViewModel(IEventAggregator eventAggregator)

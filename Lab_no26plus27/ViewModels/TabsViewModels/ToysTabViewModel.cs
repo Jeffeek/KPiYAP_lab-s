@@ -1,6 +1,7 @@
 ﻿#region Using namespaces
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,19 +22,22 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         private readonly IToysService _toysService;
         private bool _isEditMode;
         private ToyEntityViewModel _selectedToy;
+        private readonly List<ToyEntityViewModel> _internalList;
         private ObservableCollection<ToyEntityViewModel> _toys;
 
+        private DelegateCommand _searchCommand;
         private AsyncRelayCommand _removeToyCommand;
         private AsyncRelayCommand _applyToyChangesCommand;
         private AsyncRelayCommand _reloadToysCommand;
         private DelegateCommand _changeEditModeCommand;
         private DelegateCommand _addToyCommand;
+        private string _searchText = String.Empty;
 
         public ToysTabViewModel(IToysService toysService)
         {
             _toysService = toysService;
             Toys = new ObservableCollection<ToyEntityViewModel>();
-
+            _internalList = new List<ToyEntityViewModel>();
             ReloadToysAsync().Wait();
         }
 
@@ -45,6 +49,11 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         public DelegateCommand ChangeEditModeCommand =>
             _changeEditModeCommand ??= new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnToy)
                 .ObservesProperty(() => SelectedToy);
+
+        public DelegateCommand SearchCommand =>
+            _searchCommand ??=
+                new DelegateCommand(OnSearchCommandExecuted, () => SearchText.Length != 0)
+                    .ObservesProperty(() => SearchText);
 
         public AsyncRelayCommand RemoveToyCommand =>
             _removeToyCommand ??= new AsyncRelayCommand(OnRemoveToyCommandExecuted,
@@ -80,9 +89,44 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             set => SetProperty(ref _isEditMode, value);
         }
 
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+
+                if (value != String.Empty) return;
+
+                Toys.Clear();
+                Toys.AddRange(_internalList);
+            }
+        }
+
         private bool CanManipulateOnToy() => SelectedToy is not null;
 
         private void OnChangeEditModeCommandExecuted() => IsEditMode = !IsEditMode;
+
+        private void OnSearchCommandExecuted()
+        {
+            ToyEntityViewModel[] filteredToys;
+            if (Int32.TryParse(SearchText, out var number))
+            {
+                filteredToys =
+                    _internalList.Where(x => x.Entity.Id == number || x.Entity.CategoryId == number).ToArray();
+
+                if (filteredToys.Length == 0) return;
+
+                Toys.Clear();
+                Toys.AddRange(filteredToys);
+
+                return;
+            }
+
+            filteredToys = Toys.Where(x => x.Entity.Producer.Contains(SearchText)).ToArray();
+            Toys.Clear();
+            Toys.AddRange(filteredToys);
+        }
 
         private void OnAddToyCommandExecuted()
         {
@@ -100,6 +144,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnRemoveToyCommandExecuted()
         {
+            if (SelectedToy.Entity.Id == 0) Toys.Remove(SelectedToy);
             await _toysService.RemoveToyAsync(SelectedToy.Entity);
             Toys.Remove(SelectedToy);
             SelectedToy = null;
@@ -119,7 +164,11 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         {
             var dbToys = await _toysService.GetAllToysAsync();
             Toys.Clear();
-            foreach (var toy in dbToys) Toys.Add(new ToyEntityViewModel(toy));
+            _internalList.Clear();
+            foreach (var toy in dbToys)
+                _internalList.Add(new ToyEntityViewModel(toy));
+
+            Toys.AddRange(_internalList);
         }
     }
 }

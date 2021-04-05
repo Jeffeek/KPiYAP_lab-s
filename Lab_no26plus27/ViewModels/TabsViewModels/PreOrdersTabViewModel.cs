@@ -4,12 +4,14 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces.EntityServices;
 using Lab_no26plus27.Model.AsyncCommand;
 using Lab_no26plus27.ViewModels.EntitiesViewModels;
+using MahApps.Metro.Controls.Dialogs;
 using Prism.Commands;
 using Prism.Mvvm;
 
@@ -28,6 +30,9 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         private AsyncRelayCommand _applyPreOrderChangesCommand;
         private DelegateCommand _changeEditModeCommand;
         private AsyncRelayCommand _reloadPreOrdersCommand;
+        private AsyncRelayCommand _checkPreOrdersCommand;
+
+        public EventHandler<PreOrderEntityViewModel> FoundToyForPreOrder;
 
         public PreOrdersTabViewModel(IPreOrdersService preOrdersService)
         {
@@ -53,6 +58,8 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         public AsyncRelayCommand ReloadPreOrdersCommand =>
             _reloadPreOrdersCommand ??= new AsyncRelayCommand(ReloadToysAsync);
+
+        public AsyncRelayCommand CheckPreOrdersCommand => _checkPreOrdersCommand ??= new AsyncRelayCommand(OnCheckPreOrdersExecuted);
 
         public ObservableCollection<PreOrderEntityViewModel> PreOrders
         {
@@ -92,6 +99,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnRemoveToyCommandExecuted()
         {
+            if (SelectedPreOrder.Entity.Id == 0) PreOrders.Remove(SelectedPreOrder);
             await _preOrdersService.RemovePreOrderAsync(SelectedPreOrder.Entity);
             PreOrders.Remove(SelectedPreOrder);
             SelectedPreOrder = null;
@@ -111,6 +119,23 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             var preOrders = await _preOrdersService.GetAllPreOrdersAsync();
             PreOrders.Clear();
             foreach (var preOrder in preOrders) PreOrders.Add(new PreOrderEntityViewModel(preOrder));
+        }
+
+        private async Task OnCheckPreOrdersExecuted()
+        {
+            var toysForPreOrder = await _preOrdersService.GetAllPreOrdersAsync();
+            var notClosedPreOrders = toysForPreOrder.Where(x => !x.IsDone);
+            foreach (var order in notClosedPreOrders)
+            {
+                if (order.Toy.WarehouseCount > 0)
+                {
+                    MessageBox.Show($"Found toy for PreOrder Id: {order.Id}{Environment.NewLine}Customer: Name: {order.Customer.FullName}, Phone: {order.Customer.PhoneNumber}.",
+                                    "Found toy for PreOrder",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Information,
+                                    MessageBoxResult.OK);
+                }
+            }
         }
     }
 }

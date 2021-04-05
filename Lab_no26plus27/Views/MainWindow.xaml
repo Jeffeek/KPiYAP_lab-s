@@ -1,11 +1,12 @@
-﻿<Window
+﻿<controls:MetroWindow
     x:Class="Lab_no26plus27.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    Title="MainWindow"
+    Title="Toy Store Manager v1.0"
     Width="800"
     Height="450"
     MinWidth="800"
@@ -13,11 +14,16 @@
     MaxWidth="800"
     MaxHeight="450"
     prism:ViewModelLocator.AutoWireViewModel="False"
+    GlowBrush="DarkBlue"
+    IsWindowDraggable="True"
     ResizeMode="NoResize"
+    ShowDialogsOverTitleBar="True"
     SizeToContent="WidthAndHeight"
+    TitleAlignment="Center"
     WindowStartupLocation="CenterScreen"
     WindowState="Normal"
     WindowStyle="SingleBorderWindow"
+    WindowTransitionsEnabled="True"
     mc:Ignorable="d">
     <Frame prism:RegionManager.RegionName="CurrentPage" NavigationUIVisibility="Hidden" />
-</Window>
+</controls:MetroWindow>

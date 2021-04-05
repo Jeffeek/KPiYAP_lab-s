@@ -9,6 +9,12 @@
                 <ResourceDictionary Source="Views/ResourceDictinaries/ButtonsContentDictionary.xaml" />
                 <ResourceDictionary Source="Views/ResourceDictinaries/TextBoxesDictionary.xaml" />
                 <ResourceDictionary Source="Views/ResourceDictinaries/SharedContainersDictionary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.FlatButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.tabcontrol.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.listview.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.textbox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/dark.crimson.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

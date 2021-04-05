@@ -93,6 +93,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnRemoveToyCategoryCommandExecuted()
         {
+            if (SelectedToyCategory.Entity.Id == 0) ToysCategories.Remove(SelectedToyCategory);
             await _toysCategoriesService.RemoveToyCategoryAsync(SelectedToyCategory.Entity);
             ToysCategories.Remove(SelectedToyCategory);
             SelectedToyCategory = null;

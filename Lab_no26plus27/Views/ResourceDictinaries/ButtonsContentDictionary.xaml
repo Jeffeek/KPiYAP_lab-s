@@ -234,4 +234,102 @@
             </Path>
         </Canvas>
     </Viewbox>
+    <Viewbox x:Key="UpdateButton" Stretch="Uniform">
+        <Canvas
+            Name="svg36"
+            Width="20"
+            Height="20">
+            <Canvas.RenderTransform>
+                <TranslateTransform X="0" Y="0" />
+            </Canvas.RenderTransform>
+            <Canvas.Resources>
+                <RadialGradientBrush x:Key="9Y8YaPFEzyGwEgYZ1l__na" Center="-220,-34" MappingMode="Absolute" RadiusX="25.290001" RadiusY="25.290001">
+                    <RadialGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Offset=".752" Color="#076CB3" />
+                            <GradientStop Offset=".825" Color="#138CD2" />
+                            <GradientStop Offset=".865" Color="#1898DE" />
+                            <GradientStop Offset="1" Color="#199AE0" />
+                        </GradientStopCollection>
+                    </RadialGradientBrush.GradientStops>
+                    <RadialGradientBrush.Transform>
+                        <MatrixTransform Matrix="-0.29347659 -0.27988641 0.29348685 -0.27987663 -44.922628 -61.436504" />
+                    </RadialGradientBrush.Transform>
+                </RadialGradientBrush>
+                <LinearGradientBrush x:Key="9Y8YaPFEzyGwEgYZ1l__nb" MappingMode="Absolute" StartPoint="19,249" EndPoint="27,209">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="#32BDEF" />
+                            <GradientStop Offset="1" Color="#1EA2E4" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                    <LinearGradientBrush.Transform>
+                        <MatrixTransform Matrix="0.41504584 0 0 -0.39581225 -0.2724293 100.67464" />
+                    </LinearGradientBrush.Transform>
+                </LinearGradientBrush>
+                <RadialGradientBrush x:Key="9Y8YaPFEzyGwEgYZ1l__nc" Center="37,39" MappingMode="Absolute" RadiusX="10.696" RadiusY="10.696">
+                    <RadialGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="#000000" />
+                            <GradientStop Offset=".979" Color="#00000000" />
+                        </GradientStopCollection>
+                    </RadialGradientBrush.GradientStops>
+                    <RadialGradientBrush.Transform>
+                        <MatrixTransform Matrix="0.41504584 0 0 0.39581225 -0.2724293 0.13833254" />
+                    </RadialGradientBrush.Transform>
+                </RadialGradientBrush>
+                <LinearGradientBrush x:Key="9Y8YaPFEzyGwEgYZ1l__nd" MappingMode="Absolute" StartPoint="31,223" EndPoint="45,209">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="#21AD64" />
+                            <GradientStop Offset="1" Color="#088242" />
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                    <LinearGradientBrush.Transform>
+                        <MatrixTransform Matrix="0.41504584 0 0 -0.39581225 -0.2724293 100.67464" />
+                    </LinearGradientBrush.Transform>
+                </LinearGradientBrush>
+            </Canvas.Resources>
+            <Path
+                Name="path11"
+                Fill="{StaticResource 9Y8YaPFEzyGwEgYZ1l__na}"
+                StrokeThickness="0.405316">
+                <Path.Data>
+                    <PathGeometry Figures="m 14.281985 3.3582649 2.047422 2.390311 V 1.9725271 c 0 -0.2089954 -0.265214 -0.3134845 -0.420442 -0.165839 z" FillRule="NonZero" />
+                </Path.Data>
+            </Path>
+            <Path
+                Name="path18"
+                Fill="{StaticResource 9Y8YaPFEzyGwEgYZ1l__nb}"
+                StrokeThickness="0.405316">
+                <Path.Data>
+                    <PathGeometry Figures="m 9.6886714 1.7215821 c -4.5771259 0 -8.300916 3.5512267 -8.300916 7.9162437 0 4.3650172 3.7237901 7.9162462 8.300916 7.9162462 1.5140866 0 2.9322996 -0.392647 4.1554396 -1.071863 0.194657 -0.108049 0.255254 -0.350686 0.14236 -0.537115 l -0.619249 -1.022777 c -0.112483 -0.185647 -0.362751 -0.258071 -0.556993 -0.15002 -0.918079 0.510204 -1.984333 0.802708 -3.1215593 0.802708 -3.4328436 0 -6.2256871 -2.663419 -6.2256871 -5.9371834 0 -3.2737622 2.7928435 -5.9371839 6.2256871 -5.9371839 1.2073673 0 2.3292383 0.3368357 3.2830133 0.9075976 l -1.118549 1.0667141 c -0.154819 0.1476434 -0.04525 0.4005627 0.174318 0.4005627 h 3.973235 c 0.181375 0 0.328716 -0.1405178 0.328716 -0.3134845 V 4.9082619 C 14.81407 2.9782815 12.40556 1.7215779 9.6886678 1.7215779 Z" FillRule="NonZero" />
+                </Path.Data>
+            </Path>
+            <Path
+                Name="path25"
+                Fill="{StaticResource 9Y8YaPFEzyGwEgYZ1l__nc}"
+                StrokeThickness="0.405316">
+                <Path.Data>
+                    <PathGeometry Figures="m 13.367223 14.922317 c -0.112483 -0.185647 -0.36275 -0.258071 -0.556992 -0.15002 -0.685655 0.381168 -1.454319 0.640425 -2.273206 0.747294 0.05148 0.687132 0.252348 1.335867 0.578989 1.911775 0.978264 -0.163869 1.898835 -0.488829 2.728513 -0.94916 0.194656 -0.108051 0.255254 -0.350688 0.142359 -0.537118 z" FillRule="NonZero" />
+                </Path.Data>
+            </Path>
+            <Path
+                Name="path32"
+                Fill="{StaticResource 9Y8YaPFEzyGwEgYZ1l__nd}"
+                StrokeThickness="0.405316">
+                <Path.Data>
+                    <PathGeometry Figures="m 19.649773 15.179197 c 0 2.185676 -1.858575 3.958121 -4.150459 3.958121 -2.291882 0 -4.150458 -1.772445 -4.150458 -3.958121 0 -2.185677 1.858576 -3.958123 4.150458 -3.958123 2.291884 0 4.150459 1.772446 4.150459 3.958123 z" FillRule="NonZero" />
+                </Path.Data>
+            </Path>
+            <Path
+                Name="path34"
+                Fill="#FFFFFFFF"
+                StrokeThickness="0.405316">
+                <Path.Data>
+                    <PathGeometry Figures="m 14.937342 16.902564 -1.660184 -1.58325 c -0.08093 -0.07717 -0.08093 -0.202655 0 -0.279838 l 0.293438 -0.279839 c 0.08093 -0.07717 0.212505 -0.07717 0.293438 0 l 1.220234 1.163291 2.257434 -2.152822 c 0.08093 -0.07719 0.212504 -0.07719 0.293439 0 l 0.293437 0.279839 c 0.08093 0.07718 0.08093 0.202655 0 0.27984 l -2.697798 2.572779 c -0.08093 0.07717 -0.212091 0.07717 -0.293438 0 z" FillRule="NonZero" />
+                </Path.Data>
+            </Path>
+        </Canvas>
+    </Viewbox>
 </ResourceDictionary>

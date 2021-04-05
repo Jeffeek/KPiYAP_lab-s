@@ -1,6 +1,7 @@
 ﻿#region Using namespaces
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,23 +21,37 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
     {
         private readonly ICustomersService _customersService;
         private ObservableCollection<CustomerEntityViewModel> _customers;
+        private readonly List<CustomerEntityViewModel> _internalList;
         private bool _isEditMode;
+        private string _searchText = String.Empty;
         private CustomerEntityViewModel _selectedCustomer;
         private DelegateCommand _addCustomerCommand;
+        private DelegateCommand _changeEditModeCommand;
+        private DelegateCommand _searchCommand;
         private AsyncRelayCommand _removeCustomerCommand;
         private AsyncRelayCommand _applyCustomerChangesCommand;
-        private DelegateCommand _changeEditModeCommand;
         private AsyncRelayCommand _reloadCustomersCommand;
 
         public CustomersTabViewModel(ICustomersService customersService)
         {
             _customersService = customersService;
             Customers = new ObservableCollection<CustomerEntityViewModel>();
+            _internalList = new List<CustomerEntityViewModel>();
             ReloadToysAsync().Wait();
         }
 
         public DelegateCommand AddCustomerCommand =>
             _addCustomerCommand ??= new DelegateCommand(OnAddToyCommandExecuted);
+
+        public DelegateCommand ChangeEditModeCommand =>
+            _changeEditModeCommand ??= new DelegateCommand(OnChangeEditModeCommandExecuted,
+                                                           CanManipulateOnCustomer)
+                .ObservesProperty(() => SelectedCustomer);
+
+        public DelegateCommand SearchCommand =>
+            _searchCommand ??=
+                new DelegateCommand(OnSearchCommandExecuted, () => SearchText.Length != 0)
+                    .ObservesProperty(() => SearchText);
 
         public AsyncRelayCommand RemoveCustomerCommand =>
             _removeCustomerCommand ??= new AsyncRelayCommand(OnRemoveToyCommandExecuted,
@@ -44,11 +59,6 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         public AsyncRelayCommand ApplyCustomerChangesCommand =>
             _applyCustomerChangesCommand ??= new AsyncRelayCommand(OnApplyToyChangesCommandExecuted);
-
-        public DelegateCommand ChangeEditModeCommand =>
-            _changeEditModeCommand ??= new DelegateCommand(OnChangeEditModeCommandExecuted,
-                                                           CanManipulateOnCustomer)
-                .ObservesProperty(() => SelectedCustomer);
 
         public AsyncRelayCommand ReloadCustomersCommand =>
             _reloadCustomersCommand ??= new AsyncRelayCommand(ReloadToysAsync);
@@ -75,6 +85,41 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             set => SetProperty(ref _isEditMode, value);
         }
 
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+
+                if (value != String.Empty) return;
+
+                Customers.Clear();
+                Customers.AddRange(_internalList);
+            }
+        }
+
+        private void OnSearchCommandExecuted()
+        {
+            CustomerEntityViewModel[] filteredToys;
+            if (Int32.TryParse(SearchText, out var number))
+            {
+                filteredToys =
+                    _internalList.Where(x => x.Entity.Id == number).ToArray();
+
+                if (filteredToys.Length == 0) return;
+
+                Customers.Clear();
+                Customers.AddRange(filteredToys);
+
+                return;
+            }
+
+            filteredToys = Customers.Where(x => x.Entity.FullName.Contains(SearchText) || x.Entity.PhoneNumber.Contains(SearchText)).ToArray();
+            Customers.Clear();
+            Customers.AddRange(filteredToys);
+        }
+
         private bool CanManipulateOnCustomer() => SelectedCustomer is not null;
 
         private void OnChangeEditModeCommandExecuted() => IsEditMode = !IsEditMode;
@@ -93,6 +138,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnRemoveToyCommandExecuted()
         {
+            if (SelectedCustomer.Entity.Id == 0) Customers.Remove(SelectedCustomer);
             await _customersService.RemoveCustomerAsync(SelectedCustomer.Entity);
             Customers.Remove(SelectedCustomer);
             SelectedCustomer = null;
@@ -110,9 +156,13 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task ReloadToysAsync()
         {
-            var customers = await _customersService.GetAllCustomersAsync();
+            var dbCustomers = await _customersService.GetAllCustomersAsync();
             Customers.Clear();
-            foreach (var customer in customers) Customers.Add(new CustomerEntityViewModel(customer));
+            _internalList.Clear();
+            foreach (var customerEntity in dbCustomers)
+                _internalList.Add(new CustomerEntityViewModel(customerEntity));
+
+            Customers.AddRange(_internalList);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Lab_no25
                               Photo = $"photo{i + random.Next(0, 20000)}{Guid.NewGuid()}",
                               Price = (decimal)(random.NextDouble() * random.Next(1, 5000)),
                               Producer = Guid.NewGuid().ToString().Substring(0, 7).Replace("-", ""),
-                              WarehouseCount = (uint)random.Next(0, 10000)
+                              WarehouseCount = 0/*(uint)random.Next(0, 10000)*/
                           };
                 toys.Add(toy);
             }

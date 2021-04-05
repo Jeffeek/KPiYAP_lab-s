@@ -94,6 +94,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnRemoveToyCategoryCommandExecuted()
         {
+            if (SelectedSale.Entity.Id == 0) Sales.Remove(SelectedSale);
             await _salesService.RemoveSaleAsync(SelectedSale.Entity);
             Sales.Remove(SelectedSale);
             SelectedSale = null;
