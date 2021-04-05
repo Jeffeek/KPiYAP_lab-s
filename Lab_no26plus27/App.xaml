@@ -3,5 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/">
-    <Application.Resources />
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Views/ResourceDictinaries/ButtonsContentDictionary.xaml" />
+                <ResourceDictionary Source="Views/ResourceDictinaries/TextBoxesDictionary.xaml" />
+                <ResourceDictionary Source="Views/ResourceDictinaries/SharedContainersDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
 </prism:PrismApplication>
