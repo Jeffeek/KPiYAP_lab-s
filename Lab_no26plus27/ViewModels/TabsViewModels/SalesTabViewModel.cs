@@ -22,28 +22,36 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         private bool _isEditMode;
         private ObservableCollection<SaleEntityViewModel> _sales;
         private SaleEntityViewModel _selectedSale;
+        private DelegateCommand _addSaleCommand;
+        private AsyncRelayCommand _removeSaleCommand;
+        private AsyncRelayCommand _applySaleChangesCommand;
+        private DelegateCommand _changeEditModeCommand;
+        private AsyncRelayCommand _reloadSalesCommand;
 
         public SalesTabViewModel(ISalesService salesService)
         {
             _salesService = salesService;
             Sales = new ObservableCollection<SaleEntityViewModel>();
-            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnSale).ObservesProperty(() => SelectedSale);
-            ApplySaleChangesCommand = new AsyncRelayCommand(OnApplyToyCategoryChangesCommandExecuted, CanManipulateOnSale);
-            RemoveSaleCommand = new AsyncRelayCommand(OnRemoveToyCategoryCommandExecuted, CanManipulateOnSale);
-            AddSaleCommand = new DelegateCommand(OnAddSaleCommandExecuted);
-            ReloadSalesCommand = new AsyncRelayCommand(ReloadToysCategoriesAsync);
             ReloadToysCategoriesAsync().Wait();
         }
 
-        public DelegateCommand AddSaleCommand { get; }
+        public DelegateCommand AddSaleCommand =>
+            _addSaleCommand ??= new DelegateCommand(OnAddSaleCommandExecuted);
 
-        public AsyncRelayCommand RemoveSaleCommand { get; }
+        public AsyncRelayCommand RemoveSaleCommand =>
+            _removeSaleCommand ??= new AsyncRelayCommand(OnRemoveToyCategoryCommandExecuted,
+                                                         CanManipulateOnSale);
 
-        public AsyncRelayCommand ApplySaleChangesCommand { get; }
+        public AsyncRelayCommand ApplySaleChangesCommand =>
+            _applySaleChangesCommand ??= new AsyncRelayCommand(OnApplyToyCategoryChangesCommandExecuted);
 
-        public DelegateCommand ChangeEditModeCommand { get; }
+        public DelegateCommand ChangeEditModeCommand =>
+            _changeEditModeCommand ??= new DelegateCommand(OnChangeEditModeCommandExecuted,
+                                                           CanManipulateOnSale)
+                .ObservesProperty(() => SelectedSale);
 
-        public AsyncRelayCommand ReloadSalesCommand { get; }
+        public AsyncRelayCommand ReloadSalesCommand =>
+            _reloadSalesCommand ??= new AsyncRelayCommand(ReloadToysCategoriesAsync);
 
         public ObservableCollection<SaleEntityViewModel> Sales
         {
@@ -58,7 +66,6 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             {
                 SetProperty(ref _selectedSale, value);
                 RemoveSaleCommand.RaiseCanExecuteChanged();
-                ApplySaleChangesCommand.RaiseCanExecuteChanged();
             }
         }
 

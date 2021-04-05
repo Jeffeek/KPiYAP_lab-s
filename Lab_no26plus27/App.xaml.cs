@@ -23,6 +23,7 @@ namespace Lab_no26plus27
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             var options = new DbContextOptionsBuilder<ToyStoreDbContext>().UseInMemoryDatabase("Customers").Options;
+
             containerRegistry.RegisterSingleton<ToyStoreDbContext>(() =>
                                                                    {
                                                                        var initializer = new ToyStoreContextInitializer();

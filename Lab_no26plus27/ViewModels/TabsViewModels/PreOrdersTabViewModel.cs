@@ -23,29 +23,36 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         private bool _isEditMode;
         private ObservableCollection<PreOrderEntityViewModel> _preOrders;
         private PreOrderEntityViewModel _selectedPreOrder;
+        private DelegateCommand _addPreOrderCommand;
+        private AsyncRelayCommand _removePreOrderCommand;
+        private AsyncRelayCommand _applyPreOrderChangesCommand;
+        private DelegateCommand _changeEditModeCommand;
+        private AsyncRelayCommand _reloadPreOrdersCommand;
 
         public PreOrdersTabViewModel(IPreOrdersService preOrdersService)
         {
             _preOrdersService = preOrdersService;
             PreOrders = new ObservableCollection<PreOrderEntityViewModel>();
-            ChangeEditModeCommand =
-                new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnPreOrder).ObservesProperty(() => SelectedPreOrder);
-            ApplyPreOrderChangesCommand = new AsyncRelayCommand(OnApplyToyChangesCommandExecuted, CanManipulateOnPreOrder);
-            RemovePreOrderCommand = new AsyncRelayCommand(OnRemoveToyCommandExecuted, CanManipulateOnPreOrder);
-            AddPreOrderCommand = new DelegateCommand(OnAddToyCommandExecuted);
-            ReloadPreOrdersCommand = new AsyncRelayCommand(ReloadToysAsync);
             ReloadToysAsync().Wait();
         }
 
-        public DelegateCommand AddPreOrderCommand { get; }
+        public DelegateCommand AddPreOrderCommand =>
+            _addPreOrderCommand ??= new DelegateCommand(OnAddToyCommandExecuted);
 
-        public AsyncRelayCommand RemovePreOrderCommand { get; }
+        public DelegateCommand ChangeEditModeCommand =>
+            _changeEditModeCommand ??=
+                new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnPreOrder)
+                    .ObservesProperty(() => SelectedPreOrder);
 
-        public AsyncRelayCommand ApplyPreOrderChangesCommand { get; }
+        public AsyncRelayCommand RemovePreOrderCommand =>
+            _removePreOrderCommand ??= new AsyncRelayCommand(OnRemoveToyCommandExecuted, CanManipulateOnPreOrder);
 
-        public DelegateCommand ChangeEditModeCommand { get; }
+        public AsyncRelayCommand ApplyPreOrderChangesCommand =>
+            _applyPreOrderChangesCommand ??=
+                new AsyncRelayCommand(OnApplyToyChangesCommandExecuted);
 
-        public AsyncRelayCommand ReloadPreOrdersCommand { get; }
+        public AsyncRelayCommand ReloadPreOrdersCommand =>
+            _reloadPreOrdersCommand ??= new AsyncRelayCommand(ReloadToysAsync);
 
         public ObservableCollection<PreOrderEntityViewModel> PreOrders
         {
@@ -60,7 +67,6 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             {
                 SetProperty(ref _selectedPreOrder, value);
                 RemovePreOrderCommand.RaiseCanExecuteChanged();
-                ApplyPreOrderChangesCommand.RaiseCanExecuteChanged();
             }
         }
 

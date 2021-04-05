@@ -22,28 +22,36 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         private ObservableCollection<CustomerEntityViewModel> _customers;
         private bool _isEditMode;
         private CustomerEntityViewModel _selectedCustomer;
+        private DelegateCommand _addCustomerCommand;
+        private AsyncRelayCommand _removeCustomerCommand;
+        private AsyncRelayCommand _applyCustomerChangesCommand;
+        private DelegateCommand _changeEditModeCommand;
+        private AsyncRelayCommand _reloadCustomersCommand;
 
         public CustomersTabViewModel(ICustomersService customersService)
         {
             _customersService = customersService;
             Customers = new ObservableCollection<CustomerEntityViewModel>();
-            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnCustomer).ObservesProperty(() => SelectedCustomer);
-            ApplyCustomerChangesCommand = new AsyncRelayCommand(OnApplyToyChangesCommandExecuted, CanManipulateOnCustomer);
-            RemoveCustomerCommand = new AsyncRelayCommand(OnRemoveToyCommandExecuted, CanManipulateOnCustomer);
-            AddCustomerCommand = new DelegateCommand(OnAddToyCommandExecuted);
-            ReloadCustomersCommand = new AsyncRelayCommand(ReloadToysAsync);
             ReloadToysAsync().Wait();
         }
 
-        public DelegateCommand AddCustomerCommand { get; }
+        public DelegateCommand AddCustomerCommand =>
+            _addCustomerCommand ??= new DelegateCommand(OnAddToyCommandExecuted);
 
-        public AsyncRelayCommand RemoveCustomerCommand { get; }
+        public AsyncRelayCommand RemoveCustomerCommand =>
+            _removeCustomerCommand ??= new AsyncRelayCommand(OnRemoveToyCommandExecuted,
+                                                             CanManipulateOnCustomer);
 
-        public AsyncRelayCommand ApplyCustomerChangesCommand { get; }
+        public AsyncRelayCommand ApplyCustomerChangesCommand =>
+            _applyCustomerChangesCommand ??= new AsyncRelayCommand(OnApplyToyChangesCommandExecuted);
 
-        public DelegateCommand ChangeEditModeCommand { get; }
+        public DelegateCommand ChangeEditModeCommand =>
+            _changeEditModeCommand ??= new DelegateCommand(OnChangeEditModeCommandExecuted,
+                                                           CanManipulateOnCustomer)
+                .ObservesProperty(() => SelectedCustomer);
 
-        public AsyncRelayCommand ReloadCustomersCommand { get; }
+        public AsyncRelayCommand ReloadCustomersCommand =>
+            _reloadCustomersCommand ??= new AsyncRelayCommand(ReloadToysAsync);
 
         public ObservableCollection<CustomerEntityViewModel> Customers
         {
@@ -58,7 +66,6 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             {
                 SetProperty(ref _selectedCustomer, value);
                 RemoveCustomerCommand.RaiseCanExecuteChanged();
-                ApplyCustomerChangesCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -80,6 +87,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
                                                              FullName = String.Empty,
                                                              PhoneNumber = "+375"
                                                          }));
+
             SelectedCustomer = Customers.First();
         }
 
@@ -96,6 +104,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
                 await _customersService.AddCustomerAsync(SelectedCustomer.Entity);
             else
                 await _customersService.UpdateCustomerAsync(SelectedCustomer.Entity);
+
             await ReloadToysAsync();
         }
 

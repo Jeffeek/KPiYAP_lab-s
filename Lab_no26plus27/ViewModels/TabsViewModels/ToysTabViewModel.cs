@@ -23,27 +23,40 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         private ToyEntityViewModel _selectedToy;
         private ObservableCollection<ToyEntityViewModel> _toys;
 
+        private AsyncRelayCommand _removeToyCommand;
+        private AsyncRelayCommand _applyToyChangesCommand;
+        private AsyncRelayCommand _reloadToysCommand;
+        private DelegateCommand _changeEditModeCommand;
+        private DelegateCommand _addToyCommand;
+
         public ToysTabViewModel(IToysService toysService)
         {
             _toysService = toysService;
             Toys = new ObservableCollection<ToyEntityViewModel>();
-            ChangeEditModeCommand = new DelegateCommand(OnChangeEditModeCommandExecuted);
-            ApplyToyChangesCommand = new AsyncRelayCommand(OnApplyToyChangesCommandExecuted);
-            RemoveToyCommand = new AsyncRelayCommand(OnRemoveToyCommandExecuted);
-            AddToyCommand = new DelegateCommand(OnAddToyCommandExecuted);
-            ReloadToysCommand = new AsyncRelayCommand(ReloadToysAsync);
+
             ReloadToysAsync().Wait();
         }
 
-        public DelegateCommand AddToyCommand { get; }
+        #region Commands
 
-        public AsyncRelayCommand RemoveToyCommand { get; }
+        public DelegateCommand AddToyCommand =>
+            _addToyCommand ??= new DelegateCommand(OnAddToyCommandExecuted);
 
-        public AsyncRelayCommand ApplyToyChangesCommand { get; }
+        public DelegateCommand ChangeEditModeCommand =>
+            _changeEditModeCommand ??= new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnToy)
+                .ObservesProperty(() => SelectedToy);
 
-        public DelegateCommand ChangeEditModeCommand { get; }
+        public AsyncRelayCommand RemoveToyCommand =>
+            _removeToyCommand ??= new AsyncRelayCommand(OnRemoveToyCommandExecuted,
+                                                        CanManipulateOnToy);
 
-        public AsyncRelayCommand ReloadToysCommand { get; }
+        public AsyncRelayCommand ApplyToyChangesCommand =>
+            _applyToyChangesCommand ??= new AsyncRelayCommand(OnApplyToyChangesCommandExecuted);
+
+        public AsyncRelayCommand ReloadToysCommand =>
+            _reloadToysCommand ??= new AsyncRelayCommand(ReloadToysAsync);
+
+        #endregion
 
         public ObservableCollection<ToyEntityViewModel> Toys
         {
@@ -58,7 +71,6 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             {
                 SetProperty(ref _selectedToy, value);
                 RemoveToyCommand.RaiseCanExecuteChanged();
-                ApplyToyChangesCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -82,13 +94,12 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
                                                    Producer = String.Empty,
                                                    WarehouseCount = 0
                                                }));
+
             SelectedToy = Toys.First();
         }
 
         private async Task OnRemoveToyCommandExecuted()
         {
-            if (!CanManipulateOnToy()) return;
-
             await _toysService.RemoveToyAsync(SelectedToy.Entity);
             Toys.Remove(SelectedToy);
             SelectedToy = null;
@@ -96,12 +107,11 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnApplyToyChangesCommandExecuted()
         {
-            if (!CanManipulateOnToy()) return;
-
             if (SelectedToy.Entity.Id == 0)
                 await _toysService.AddToyAsync(SelectedToy.Entity);
             else
                 await _toysService.UpdateToyAsync(SelectedToy.Entity);
+
             await ReloadToysAsync();
         }
 
