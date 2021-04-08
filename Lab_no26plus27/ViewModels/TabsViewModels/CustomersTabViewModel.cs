@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces.EntityServices;
 using Lab_no26plus27.Model.AsyncCommand;
@@ -20,8 +19,8 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
     public class CustomersTabViewModel : BindableBase
     {
         private readonly ICustomersService _customersService;
-        private ObservableCollection<CustomerEntityViewModel> _customers;
         private readonly List<CustomerEntityViewModel> _internalList;
+        private ObservableCollection<CustomerEntityViewModel> _customers;
         private bool _isEditMode;
         private string _searchText = String.Empty;
         private CustomerEntityViewModel _selectedCustomer;
@@ -37,7 +36,9 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             _customersService = customersService;
             Customers = new ObservableCollection<CustomerEntityViewModel>();
             _internalList = new List<CustomerEntityViewModel>();
-            ReloadToysAsync().Wait();
+
+            ReloadToysAsync()
+                .Wait();
         }
 
         public DelegateCommand AddCustomerCommand =>
@@ -92,7 +93,8 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             {
                 _searchText = value;
 
-                if (value != String.Empty) return;
+                if (value != String.Empty)
+                    return;
 
                 Customers.Clear();
                 Customers.AddRange(_internalList);
@@ -102,12 +104,15 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         private void OnSearchCommandExecuted()
         {
             CustomerEntityViewModel[] filteredToys;
+
             if (Int32.TryParse(SearchText, out var number))
             {
                 filteredToys =
-                    _internalList.Where(x => x.Entity.Id == number).ToArray();
+                    _internalList.Where(x => x.Entity.Id == number)
+                                 .ToArray();
 
-                if (filteredToys.Length == 0) return;
+                if (filteredToys.Length == 0)
+                    return;
 
                 Customers.Clear();
                 Customers.AddRange(filteredToys);
@@ -115,14 +120,20 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
                 return;
             }
 
-            filteredToys = Customers.Where(x => x.Entity.FullName.Contains(SearchText) || x.Entity.PhoneNumber.Contains(SearchText)).ToArray();
+            filteredToys = Customers
+                           .Where(x => x.Entity.FullName.Contains(SearchText)
+                                       || x.Entity.PhoneNumber.Contains(SearchText))
+                           .ToArray();
+
             Customers.Clear();
             Customers.AddRange(filteredToys);
         }
 
-        private bool CanManipulateOnCustomer() => SelectedCustomer is not null;
+        private bool CanManipulateOnCustomer() =>
+            SelectedCustomer is not null;
 
-        private void OnChangeEditModeCommandExecuted() => IsEditMode = !IsEditMode;
+        private void OnChangeEditModeCommandExecuted() =>
+            IsEditMode = !IsEditMode;
 
         private void OnAddToyCommandExecuted()
         {
@@ -138,7 +149,9 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnRemoveToyCommandExecuted()
         {
-            if (SelectedCustomer.Entity.Id == 0) Customers.Remove(SelectedCustomer);
+            if (SelectedCustomer.Entity.Id == 0)
+                Customers.Remove(SelectedCustomer);
+
             await _customersService.RemoveCustomerAsync(SelectedCustomer.Entity);
             Customers.Remove(SelectedCustomer);
             SelectedCustomer = null;
@@ -159,6 +172,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             var dbCustomers = await _customersService.GetAllCustomersAsync();
             Customers.Clear();
             _internalList.Clear();
+
             foreach (var customerEntity in dbCustomers)
                 _internalList.Add(new CustomerEntityViewModel(customerEntity));
 

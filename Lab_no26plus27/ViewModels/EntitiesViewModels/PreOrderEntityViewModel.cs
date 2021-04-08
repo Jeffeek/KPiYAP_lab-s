@@ -11,7 +11,8 @@ namespace Lab_no26plus27.ViewModels.EntitiesViewModels
     {
         private PreOrderEntity _entity;
 
-        public PreOrderEntityViewModel(PreOrderEntity entity) => _entity = entity;
+        public PreOrderEntityViewModel(PreOrderEntity entity) =>
+            _entity = entity;
 
         public PreOrderEntity Entity
         {

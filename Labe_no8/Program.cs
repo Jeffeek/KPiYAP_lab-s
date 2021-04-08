@@ -13,7 +13,10 @@ namespace Labe_no8
         {
             var date = new DateRegex($"{Directory.GetCurrentDirectory()}\\timeregex.txt");
             var dates = date.GetResult();
-            foreach (var d in dates) Console.WriteLine(d.ToShortDateString());
+
+            foreach (var d in dates)
+                Console.WriteLine(d.ToShortDateString());
+
             var html = new HtmlRegex($"{Directory.GetCurrentDirectory()}\\htmlregex.txt");
             html.Parse();
             Console.ReadLine();

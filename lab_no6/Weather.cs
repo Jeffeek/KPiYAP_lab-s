@@ -38,14 +38,18 @@ namespace lab_no6
         {
             var rnd = new Random();
             var temps = new double[days];
-            for (var i = 0; i < days; i++) temps[i] = Double.Parse($"{rnd.Next(min, max)},{rnd.Next(0, 9)}");
+
+            for (var i = 0; i < days; i++)
+                temps[i] = Double.Parse($"{rnd.Next(min, max)},{rnd.Next(0, 9)}");
 
             return temps;
         }
 
         public int GetCountOfDaysLessAvg(string key)
         {
-            if (!_weatherDictionary.ContainsKey(key)) throw new ArgumentException();
+            if (!_weatherDictionary.ContainsKey(key))
+                throw new ArgumentException();
+
             var temps = _weatherDictionary[key];
             var avg = temps.Average();
             var result = temps.Count(x => x < avg);

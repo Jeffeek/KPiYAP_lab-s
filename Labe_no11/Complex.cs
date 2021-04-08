@@ -22,11 +22,16 @@ namespace Labe_no11
 
         public int CompareTo(Complex other)
         {
-            if (ReferenceEquals(this, other)) return 0;
-            if (ReferenceEquals(null, other)) return 1;
+            if (ReferenceEquals(this, other))
+                return 0;
+
+            if (ReferenceEquals(null, other))
+                return 1;
+
             var realPartComparison = RealPart.CompareTo(other.RealPart);
 
-            if (realPartComparison != 0) return realPartComparison;
+            if (realPartComparison != 0)
+                return realPartComparison;
 
             return VirtualPart.CompareTo(other.VirtualPart);
         }

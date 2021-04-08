@@ -32,8 +32,11 @@ namespace Labe_no11
             return arr;
         }
 
-        public void Sort(int[] arr) => Array.Sort(arr, new ModulOfThreeComparer());
+        public void Sort(int[] arr) =>
+            Array.Sort(arr, new ModulOfThreeComparer());
 
-        public void PrintArray(int[] array) => array.ToList().ForEach(Console.WriteLine);
+        public void PrintArray(int[] array) =>
+            array.ToList()
+                 .ForEach(Console.WriteLine);
     }
 }

@@ -22,7 +22,8 @@ namespace Lab_no19
                                      string outputPath,
                                      int t1,
                                      int t2,
-                                     InputOutputProvider provider)
+                                     InputOutputProvider provider
+            )
         {
             _concurrentInputFile = new ConcurrentFile(inputPath);
             _concurrentOutputFile = new ConcurrentFile(outputPath);
@@ -36,7 +37,8 @@ namespace Lab_no19
         {
             var threads = new List<Thread>();
 
-            for (var i = 0; i < 5; i++) threads.Add(new Thread(DoWork1));
+            for (var i = 0; i < 5; i++)
+                threads.Add(new Thread(DoWork1));
 
             threads.ForEach(x =>
                             {
@@ -49,7 +51,8 @@ namespace Lab_no19
         {
             var threads = new List<Thread>();
 
-            for (var i = 0; i < 5; i++) threads.Add(new Thread(DoWork2));
+            for (var i = 0; i < 5; i++)
+                threads.Add(new Thread(DoWork2));
 
             threads.ForEach(x =>
                             {
@@ -80,9 +83,12 @@ namespace Lab_no19
             for (var i = 0; i < lineLength; i++)
             {
                 Thread.Sleep(TimeSpan.FromMilliseconds(_t1));
-                var digit = Int32.Parse(result[i].ToString());
 
-                if (digit % 2 == 0) sum += digit;
+                var digit = Int32.Parse(result[i]
+                                            .ToString());
+
+                if (digit % 2 == 0)
+                    sum += digit;
 
                 _concurrentOutputFile.Write($"Время: {DateTime.Now}\t"
                                             + $"Процент выполнения: {Math.Round((i + 1) / (double)lineLength * 100, 0)}%\t"

@@ -21,9 +21,13 @@ namespace Lab_no_22
         {
             InitializeComponent();
             _check = new Check();
-            ChangeTime().ConfigureAwait(true);
+
+            ChangeTime()
+                .ConfigureAwait(true);
+
             ReadProductsFromFile();
             FillProductsComboBox();
+
             _check.SumOfProductsChanged += (s, e) =>
                                            {
                                                labelCurrentSum.Text = e.ToString();
@@ -51,16 +55,19 @@ namespace Lab_no_22
 
         private void FillProductsComboBox()
         {
-            foreach (var product in _allProducts) comboBoxProducts.Items.Add($"{product.Title} : {product.Price}");
+            foreach (var product in _allProducts)
+                comboBoxProducts.Items.Add($"{product.Title} : {product.Price}");
         }
 
         private void buttonAddProduct_Click(object sender, EventArgs e)
         {
-            if (comboBoxProducts.SelectedIndex < 0) return;
+            if (comboBoxProducts.SelectedIndex < 0)
+                return;
 
             var product = _allProducts[comboBoxProducts.SelectedIndex];
 
-            if (product is null) throw new NotSupportedException();
+            if (product is null)
+                throw new NotSupportedException();
 
             _check.AddProduct(product);
         }
@@ -86,7 +93,8 @@ namespace Lab_no_22
 
         private void toolStripMenuItemSave_Click(object sender, EventArgs e)
         {
-            if (richTextBoxCheck.Text == String.Empty) return;
+            if (richTextBoxCheck.Text == String.Empty)
+                return;
 
             var fileDialog = new SaveFileDialog
                              {
@@ -94,7 +102,8 @@ namespace Lab_no_22
                                  InitialDirectory = $"{Directory.GetCurrentDirectory()}"
                              };
 
-            if (fileDialog.ShowDialog() != DialogResult.OK) return;
+            if (fileDialog.ShowDialog() != DialogResult.OK)
+                return;
 
             MessageBox.Show(this, "Ok");
             File.WriteAllText(fileDialog.FileName, richTextBoxCheck.Text);

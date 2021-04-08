@@ -7,7 +7,8 @@
 
         public override bool PassOffset()
         {
-            if (VisitedClasses >= 1) return true;
+            if (VisitedClasses >= 1)
+                return true;
 
             return false;
         }

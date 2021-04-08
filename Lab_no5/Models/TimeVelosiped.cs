@@ -14,12 +14,25 @@ namespace Lab_no5.Models
         private int _seconds;
         private DateTime _timeCorrection;
 
-        public TimeVelosiped() => _timeCorrection = new DateTime(2020, 10, 5, 0, 0, 0);
+        public TimeVelosiped() =>
+            _timeCorrection = new DateTime(2020,
+                                           10,
+                                           5,
+                                           0,
+                                           0,
+                                           0);
 
         public TimeVelosiped(int hours, int minutes, int seconds)
         {
             SetTime(hours, minutes, seconds);
-            _timeCorrection = new DateTime(2020, 10, 5, 0, 0, 0);
+
+            _timeCorrection = new DateTime(2020,
+                                           10,
+                                           5,
+                                           0,
+                                           0,
+                                           0);
+
             _timeCorrection = _timeCorrection.AddHours(Hours);
             _timeCorrection = _timeCorrection.AddMinutes(Minutes);
             _timeCorrection = _timeCorrection.AddSeconds(Seconds);
@@ -40,7 +53,12 @@ namespace Lab_no5.Models
 
                 _hours = value;
 
-                _timeCorrection = new DateTime(2020, 10, 5, Hours, Minutes, Seconds);
+                _timeCorrection = new DateTime(2020,
+                                               10,
+                                               5,
+                                               Hours,
+                                               Minutes,
+                                               Seconds);
             }
         }
 
@@ -59,7 +77,12 @@ namespace Lab_no5.Models
 
                 _minutes = value;
 
-                _timeCorrection = new DateTime(2020, 10, 5, Hours, Minutes, Seconds);
+                _timeCorrection = new DateTime(2020,
+                                               10,
+                                               5,
+                                               Hours,
+                                               Minutes,
+                                               Seconds);
             }
         }
 
@@ -78,11 +101,17 @@ namespace Lab_no5.Models
 
                 _seconds = value;
 
-                _timeCorrection = new DateTime(2020, 10, 5, Hours, Minutes, Seconds);
+                _timeCorrection = new DateTime(2020,
+                                               10,
+                                               5,
+                                               Hours,
+                                               Minutes,
+                                               Seconds);
             }
         }
 
-        public override string ToString() => $"{Hours}:{Minutes}:{Seconds}";
+        public override string ToString() =>
+            $"{Hours}:{Minutes}:{Seconds}";
 
         public void AddSeconds(int seconds)
         {

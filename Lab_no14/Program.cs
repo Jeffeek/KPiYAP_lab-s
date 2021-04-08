@@ -14,8 +14,18 @@ namespace Lab_no14
 
             for (var i = 0; i < 50; i++)
             {
-                var hero = new Hero(110, 0.1, new Ability("Заморозка", "Застынь!"), 12, 14);
-                var hero2 = new Hero(150, 0.2, new Ability("Оглушение", "Оглушение!"), 5, 15);
+                var hero = new Hero(110,
+                                    0.1,
+                                    new Ability("Заморозка", "Застынь!"),
+                                    12,
+                                    14);
+
+                var hero2 = new Hero(150,
+                                     0.2,
+                                     new Ability("Оглушение", "Оглушение!"),
+                                     5,
+                                     15);
+
                 var match = new Match(hero, hero2);
                 match.Start();
 
@@ -34,8 +44,18 @@ namespace Lab_no14
 
             for (var i = 0; i < 50; i++)
             {
-                var hero = new Hero(110, 0.1, new Ability("Заморозка", "Застынь!"), 12, 14);
-                var hero2 = new Hero(150, 0.2, new Ability("Оглушение", "Оглушение!"), 5, 15);
+                var hero = new Hero(110,
+                                    0.1,
+                                    new Ability("Заморозка", "Застынь!"),
+                                    12,
+                                    14);
+
+                var hero2 = new Hero(150,
+                                     0.2,
+                                     new Ability("Оглушение", "Оглушение!"),
+                                     5,
+                                     15);
+
                 var match = new Match(hero2, hero);
                 match.Start();
 

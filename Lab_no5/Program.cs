@@ -29,19 +29,25 @@ namespace Lab_no5
         private static void AddSeconds_test(TimeVelosiped time)
         {
             Console.WriteLine("Введите секунды (add)");
-            if (Int32.TryParse(Console.ReadLine(), out var seconds)) time.AddSeconds(seconds);
+
+            if (Int32.TryParse(Console.ReadLine(), out var seconds))
+                time.AddSeconds(seconds);
         }
 
         private static void AddMinutes_test(TimeVelosiped time)
         {
             Console.WriteLine("Введите минуты (add)");
-            if (Int32.TryParse(Console.ReadLine(), out var min)) time.AddMinutes(min);
+
+            if (Int32.TryParse(Console.ReadLine(), out var min))
+                time.AddMinutes(min);
         }
 
         private static void AddHours_test(TimeVelosiped time)
         {
             Console.WriteLine("Введите часы (add)");
-            if (Int32.TryParse(Console.ReadLine(), out var hours)) time.AddHours(hours);
+
+            if (Int32.TryParse(Console.ReadLine(), out var hours))
+                time.AddHours(hours);
         }
 
         private static void TypeSeconds_Exception(TimeVelosiped time)

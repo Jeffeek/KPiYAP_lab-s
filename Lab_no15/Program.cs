@@ -24,9 +24,15 @@ namespace Lab_no15
         private static void SecondTask()
         {
             var text = File.ReadAllText(_loadFilePath2);
-            var sentences = text.Split(". ").Select(x => x + ". ");
-            var ordered = sentences.SortByPunctuationAndSpaces().ToArray();
-            foreach (var sentence in ordered) Console.WriteLine(sentence);
+
+            var sentences = text.Split(". ")
+                                .Select(x => x + ". ");
+
+            var ordered = sentences.SortByPunctuationAndSpaces()
+                                   .ToArray();
+
+            foreach (var sentence in ordered)
+                Console.WriteLine(sentence);
         }
 
         private static void FirstTask()
@@ -40,11 +46,20 @@ namespace Lab_no15
         private static double[] ResolveJaggedMatrix(int[][] jaggedMatrix)
         {
             var list = new List<double>();
-            var avg = jaggedMatrix.AvgInEachRow().ToArray();
-            var minimalValues = jaggedMatrix.MinInEachRow().ToArray();
-            var maximalValues = jaggedMatrix.MaxInEachRow().ToArray();
+
+            var avg = jaggedMatrix.AvgInEachRow()
+                                  .ToArray();
+
+            var minimalValues = jaggedMatrix.MinInEachRow()
+                                            .ToArray();
+
+            var maximalValues = jaggedMatrix.MaxInEachRow()
+                                            .ToArray();
+
             var rowCount = avg.Length;
-            for (var i = 0; i < rowCount; i++) list.Add(avg[i] * (minimalValues[i] + maximalValues[i]));
+
+            for (var i = 0; i < rowCount; i++)
+                list.Add(avg[i] * (minimalValues[i] + maximalValues[i]));
 
             return list.ToArray();
         }

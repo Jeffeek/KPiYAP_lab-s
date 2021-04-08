@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Using namespaces
+
 using Lab_no25.Services.Interfaces.Administration;
 using Lab_no25.Services.Interfaces.EntityServices;
+
+#endregion
 
 namespace Lab_no25.Services.Administration
 {
@@ -14,7 +13,8 @@ namespace Lab_no25.Services.Administration
                             IToysService toysService,
                             IPreOrdersService preOrdersService,
                             ICustomersService customersService,
-                            ISalesService salesService)
+                            ISalesService salesService
+            )
         {
             ToysCategoriesService = toysCategoriesService;
             ToysService = toysService;

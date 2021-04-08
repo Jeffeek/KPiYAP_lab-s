@@ -11,7 +11,8 @@ namespace Lab_no26plus27.ViewModels.EntitiesViewModels
     {
         private ToyEntity _entity;
 
-        public ToyEntityViewModel(ToyEntity entity) => Entity = entity;
+        public ToyEntityViewModel(ToyEntity entity) =>
+            Entity = entity;
 
         public ToyEntity Entity
         {

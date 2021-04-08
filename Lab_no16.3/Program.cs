@@ -58,7 +58,9 @@ namespace Lab_no16._3
 
             // создали N-ое количество собак и добавили эту ноду к детям главного документа
             mainDocument.Add(randomDogs);
-            ParseIntoList(mainDocument).ForEach(Console.WriteLine);
+
+            ParseIntoList(mainDocument)
+                .ForEach(Console.WriteLine);
 
             // -------------------------------
             // создаём рандомную собаку
@@ -74,7 +76,9 @@ namespace Lab_no16._3
             // --------------------------------
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("После вставки на 4ю позицию: ");
-            ParseIntoList(mainDocument).ForEach(Console.WriteLine);
+
+            ParseIntoList(mainDocument)
+                .ForEach(Console.WriteLine);
 
             // ---------------------------------
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -86,7 +90,10 @@ namespace Lab_no16._3
 
             // ---------------------------------
             // получаем рандомное имя собаки
-            var rndName = _names.Split(',')[new Random().Next(0, _names.Split(',').Length)];
+            var rndName = _names.Split(',')[new Random().Next(0,
+                                                              _names.Split(',')
+                                                                    .Length)];
+
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"Собака по имени: {rndName}");
             var byName = FindByName(mainDocument, rndName);
@@ -122,24 +129,31 @@ namespace Lab_no16._3
             var houseType = housingTypes[rnd.Next(0, housingTypes.Length)];
             var age = rnd.Next(0, 16);
             var master = masterNames[rnd.Next(0, masterNames.Length)];
+
             var nameNode = new XElement(XName.Get("Name"))
                            {
                                Value = name
                            };
+
             var breedNode = new XElement(XName.Get("Breed"));
+
             var ageNode = new XElement(XName.Get("Age"))
                           {
                               Value = age.ToString()
                           };
+
             breedNode.Value = breed;
+
             var houseTypeNode = new XElement(XName.Get("HouseType"))
                                 {
                                     Value = houseType
                                 };
+
             var masterNameNode = new XElement(XName.Get("MasterName"))
                                  {
                                      Value = master
                                  };
+
             dog.Add(nameNode);
             dog.Add(breedNode);
             dog.Add(ageNode);
@@ -172,7 +186,8 @@ namespace Lab_no16._3
         {
             var dogs = ParseIntoList(document);
 
-            return dogs.Where(dog => dog.HouseType == housing).ToList();
+            return dogs.Where(dog => dog.HouseType == housing)
+                       .ToList();
         }
 
         #region Вспомогательные методы
@@ -181,15 +196,21 @@ namespace Lab_no16._3
 
         private static List<Dog> ParseIntoList(XDocument document)
         {
-            var dogsNodes = document.XPathSelectElement("dogs").Nodes();
+            var dogsNodes = document.XPathSelectElement("dogs")
+                                    .Nodes();
 
             return (
                        from node in dogsNodes
-                       let name = node.XPathSelectElement("Name").Value
-                       let breed = node.XPathSelectElement("Breed").Value
-                       let age = Int32.Parse(node.XPathSelectElement("Age").Value)
-                       let houseType = node.XPathSelectElement("HouseType").Value
-                       let master = node.XPathSelectElement("MasterName").Value
+                       let name = node.XPathSelectElement("Name")
+                                      .Value
+                       let breed = node.XPathSelectElement("Breed")
+                                       .Value
+                       let age = Int32.Parse(node.XPathSelectElement("Age")
+                                                 .Value)
+                       let houseType = node.XPathSelectElement("HouseType")
+                                           .Value
+                       let master = node.XPathSelectElement("MasterName")
+                                        .Value
                        select new Dog
                               {
                                   Age = age,
@@ -209,11 +230,20 @@ namespace Lab_no16._3
 
         private static Dog ParseDog(XNode dogElement)
         {
-            var name = dogElement.XPathSelectElement("Name").Value;
-            var breed = dogElement.XPathSelectElement("Breed").Value;
-            var age = Int32.Parse(dogElement.XPathSelectElement("Age").Value);
-            var houseType = dogElement.XPathSelectElement("HouseType").Value;
-            var master = dogElement.XPathSelectElement("MasterName").Value;
+            var name = dogElement.XPathSelectElement("Name")
+                                 .Value;
+
+            var breed = dogElement.XPathSelectElement("Breed")
+                                  .Value;
+
+            var age = Int32.Parse(dogElement.XPathSelectElement("Age")
+                                            .Value);
+
+            var houseType = dogElement.XPathSelectElement("HouseType")
+                                      .Value;
+
+            var master = dogElement.XPathSelectElement("MasterName")
+                                   .Value;
 
             return new Dog
                    {

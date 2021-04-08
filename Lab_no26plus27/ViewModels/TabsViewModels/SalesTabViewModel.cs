@@ -4,10 +4,10 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces.EntityServices;
 using Lab_no26plus27.Model.AsyncCommand;
+using Lab_no26plus27.Model.SalesStatisticsPrinter;
 using Lab_no26plus27.ViewModels.EntitiesViewModels;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -19,6 +19,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
     public class SalesTabViewModel : BindableBase
     {
         private readonly ISalesService _salesService;
+        private readonly ISalesStatisticsPrinter _salesStatisticsPrinter;
         private bool _isEditMode;
         private ObservableCollection<SaleEntityViewModel> _sales;
         private SaleEntityViewModel _selectedSale;
@@ -27,16 +28,31 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         private AsyncRelayCommand _applySaleChangesCommand;
         private DelegateCommand _changeEditModeCommand;
         private AsyncRelayCommand _reloadSalesCommand;
+        private DelegateCommand _writeSalesStatisticsCommand;
 
-        public SalesTabViewModel(ISalesService salesService)
+        public SalesTabViewModel(ISalesService salesService,
+                                 ISalesStatisticsPrinter salesStatisticsPrinter
+            )
         {
             _salesService = salesService;
+            _salesStatisticsPrinter = salesStatisticsPrinter;
             Sales = new ObservableCollection<SaleEntityViewModel>();
-            ReloadToysCategoriesAsync().Wait();
+
+            ReloadToysCategoriesAsync()
+                .Wait();
         }
 
         public DelegateCommand AddSaleCommand =>
             _addSaleCommand ??= new DelegateCommand(OnAddSaleCommandExecuted);
+
+        public DelegateCommand WriteSalesStatisticsCommand =>
+            _writeSalesStatisticsCommand ??=
+                new DelegateCommand(() => _salesStatisticsPrinter.Write(_salesService
+                                                                        .GetSalesByAsync(x => x.SaleDate.Day
+                                                                                              == DateTime.Now.Day)
+                                                                        .GetAwaiter()
+                                                                        .GetResult()),
+                                    () => true);
 
         public AsyncRelayCommand RemoveSaleCommand =>
             _removeSaleCommand ??= new AsyncRelayCommand(OnRemoveToyCategoryCommandExecuted,
@@ -75,9 +91,11 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             set => SetProperty(ref _isEditMode, value);
         }
 
-        private bool CanManipulateOnSale() => SelectedSale is not null;
+        private bool CanManipulateOnSale() =>
+            SelectedSale is not null;
 
-        private void OnChangeEditModeCommandExecuted() => IsEditMode = !IsEditMode;
+        private void OnChangeEditModeCommandExecuted() =>
+            IsEditMode = !IsEditMode;
 
         private void OnAddSaleCommandExecuted()
         {
@@ -89,12 +107,15 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
                                                      SaleDate = DateTime.Now,
                                                      ToyId = 1
                                                  }));
+
             SelectedSale = Sales.First();
         }
 
         private async Task OnRemoveToyCategoryCommandExecuted()
         {
-            if (SelectedSale.Entity.Id == 0) Sales.Remove(SelectedSale);
+            if (SelectedSale.Entity.Id == 0)
+                Sales.Remove(SelectedSale);
+
             await _salesService.RemoveSaleAsync(SelectedSale.Entity);
             Sales.Remove(SelectedSale);
             SelectedSale = null;
@@ -106,6 +127,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
                 await _salesService.AddSaleAsync(SelectedSale.Entity);
             else
                 await _salesService.UpdateSaleAsync(SelectedSale.Entity);
+
             await ReloadToysCategoriesAsync();
         }
 
@@ -113,7 +135,9 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         {
             var dbSales = await _salesService.GetAllSalesAsync();
             Sales.Clear();
-            foreach (var sale in dbSales) Sales.Add(new SaleEntityViewModel(sale));
+
+            foreach (var sale in dbSales)
+                Sales.Add(new SaleEntityViewModel(sale));
         }
     }
 }

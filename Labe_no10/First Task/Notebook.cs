@@ -12,19 +12,25 @@ namespace Labe_no10.First_Task
                         int clockSpeed,
                         int coresCount,
                         int ram,
-                        int hardDriveCapacity)
+                        int hardDriveCapacity
+            )
             : base(clockSpeed, coresCount, ram, hardDriveCapacity)
         {
-            if (batteryLife < 20) throw new ArgumentException(nameof(batteryLife));
+            if (batteryLife < 20)
+                throw new ArgumentException(nameof(batteryLife));
+
             BatteryLife = batteryLife;
         }
 
         public int BatteryLife { get; }
 
-        public override double CalculatePrice() => base.CalculatePrice() + BatteryLife / 10.0;
+        public override double CalculatePrice() =>
+            base.CalculatePrice() + BatteryLife / 10.0;
 
-        public override bool IsSuitable() => base.IsSuitable() && BatteryLife >= 60;
+        public override bool IsSuitable() =>
+            base.IsSuitable() && BatteryLife >= 60;
 
-        public override string ToString() => base.ToString() + $", {nameof(BatteryLife)}: {BatteryLife}";
+        public override string ToString() =>
+            base.ToString() + $", {nameof(BatteryLife)}: {BatteryLife}";
     }
 }

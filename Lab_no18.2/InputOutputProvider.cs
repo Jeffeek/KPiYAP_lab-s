@@ -17,8 +17,10 @@ namespace Lab_no18._2
             _output = output ?? throw new ArgumentNullException(nameof(output));
         }
 
-        public void Out(string text) => _output(text);
+        public void Out(string text) =>
+            _output(text);
 
-        public string In() => _input();
+        public string In() =>
+            _input();
     }
 }

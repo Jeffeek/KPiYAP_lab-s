@@ -17,14 +17,19 @@ namespace Lab_no26plus27.ViewModels.WindowsViewModels
         private readonly IRegionManager _regionManager;
 
         public MainWindowViewModel(IRegionManager regionManager,
-                                   IEventAggregator eventAggregator)
+                                   IEventAggregator eventAggregator
+            )
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
 
-            _regionManager.RegisterViewWithRegion("CurrentPage", () => ContainerLocator.Container.Resolve<SignInPage>());
+            _regionManager.RegisterViewWithRegion("CurrentPage",
+                                                  () => ContainerLocator.Container.Resolve<SignInPage>());
+
             _regionManager.RegisterViewWithRegion("CurrentPage", () => ContainerLocator.Container.Resolve<AdminPage>());
-            _regionManager.RegisterViewWithRegion("CurrentPage", () => ContainerLocator.Container.Resolve<ManagerPage>());
+
+            _regionManager.RegisterViewWithRegion("CurrentPage",
+                                                  () => ContainerLocator.Container.Resolve<ManagerPage>());
 
             _eventAggregator.GetEvent<PubSubEvent<string>>()
                             .Subscribe(x =>
@@ -32,6 +37,7 @@ namespace Lab_no26plus27.ViewModels.WindowsViewModels
                                                                           x == ApplicationRoles.Administrator
                                                                               ? "AdministratorPage"
                                                                               : "ManagerPage"));
+
             regionManager.RequestNavigate("CurrentPage", "SignInPage");
         }
     }

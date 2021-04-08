@@ -36,7 +36,8 @@ namespace Labe_no12
             {
                 var roundedValue = Math.Round(value, 2);
 
-                if (Math.Abs(roundedValue - 0.00) < 0.001) throw new BadQException();
+                if (Math.Abs(roundedValue - 0.00) < 0.001)
+                    throw new BadQException();
 
                 _q = roundedValue;
             }
@@ -57,13 +58,15 @@ namespace Labe_no12
         /// </summary>
         /// <param name="n">заданное число, до которого идёт вычисление суммы прогрессии</param>
         /// <returns>сумма элементов последовательности до n</returns>
-        public double Sum(long n) => Math.Round((Get(n) * Q - StartPoint) / (Q - 1), 2);
+        public double Sum(long n) =>
+            Math.Round((Get(n) * Q - StartPoint) / (Q - 1), 2);
 
         /// <summary>
         ///     получение n-ого члена прогрессии
         /// </summary>
         /// <param name="n">заданный "индекс" в прогрессии</param>
         /// <returns>n-ый член прогрессии</returns>
-        public double Get(long n) => Math.Round(StartPoint * Math.Pow(Q, n - 1), 2);
+        public double Get(long n) =>
+            Math.Round(StartPoint * Math.Pow(Q, n - 1), 2);
     }
 }

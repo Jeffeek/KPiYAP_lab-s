@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Lab_no25.Model;
 using Lab_no25.Model.Entities;
-using Lab_no25.Services.Interfaces;
 using Lab_no25.Services.Interfaces.EntityServices;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +15,8 @@ namespace Lab_no25.Services.Implementations
     {
         private readonly ToyStoreDbContext _context;
 
-        public ToysService(ToyStoreDbContext context) => _context = context;
+        public ToysService(ToyStoreDbContext context) =>
+            _context = context;
 
         public async Task<bool> AddToyAsync(ToyEntity toy)
         {
@@ -37,17 +37,22 @@ namespace Lab_no25.Services.Implementations
         {
             var newCategory = await _context.ToyCategories.FindAsync(toy.CategoryId);
 
-            if (newCategory is null) return false;
+            if (newCategory is null)
+                return false;
 
             _context.Attach(toy);
-            _context.Entry(toy).State = EntityState.Modified;
+
+            _context.Entry(toy)
+                    .State = EntityState.Modified;
 
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<ToyEntity> GetByIdAsync(int id) => await _context.Toys.FindAsync(id);
+        public async Task<ToyEntity> GetByIdAsync(int id) =>
+            await _context.Toys.FindAsync(id);
 
         public async Task<IEnumerable<ToyEntity>> GetAllToysAsync() =>
-            await _context.Toys.Include(x => x.Category).ToListAsync();
+            await _context.Toys.Include(x => x.Category)
+                          .ToListAsync();
     }
 }

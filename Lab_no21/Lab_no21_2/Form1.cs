@@ -15,16 +15,19 @@ namespace Lab_no21_2
         private bool _isOpen;
         private int _number;
 
-        public Form1() => InitializeComponent();
+        public Form1() =>
+            InitializeComponent();
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            if (trackBar1.Value >= 1) CheckGoldenChest(button1, 1);
+            if (trackBar1.Value >= 1)
+                CheckGoldenChest(button1, 1);
         }
 
         private void CheckGoldenChest(Button button, int n)
         {
-            if (_isOpen) return;
+            if (_isOpen)
+                return;
 
             _isOpen = true;
 
@@ -42,9 +45,11 @@ namespace Lab_no21_2
             RefreshWindow();
         }
 
-        private void TrackBar1_Scroll(object sender, EventArgs e) => RefreshWindow();
+        private void TrackBar1_Scroll(object sender, EventArgs e) =>
+            RefreshWindow();
 
-        private void Form1_Load(object sender, EventArgs e) => Restart();
+        private void Form1_Load(object sender, EventArgs e) =>
+            Restart();
 
         private void Restart()
         {
@@ -62,7 +67,8 @@ namespace Lab_no21_2
             label2.Text = "Деньги:" + _currentBalance;
             label1.Text = "Ставка:" + trackBar1.Value;
 
-            if (_currentBalance != 0) return;
+            if (_currentBalance != 0)
+                return;
 
             MessageBox.Show("Вы бонкрот, прощайте",
                             "GameOver",
@@ -72,16 +78,19 @@ namespace Lab_no21_2
             Close();
         }
 
-        private void Button4_Click(object sender, EventArgs e) => Restart();
+        private void Button4_Click(object sender, EventArgs e) =>
+            Restart();
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            if (trackBar1.Value >= 1) CheckGoldenChest(button2, 2);
+            if (trackBar1.Value >= 1)
+                CheckGoldenChest(button2, 2);
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            if (trackBar1.Value >= 1) CheckGoldenChest(button3, 3);
+            if (trackBar1.Value >= 1)
+                CheckGoldenChest(button3, 3);
         }
     }
 }

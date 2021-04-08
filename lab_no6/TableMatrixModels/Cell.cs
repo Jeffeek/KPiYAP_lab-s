@@ -18,6 +18,7 @@
 
         public double Value { get; set; }
 
-        public override string ToString() => "--------\n" + $"|M[{Index}]={Value}|\n" + "--------";
+        public override string ToString() =>
+            "--------\n" + $"|M[{Index}]={Value}|\n" + "--------";
     }
 }

@@ -25,5 +25,7 @@
     WindowStyle="SingleBorderWindow"
     WindowTransitionsEnabled="True"
     mc:Ignorable="d">
-    <Frame prism:RegionManager.RegionName="CurrentPage" NavigationUIVisibility="Hidden" />
+    <Frame
+        prism:RegionManager.RegionName="CurrentPage"
+        NavigationUIVisibility="Hidden" />
 </controls:MetroWindow>

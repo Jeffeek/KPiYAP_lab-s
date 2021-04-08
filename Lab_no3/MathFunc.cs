@@ -25,7 +25,8 @@ namespace Lab_no3
                 floor++;
             }
 
-            if (floor % 2 == 0) floor--;
+            if (floor % 2 == 0)
+                floor--;
 
             return floor;
         }

@@ -121,25 +121,33 @@ namespace Additinal_after5.Models
         {
             var surname = GetSurname();
             var collection = _students.FindAll(x => x.Surname == surname);
-            if (collection.Count > 1) Console.WriteLine("Нашли несколько студентов с такой фамилией");
+
+            if (collection.Count > 1)
+                Console.WriteLine("Нашли несколько студентов с такой фамилией");
+
             PrintStudents(collection);
         }
 
         private void Exit()
         {
-            Process.GetCurrentProcess().CloseMainWindow();
+            Process.GetCurrentProcess()
+                   .CloseMainWindow();
         }
 
         private void PrintStudents(IEnumerable<Student> list)
         {
-            foreach (var s in list) Console.WriteLine(s);
+            foreach (var s in list)
+                Console.WriteLine(s);
         }
 
         private void RemoveStudent()
         {
             var surname = GetSurname();
             var student = _students.Find(x => x.Surname == surname);
-            if (student == null) Console.WriteLine("Такого студента нет");
+
+            if (student == null)
+                Console.WriteLine("Такого студента нет");
+
             _students.Remove(student);
         }
 
@@ -192,9 +200,12 @@ namespace Additinal_after5.Models
         {
             Console.WriteLine("Введите оценки через пробел: ");
             var strMarks = Console.ReadLine();
-            var marks = strMarks?.Split().Select(Int32.Parse);
 
-            if (marks.Count() != 5) throw new Exception("дэбил ти шо");
+            var marks = strMarks?.Split()
+                                .Select(Int32.Parse);
+
+            if (marks.Count() != 5)
+                throw new Exception("дэбил ти шо");
 
             return marks.ToArray();
         }

@@ -58,13 +58,31 @@ namespace Lab_no7
 
             for (var i = 0; i < words.Length; i++)
             {
-                if (words[i].Length < 4) continue;
+                if (words[i]
+                        .Length
+                    < 4)
+                    continue;
 
-                if (words[i].Length >= 4
-                    && words[i].Length < 7)
-                    words[i] = words[i].Substring(0, 3) + "#" + words[i].Substring(4);
+                if (words[i]
+                        .Length
+                    >= 4
+                    && words[i]
+                        .Length
+                    < 7)
+                    words[i] = words[i]
+                                   .Substring(0, 3)
+                               + "#"
+                               + words[i]
+                                   .Substring(4);
                 else
-                    words[i] = words[i].Substring(0, 3) + "#" + words[i].Substring(4, 3) + "#" + words[i].Substring(7);
+                    words[i] = words[i]
+                                   .Substring(0, 3)
+                               + "#"
+                               + words[i]
+                                   .Substring(4, 3)
+                               + "#"
+                               + words[i]
+                                   .Substring(7);
             }
 
             return String.Join(" ", words);
@@ -73,7 +91,10 @@ namespace Lab_no7
         private void Second()
         {
             Console.WriteLine("Второе задание: ");
-            var words = text.Split().ToHashSet();
+
+            var words = text.Split()
+                            .ToHashSet();
+
             for (var i = 0; i < words.Count; i++)
                 Console.WriteLine($"{words.ElementAt(i)}:{text.Split().Count(x => x == words.ElementAt(i))}");
         }
@@ -81,21 +102,52 @@ namespace Lab_no7
         private void Third()
         {
             Console.WriteLine("Третье задание: ");
+
             char[] vowels =
             {
-                'а', 'у', 'о', 'ы', 'и', 'э', 'я', 'ю', 'ё', 'е'
+                'а',
+                'у',
+                'о',
+                'ы',
+                'и',
+                'э',
+                'я',
+                'ю',
+                'ё',
+                'е'
             };
 
             char[] nvowels =
             {
-                'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ'
+                'б',
+                'в',
+                'г',
+                'д',
+                'ж',
+                'з',
+                'й',
+                'к',
+                'л',
+                'м',
+                'н',
+                'п',
+                'р',
+                'с',
+                'т',
+                'ф',
+                'х',
+                'ц',
+                'ч',
+                'ш',
+                'щ'
             };
 
             var words = text.Split();
 
             for (var i = 0; i < words.Length; i++)
             {
-                var remove = String.Concat(words[i].Where(x => x != ';'));
+                var remove = String.Concat(words[i]
+                                               .Where(x => x != ';'));
 
                 if (nvowels.Contains(remove[0])
                     && vowels.Contains(remove[remove.Length - 1]))
@@ -105,7 +157,8 @@ namespace Lab_no7
 
         public string Slow(string slowtext)
         {
-            while (slowtext.Length < 100000) slowtext += $" {slowtext}";
+            while (slowtext.Length < 100000)
+                slowtext += $" {slowtext}";
 
             return slowtext;
         }
@@ -113,7 +166,9 @@ namespace Lab_no7
         public string Fast(string slowtext)
         {
             var sb = new StringBuilder();
-            while (sb.Length < 100000) sb.Append($" {slowtext}");
+
+            while (sb.Length < 100000)
+                sb.Append($" {slowtext}");
 
             return sb.ToString();
         }

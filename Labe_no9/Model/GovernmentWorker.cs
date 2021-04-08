@@ -31,8 +31,12 @@ namespace Labe_no9.Model
                            .SetArea(rnd.Next(1000, 300000))
                            .SetPopulation(rnd.Next(50000, 900000))
                            .SetType((GovernmentType)rnd.Next(0, 7))
-                           .SetName(Guid.NewGuid().ToString().Substring(0, 10))
-                           .SetCapital(Guid.NewGuid().ToString().Substring(0, 6))
+                           .SetName(Guid.NewGuid()
+                                        .ToString()
+                                        .Substring(0, 10))
+                           .SetCapital(Guid.NewGuid()
+                                           .ToString()
+                                           .Substring(0, 6))
                            .Build();
 
                 _governments.Add(item);
@@ -43,7 +47,8 @@ namespace Labe_no9.Model
                                   string name,
                                   string capital,
                                   long population,
-                                  long area)
+                                  long area
+            )
         {
             var item = _builder
                        .SetArea(area)
@@ -57,7 +62,8 @@ namespace Labe_no9.Model
             _governments.Add(item);
         }
 
-        public IEnumerable<Government> GetCollection() => _governments.AsEnumerable();
+        public IEnumerable<Government> GetCollection() =>
+            _governments.AsEnumerable();
 
         public void RemoveGovernment(string name)
         {

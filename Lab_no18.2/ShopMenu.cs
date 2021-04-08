@@ -40,21 +40,32 @@ namespace Lab_no18._2
             PrintProducts(_document);
         }
 
-        public void Start() => PrintMenu();
+        public void Start() =>
+            PrintMenu();
 
         private void AddPC()
         {
-            var products = _document.Element(XName.Get("shop")).Element(XName.Get("products")).Elements().ToList();
+            var products = _document.Element(XName.Get("shop"))
+                                    .Element(XName.Get("products"))
+                                    .Elements()
+                                    .ToList();
+
             _provider.Out("Введите имя для товара: ");
             var name = _provider.In();
-            var deXElement = products.SingleOrDefault(pc => pc.XPathSelectElement("Name").Value == name);
+
+            var deXElement = products.SingleOrDefault(pc => pc.XPathSelectElement("Name")
+                                                              .Value
+                                                            == name);
 
             if (deXElement != null)
             {
                 _provider.Out("Нашли компьютер с таким названием. Добавим ему количество на складе + 1");
 
-                deXElement.XPathSelectElement("InStock").Value =
-                    (Int32.Parse(deXElement.XPathSelectElement("InStock").Value) + 1).ToString();
+                deXElement.XPathSelectElement("InStock")
+                          .Value =
+                    (Int32.Parse(deXElement.XPathSelectElement("InStock")
+                                           .Value)
+                     + 1).ToString();
 
                 PrintProducts(_document);
                 PrintMenu();
@@ -84,20 +95,28 @@ namespace Lab_no18._2
             doc.Add(shop);
             var products = new XElement(XName.Get("products"));
             shop.Add(products);
-            foreach (var pc in list.Select(t => new XElement(t))) products.Add(pc);
+
+            foreach (var pc in list.Select(t => new XElement(t)))
+                products.Add(pc);
 
             return doc;
         }
 
         private List<XElement> ParseToList(XDocument document) =>
-            document.Element(XName.Get("shop")).Element("products").Elements().ToList();
+            document.Element(XName.Get("shop"))
+                    .Element("products")
+                    .Elements()
+                    .ToList();
 
         private void RemovePC()
         {
             _provider.Out("Введите название компьютера, количество которого вы хотите уменьшить на 1");
             var name = _provider.In();
             var products = ParseToList(_document);
-            var pc = products.SingleOrDefault(x => x.Element(XName.Get("Name")).Value == name);
+
+            var pc = products.SingleOrDefault(x => x.Element(XName.Get("Name"))
+                                                    .Value
+                                                   == name);
 
             if (pc == null)
             {
@@ -107,9 +126,16 @@ namespace Lab_no18._2
                 return;
             }
 
-            pc.Element(XName.Get("InStock")).Value =
-                (Int32.Parse(pc.Element(XName.Get("InStock")).Value) - 1).ToString();
-            if (Int32.Parse(pc.Element(XName.Get("InStock")).Value) == 0) products.Remove(pc);
+            pc.Element(XName.Get("InStock"))
+              .Value =
+                (Int32.Parse(pc.Element(XName.Get("InStock"))
+                               .Value)
+                 - 1).ToString();
+
+            if (Int32.Parse(pc.Element(XName.Get("InStock"))
+                              .Value)
+                == 0)
+                products.Remove(pc);
 
             _document = ParseFromList(products);
             PrintProducts(_document);
@@ -152,11 +178,19 @@ namespace Lab_no18._2
 
         private void PrintProduct(XElement product)
         {
-            _provider.Out(product.Element(XName.Get("Name")).Value);
+            _provider.Out(product.Element(XName.Get("Name"))
+                                 .Value);
+
             _provider.Out("Характеристики: ");
-            var characteristics = product.Element(XName.Get("characteristics")).Elements();
-            foreach (var characteristic in characteristics) _provider.Out(characteristic.Value);
-            _provider.Out(product.Element(XName.Get("InStock")).Value);
+
+            var characteristics = product.Element(XName.Get("characteristics"))
+                                         .Elements();
+
+            foreach (var characteristic in characteristics)
+                _provider.Out(characteristic.Value);
+
+            _provider.Out(product.Element(XName.Get("InStock"))
+                                 .Value);
         }
 
         private void SearchByName()
@@ -164,7 +198,10 @@ namespace Lab_no18._2
             _provider.Out("Введите название: ");
             var name = _provider.In();
             var products = ParseToList(_document);
-            var pc = products.SingleOrDefault(x => x.Element(XName.Get("Name")).Value == name);
+
+            var pc = products.SingleOrDefault(x => x.Element(XName.Get("Name"))
+                                                    .Value
+                                                   == name);
 
             if (pc == null)
             {
@@ -198,8 +235,12 @@ namespace Lab_no18._2
 
         private void PrintProducts(XDocument document)
         {
-            var products = document.Element(XName.Get("shop")).Element(XName.Get("products")).Elements();
-            foreach (var pc in products) PrintProduct(pc);
+            var products = document.Element(XName.Get("shop"))
+                                   .Element(XName.Get("products"))
+                                   .Elements();
+
+            foreach (var pc in products)
+                PrintProduct(pc);
         }
     }
 }

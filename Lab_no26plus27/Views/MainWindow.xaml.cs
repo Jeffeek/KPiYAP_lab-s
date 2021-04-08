@@ -1,6 +1,5 @@
 ﻿#region Using namespaces
 
-using System.Windows;
 using MahApps.Metro.Controls;
 
 #endregion

@@ -10,9 +10,11 @@ namespace Labe_no9.Model
     {
         private Government _government;
 
-        public GovernmentBuilder() => _government = new Government();
+        public GovernmentBuilder() =>
+            _government = new Government();
 
-        public Government Build() => _government;
+        public Government Build() =>
+            _government;
 
         public GovernmentBuilder SetName(string name)
         {

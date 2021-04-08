@@ -32,11 +32,15 @@ namespace Labe_no11
             var complex2 = cbuilder.Build();
             Console.WriteLine($"Первое число: {complex1}");
             Console.WriteLine($"Второе число: {complex2}");
-            if (complex1.CompareTo(complex2) == 1) Console.WriteLine("Первое комплексное число больше!");
 
-            if (complex1.CompareTo(complex2) == -1) Console.WriteLine("Второе комплексное число больше!");
+            if (complex1.CompareTo(complex2) == 1)
+                Console.WriteLine("Первое комплексное число больше!");
 
-            if (complex1.CompareTo(complex2) == 0) Console.WriteLine("Комплексные числа равны!");
+            if (complex1.CompareTo(complex2) == -1)
+                Console.WriteLine("Второе комплексное число больше!");
+
+            if (complex1.CompareTo(complex2) == 0)
+                Console.WriteLine("Комплексные числа равны!");
         }
     }
 }

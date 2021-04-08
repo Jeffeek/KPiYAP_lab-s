@@ -11,8 +11,9 @@
     d:DesignWidth="800"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    <TabControl Style="{StaticResource MahApps.Styles.TabControl.Animated}">
-        <TabItem Header="Toys" Style="{StaticResource MahApps.Styles.TabItem}">
+    <mah:MetroTabControl Style="{StaticResource MahApps.Styles.TabControl.Animated}">
+        <mah:MetroTabItem
+            Header="Toys">
             <TabPanel Style="{StaticResource SharedTabPanel}">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -78,23 +79,28 @@
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                                 <TextBlock Text="Id: " />
-                                                <TextBlock Text="{Binding Entity.Id, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.Id, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                                 <TextBlock Text="Producer: " />
-                                                <TextBlock Text="{Binding Entity.Producer, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.Producer, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                                 <TextBlock Text="Price: " />
-                                                <TextBlock Text="{Binding Entity.Price, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.Price, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="3" Orientation="Horizontal">
                                                 <TextBlock Text="WarehouseCount: " />
-                                                <TextBlock Text="{Binding Entity.WarehouseCount, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.WarehouseCount, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="4" Orientation="Horizontal">
                                                 <TextBlock Text="CategoryId: " />
-                                                <TextBlock Text="{Binding Entity.CategoryId, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.CategoryId, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -191,12 +197,13 @@
                             Command="{Binding ToysContext.ApplyToyChangesCommand, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"
                             Content="{StaticResource ApplyButton}"
                             IsEnabled="{Binding ToysContext.IsEditMode}"
-                            Style="{StaticResource MahApps.Styles.Button.DropDown}" />
+                            Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" />
                     </Grid>
                 </Grid>
             </TabPanel>
-        </TabItem>
-        <TabItem Header="ToysCategories" Style="{StaticResource MahApps.Styles.TabItem}">
+        </mah:MetroTabItem>
+        <mah:MetroTabItem
+            Header="ToysCategories">
             <TabPanel Style="{StaticResource SharedTabPanel}">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -250,19 +257,23 @@
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                                 <TextBlock Text="Id: " />
-                                                <TextBlock Text="{Binding Entity.Id, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.Id, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                                 <TextBlock Text="Care Rules: " />
-                                                <TextBlock Text="{Binding Entity.CareRules, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.CareRules, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                                 <TextBlock Text="Warranty Period: " />
-                                                <TextBlock Text="{Binding Entity.WarrantyPeriod, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.WarrantyPeriod, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="3" Orientation="Horizontal">
                                                 <TextBlock Text="Age: " />
-                                                <TextBlock Text="{Binding Entity.Age, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.Age, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -333,12 +344,13 @@
                             Command="{Binding ToysCategoriesContext.ApplyToyCategoryChangesCommand, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
                             Content="{StaticResource ApplyButton}"
                             IsEnabled="{Binding ToysCategoriesContext.IsEditMode}"
-                            Style="{StaticResource MahApps.Styles.Button.DropDown}" />
+                            Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" />
                     </Grid>
                 </Grid>
             </TabPanel>
-        </TabItem>
-        <TabItem Header="Sales" Style="{StaticResource MahApps.Styles.TabItem}">
+        </mah:MetroTabItem>
+        <mah:MetroTabItem
+            Header="Sales">
             <TabPanel Style="{StaticResource SharedTabPanel}">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -394,27 +406,33 @@
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                                 <TextBlock Text="Id: " />
-                                                <TextBlock Text="{Binding Entity.Id, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.Id, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                                 <TextBlock Text="Discount: " />
-                                                <TextBlock Text="{Binding Entity.Discount, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.Discount, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                                 <TextBlock Text="Toy Id: " />
-                                                <TextBlock Text="{Binding Entity.ToyId, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.ToyId, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="3" Orientation="Horizontal">
                                                 <TextBlock Text="Sale Count: " />
-                                                <TextBlock Text="{Binding Entity.SaleCount, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.SaleCount, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="4" Orientation="Horizontal">
                                                 <TextBlock Text="Sale Date: " />
-                                                <TextBlock Text="{Binding Entity.SaleDate, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.SaleDate, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="5" Orientation="Horizontal">
                                                 <TextBlock Text="Sale Sum: " />
-                                                <TextBlock Text="{Binding Entity.SaleSum, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.SaleSum, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -502,12 +520,13 @@
                             Command="{Binding SalesContext.ApplySaleChangesCommand, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
                             Content="{StaticResource ApplyButton}"
                             IsEnabled="{Binding SalesContext.IsEditMode}"
-                            Style="{StaticResource MahApps.Styles.Button.DropDown}" />
+                            Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" />
                     </Grid>
                 </Grid>
             </TabPanel>
-        </TabItem>
-        <TabItem Header="Customers" Style="{StaticResource MahApps.Styles.TabItem}">
+        </mah:MetroTabItem>
+        <mah:MetroTabItem
+            Header="Customers">
             <TabPanel Style="{StaticResource SharedTabPanel}">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -572,15 +591,18 @@
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                                 <TextBlock Text="Id: " />
-                                                <TextBlock Text="{Binding Entity.Id, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.Id, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                                 <TextBlock Text="Full Name: " />
-                                                <TextBlock Text="{Binding Entity.FullName, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.FullName, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                                 <TextBlock Text="Phone Number: " />
-                                                <TextBlock Text="{Binding Entity.PhoneNumber, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.PhoneNumber, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -636,12 +658,13 @@
                             Command="{Binding CustomersContext.ApplyCustomerChangesCommand, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
                             Content="{StaticResource ApplyButton}"
                             IsEnabled="{Binding CustomersContext.IsEditMode}"
-                            Style="{StaticResource MahApps.Styles.Button.DropDown}" />
+                            Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" />
                     </Grid>
                 </Grid>
             </TabPanel>
-        </TabItem>
-        <TabItem Header="PreOrders" Style="{StaticResource MahApps.Styles.TabItem}">
+        </mah:MetroTabItem>
+        <mah:MetroTabItem
+            Header="PreOrders">
             <TabPanel Style="{StaticResource SharedTabPanel}">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -699,19 +722,23 @@
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                                 <TextBlock Text="Id: " />
-                                                <TextBlock Text="{Binding Entity.Id, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.Id, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                                 <TextBlock Text="Customer Id: " />
-                                                <TextBlock Text="{Binding Entity.CustomerId, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.CustomerId, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                                 <TextBlock Text="Toy Id: " />
-                                                <TextBlock Text="{Binding Entity.ToyId, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.ToyId, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="3" Orientation="Horizontal">
                                                 <TextBlock Text="Is Done: " />
-                                                <TextBlock Text="{Binding Entity.IsDone, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
+                                                <TextBlock
+                                                    Text="{Binding Entity.IsDone, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -783,10 +810,10 @@
                             Command="{Binding PreOrdersContext.ApplyPreOrderChangesCommand, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
                             Content="{StaticResource ApplyButton}"
                             IsEnabled="{Binding PreOrdersContext.IsEditMode}"
-                            Style="{StaticResource MahApps.Styles.Button.DropDown}" />
+                            Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" />
                     </Grid>
                 </Grid>
             </TabPanel>
-        </TabItem>
-    </TabControl>
+        </mah:MetroTabItem>
+    </mah:MetroTabControl>
 </Page>

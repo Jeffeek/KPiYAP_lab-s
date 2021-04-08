@@ -26,25 +26,35 @@ namespace Lab_no7
 
         public int X3 { get; }
 
-        public double Discriminant => Math.Pow(X2, 2) - 4 * X1 * X3;
+        public double Discriminant =>
+            Math.Pow(X2, 2) - 4 * X1 * X3;
 
         public static QuadraticEqualation ParseEqualation(string eq)
         {
             var matches = pattern.Match(eq);
 
-            if (matches.Length == 0) throw new ArgumentException("Not a valid pattern " + eq);
-            var a = Int32.Parse(matches.Groups[1].ToString());
-            var b = Int32.Parse(matches.Groups[2].ToString());
-            var c = Int32.Parse(matches.Groups[3].ToString());
+            if (matches.Length == 0)
+                throw new ArgumentException("Not a valid pattern " + eq);
+
+            var a = Int32.Parse(matches.Groups[1]
+                                       .ToString());
+
+            var b = Int32.Parse(matches.Groups[2]
+                                       .ToString());
+
+            var c = Int32.Parse(matches.Groups[3]
+                                       .ToString());
 
             return new QuadraticEqualation(a, b, c);
         }
 
         public (double, double) Roots()
         {
-            if (Discriminant < 0) throw new Exception("D < 0");
+            if (Discriminant < 0)
+                throw new Exception("D < 0");
 
-            if (Discriminant == 0.0) return (-X2 / 2.0 * X1, -X2 / 2.0 * X1);
+            if (Discriminant == 0.0)
+                return (-X2 / 2.0 * X1, -X2 / 2.0 * X1);
 
             var DRoot = Math.Sqrt(Discriminant);
 
@@ -55,6 +65,7 @@ namespace Lab_no7
         public override string ToString()
         {
             var sb = new StringBuilder("QuadraticEqualation{");
+
             sb.Append($"a={X1}, b={X2}, c={X3}")
               .Append("}")
               .Append($"\nD: {Discriminant}\nRoots: {Roots().Item1}, {Roots().Item2}");

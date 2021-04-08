@@ -14,7 +14,8 @@ namespace Lab_no14
                     double abilityPossibility,
                     IAbility ability,
                     int minPunch,
-                    int maxPunch)
+                    int maxPunch
+            )
         {
             Life = life;
             AbilityPossibility = abilityPossibility;
@@ -29,7 +30,9 @@ namespace Lab_no14
             set
             {
                 _life = value;
-                if (_life <= 0) HeroDied?.Invoke(this, EventArgs.Empty);
+
+                if (_life <= 0)
+                    HeroDied?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -46,7 +49,10 @@ namespace Lab_no14
             var rnd = new Random();
             var punchStrength = rnd.Next(MinPunch, MaxPunch + 1);
             var ability = rnd.NextDouble();
-            if (ability <= AbilityPossibility) AbilityUsed?.Invoke(this, Ability);
+
+            if (ability <= AbilityPossibility)
+                AbilityUsed?.Invoke(this, Ability);
+
             IPunch punch = new Punch(punchStrength, this, to);
             HeroPunched?.Invoke(this, punch);
 

@@ -19,14 +19,17 @@ namespace lab_no6.TableMatrixModels
         private double[] MatrixToColumn(double[,] matrix, int columnIndex)
         {
             var vector = new double[matrix.GetLength(0)];
-            for (var i = 0; i < matrix.GetLength(0); i++) vector[i] = matrix[i, columnIndex];
+
+            for (var i = 0; i < matrix.GetLength(0); i++)
+                vector[i] = matrix[i, columnIndex];
 
             return vector;
         }
 
         private void FillColumns(double[,] matrix)
         {
-            for (var i = 0; i < matrix.GetLength(1); i++) Columns.Add(new Column(MatrixToColumn(matrix, i)));
+            for (var i = 0; i < matrix.GetLength(1); i++)
+                Columns.Add(new Column(MatrixToColumn(matrix, i)));
         }
 
         public override string ToString()
@@ -35,7 +38,9 @@ namespace lab_no6.TableMatrixModels
 
             for (var i = 0; i < Columns.Count; i++)
             {
-                str += Columns[i].ToString();
+                str += Columns[i]
+                    .ToString();
+
                 str += "\n";
             }
 

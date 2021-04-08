@@ -38,7 +38,9 @@ namespace Lab_no15._2
             get => _money;
             private set
             {
-                if (!IsGameOn) return;
+                if (!IsGameOn)
+                    return;
+
                 var addOrRemove = _money < value;
                 _money = value;
 
@@ -47,7 +49,8 @@ namespace Lab_no15._2
                 else
                     MoneySpend?.Invoke(this, EventArgs.Empty);
 
-                if (value < 0) LostGame?.Invoke(this, EventArgs.Empty);
+                if (value < 0)
+                    LostGame?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -56,7 +59,9 @@ namespace Lab_no15._2
             get => _peasantsCount;
             private set
             {
-                if (!IsGameOn) return;
+                if (!IsGameOn)
+                    return;
+
                 var addOrRemove = _peasantsCount < value;
                 _peasantsCount = value;
 
@@ -65,7 +70,8 @@ namespace Lab_no15._2
                 else
                     PeasantRemoved?.Invoke(this, EventArgs.Empty);
 
-                if (value == Settings.PeasantsTargetCount) WinGame?.Invoke(this, EventArgs.Empty);
+                if (value == Settings.PeasantsTargetCount)
+                    WinGame?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -92,7 +98,9 @@ namespace Lab_no15._2
         {
             while (actions.Any())
             {
-                if (!IsGameOn) break;
+                if (!IsGameOn)
+                    break;
+
                 var action = actions.Dequeue();
 
                 switch (action)
@@ -129,10 +137,14 @@ namespace Lab_no15._2
 
         private void TryToGeneratePeasant()
         {
-            if (PeasantsCount == Settings.MaxPeasantCount) return;
+            if (PeasantsCount == Settings.MaxPeasantCount)
+                return;
+
             var random = new Random();
             var randomNumber = random.NextDouble();
-            if (randomNumber <= Settings.PeasantSpawnChance) PeasantsCount++;
+
+            if (randomNumber <= Settings.PeasantSpawnChance)
+                PeasantsCount++;
         }
 
         private void ReloadGame(object sender, EventArgs args)

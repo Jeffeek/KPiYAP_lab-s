@@ -18,14 +18,21 @@ namespace Additinal_after5.Models
 
         public int CompareTo(Student other)
         {
-            if (ReferenceEquals(this, other)) return 0;
-            if (ReferenceEquals(null, other)) return 1;
+            if (ReferenceEquals(this, other))
+                return 0;
+
+            if (ReferenceEquals(null, other))
+                return 1;
+
             var surnameComparison = String.Compare(Surname, other.Surname, StringComparison.Ordinal);
 
-            if (surnameComparison != 0) return surnameComparison;
+            if (surnameComparison != 0)
+                return surnameComparison;
+
             var nameComparison = String.Compare(Name, other.Name, StringComparison.Ordinal);
 
-            if (nameComparison != 0) return nameComparison;
+            if (nameComparison != 0)
+                return nameComparison;
 
             return String.Compare(GroupName, other.GroupName, StringComparison.Ordinal);
         }

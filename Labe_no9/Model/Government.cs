@@ -15,7 +15,8 @@ namespace Labe_no9.Model
                           string name,
                           string capital,
                           long population,
-                          long area)
+                          long area
+            )
         {
             Type = type;
             Name = name;

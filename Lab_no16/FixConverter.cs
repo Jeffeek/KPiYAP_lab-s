@@ -27,8 +27,7 @@ namespace Lab_no16
                 case '/':
                     return 2;
 
-                case '^':
-                    return 3;
+                case '^': return 3;
             }
 
             return 0;
@@ -39,6 +38,7 @@ namespace Lab_no16
             var s = new Stack<string>();
 
             foreach (var c in postfix)
+            {
                 if (_operators.Contains(c))
                 {
                     var b = s.Pop();
@@ -49,6 +49,7 @@ namespace Lab_no16
                 {
                     s.Push(c.ToString());
                 }
+            }
 
             return s.Pop();
         }
@@ -60,6 +61,7 @@ namespace Lab_no16
             var stack = new Stack<char>();
 
             foreach (var c in infix)
+            {
                 if (Char.IsLetterOrDigit(c))
                 {
                     result += c;
@@ -90,8 +92,10 @@ namespace Lab_no16
 
                     stack.Push(c);
                 }
+            }
 
-            while (stack.Count > 0) result += stack.Pop();
+            while (stack.Count > 0)
+                result += stack.Pop();
 
             return result;
         }
@@ -124,9 +128,11 @@ namespace Lab_no16
 
         public static string InfixToPrefix(string infix)
         {
-            var reversedArray = infix.Reverse().ToArray();
+            var reversedArray = infix.Reverse()
+                                     .ToArray();
 
             for (var i = 0; i < infix.Length; i++)
+            {
                 if (reversedArray[i] == '(')
                 {
                     reversedArray[i] = ')';
@@ -137,6 +143,7 @@ namespace Lab_no16
                     reversedArray[i] = '(';
                     i++;
                 }
+            }
 
             var prefix = InfixToPostfix(String.Concat(reversedArray));
             var result = String.Concat(prefix.Reverse());

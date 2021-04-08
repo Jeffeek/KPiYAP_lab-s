@@ -23,7 +23,8 @@ namespace Labe_no13
 
         public int RowsCount { get; }
 
-        public bool IsSquare => RowsCount == ColumnsCount;
+        public bool IsSquare =>
+            RowsCount == ColumnsCount;
 
         public double this[int row, int column]
         {
@@ -33,8 +34,11 @@ namespace Labe_no13
 
         public bool Equals(Matrix other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if (ReferenceEquals(null, other))
+                return false;
+
+            if (ReferenceEquals(this, other))
+                return true;
 
             return Equals(_innerMatrix, other._innerMatrix)
                    && ColumnsCount == other.ColumnsCount
@@ -43,7 +47,8 @@ namespace Labe_no13
 
         private void FillColumns()
         {
-            for (var i = 0; i < RowsCount; i++) _innerMatrix[i] = new double[ColumnsCount];
+            for (var i = 0; i < RowsCount; i++)
+                _innerMatrix[i] = new double[ColumnsCount];
         }
 
         public string GetAsString()
@@ -52,29 +57,41 @@ namespace Labe_no13
 
             for (var i = 0; i < RowsCount; i++)
             {
-                for (var j = 0; j < ColumnsCount; j++) sb.Append($"{this[i, j]} | ");
+                for (var j = 0; j < ColumnsCount; j++)
+                    sb.Append($"{this[i, j]} | ");
+
                 sb.AppendLine();
             }
 
             return sb.ToString();
         }
 
-        public override string ToString() => GetAsString();
+        public override string ToString() =>
+            GetAsString();
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
+            if (ReferenceEquals(null, obj))
+                return false;
+
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (obj.GetType() != GetType())
+                return false;
 
             return Equals((Matrix)obj);
         }
 
         public double DiagonalSum()
         {
-            if (!IsSquare) return default;
+            if (!IsSquare)
+                return default;
+
             var sum = 0.0;
-            for (var i = 0; i < RowsCount; i++) sum += this[i, i];
+
+            for (var i = 0; i < RowsCount; i++)
+                sum += this[i, i];
 
             return Math.Round(sum, 2);
         }
@@ -85,7 +102,8 @@ namespace Labe_no13
 
             for (var i = 0; i < RowsCount; i++)
             {
-                for (var j = 0; j < ColumnsCount; j++) sum += this[i, j];
+                for (var j = 0; j < ColumnsCount; j++)
+                    sum += this[i, j];
             }
 
             return Math.Round(sum / (RowsCount * ColumnsCount), 2);
@@ -113,8 +131,10 @@ namespace Labe_no13
         private bool IsMaxInCol(int i, int j)
         {
             for (var k = 0; k < RowsCount; k++)
+            {
                 if (this[k, j] > this[i, j])
                     return false;
+            }
 
             return true;
         }
@@ -122,8 +142,10 @@ namespace Labe_no13
         private bool IsMinInRow(int i, int j)
         {
             for (var k = 0; k < ColumnsCount; k++)
+            {
                 if (this[i, k] < this[i, j])
                     return false;
+            }
 
             return true;
         }
@@ -134,7 +156,8 @@ namespace Labe_no13
 
             for (var i = 0; i < RowsCount; i++)
             {
-                for (var j = 0; j < ColumnsCount; j++) this[i, j] = min + (max - min) * rnd.NextDouble();
+                for (var j = 0; j < ColumnsCount; j++)
+                    this[i, j] = min + (max - min) * rnd.NextDouble();
             }
         }
     }

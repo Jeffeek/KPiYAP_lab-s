@@ -55,15 +55,27 @@ namespace Lab_no4.Models
 
             var points = new[]
                          {
-                             Point_1, Point_2, Point_3, Point_4, Point_5, Point_6, Point_7, Point_8, Point_9, Point_10
+                             Point_1,
+                             Point_2,
+                             Point_3,
+                             Point_4,
+                             Point_5,
+                             Point_6,
+                             Point_7,
+                             Point_8,
+                             Point_9,
+                             Point_10
                          };
 
             allPoints = points;
 
             for (var i = 0; i < 10; i++)
             {
-                allPoints[i].X = rnd.Next(-20, 20);
-                allPoints[i].Y = rnd.Next(-25, 25);
+                allPoints[i]
+                    .X = rnd.Next(-20, 20);
+
+                allPoints[i]
+                    .Y = rnd.Next(-25, 25);
             }
         }
 

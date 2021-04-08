@@ -1,12 +1,13 @@
-﻿using System;
+﻿#region Using namespaces
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Lab_no25.Model;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces.EntityServices;
 using Microsoft.EntityFrameworkCore;
+
+#endregion
 
 namespace Lab_no25.Services.Implementations
 {
@@ -14,7 +15,8 @@ namespace Lab_no25.Services.Implementations
     {
         private readonly ToyStoreDbContext _context;
 
-        public CustomersService(ToyStoreDbContext context) => _context = context;
+        public CustomersService(ToyStoreDbContext context) =>
+            _context = context;
 
         public async Task<bool> AddCustomerAsync(CustomerEntity customer)
         {
@@ -34,12 +36,15 @@ namespace Lab_no25.Services.Implementations
         public async Task<bool> UpdateCustomerAsync(CustomerEntity customer)
         {
             _context.Attach(customer);
-            _context.Entry(customer).State = EntityState.Modified;
+
+            _context.Entry(customer)
+                    .State = EntityState.Modified;
 
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<CustomerEntity> GetByIdAsync(int id) => await _context.Customers.FindAsync(id);
+        public async Task<CustomerEntity> GetByIdAsync(int id) =>
+            await _context.Customers.FindAsync(id);
 
         public async Task<IEnumerable<CustomerEntity>> GetAllCustomersAsync() =>
             await _context.Customers

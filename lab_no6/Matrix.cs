@@ -54,7 +54,8 @@ namespace lab_no6
 
             for (var i = 0; i < RowsCount; i++)
             {
-                for (var j = 0; j < ColumnsCount; j++) this[i, j] = rnd.Next(-100, 100);
+                for (var j = 0; j < ColumnsCount; j++)
+                    this[i, j] = rnd.Next(-100, 100);
             }
         }
 
@@ -65,7 +66,9 @@ namespace lab_no6
             for (var i = 0; i < RowsCount; i++)
             {
                 result += "\n";
-                for (var j = 0; j < ColumnsCount; j++) result += $"{this[i, j]} | ";
+
+                for (var j = 0; j < ColumnsCount; j++)
+                    result += $"{this[i, j]} | ";
             }
 
             return result;
@@ -85,7 +88,8 @@ namespace lab_no6
                 {
                     matrixC[i, j] = 0.0;
 
-                    for (var k = 0; k < matrixA.ColumnsCount; k++) matrixC[i, j] += matrixA[i, k] * matrixB[k, j];
+                    for (var k = 0; k < matrixA.ColumnsCount; k++)
+                        matrixC[i, j] += matrixA[i, k] * matrixB[k, j];
                 }
             }
 
@@ -95,6 +99,7 @@ namespace lab_no6
         public static Matrix MulVector(Matrix matrix, double[] vector) =>
             MatrixMultiplication(matrix, MatrixConvertor.VectorToMatrix(vector));
 
-        public override string ToString() => GetMatrixAsString();
+        public override string ToString() =>
+            GetMatrixAsString();
     }
 }

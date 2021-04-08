@@ -17,7 +17,8 @@ namespace Lab_no19
         {
             _filePath = path ?? throw new ArgumentNullException(nameof(path));
 
-            if (!File.Exists(_filePath)) throw new FileNotFoundException(nameof(path));
+            if (!File.Exists(_filePath))
+                throw new FileNotFoundException(nameof(path));
         }
 
         public void Write(string text)
@@ -32,7 +33,8 @@ namespace Lab_no19
             }
             finally
             {
-                if (isLockRequired) Monitor.Exit(_syncObject);
+                if (isLockRequired)
+                    Monitor.Exit(_syncObject);
             }
         }
 
@@ -49,7 +51,8 @@ namespace Lab_no19
             }
             finally
             {
-                if (isLockRequired) Monitor.Exit(_syncObject);
+                if (isLockRequired)
+                    Monitor.Exit(_syncObject);
             }
         }
     }

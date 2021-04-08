@@ -1,6 +1,7 @@
 ﻿#region Using namespaces
 
 using Lab_no25.Services.Interfaces.EntityServices;
+using Lab_no26plus27.Model.SalesStatisticsPrinter;
 using Lab_no26plus27.ViewModels.TabsViewModels;
 using Prism.Mvvm;
 
@@ -18,10 +19,12 @@ namespace Lab_no26plus27.ViewModels.PagesViewModels
         public ManagerPageViewModel(IToysService toysService,
                                     ISalesService salesService,
                                     ICustomersService customersService,
-                                    IPreOrdersService preOrdersService)
+                                    IPreOrdersService preOrdersService,
+                                    ISalesStatisticsPrinter printer
+            )
         {
             ToysContext = new ToysTabViewModel(toysService);
-            SalesContext = new SalesTabViewModel(salesService);
+            SalesContext = new SalesTabViewModel(salesService, printer);
             CustomersContext = new CustomersTabViewModel(customersService);
             PreOrdersContext = new PreOrdersTabViewModel(preOrdersService);
         }

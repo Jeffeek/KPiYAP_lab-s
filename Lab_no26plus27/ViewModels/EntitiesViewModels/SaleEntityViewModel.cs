@@ -11,7 +11,8 @@ namespace Lab_no26plus27.ViewModels.EntitiesViewModels
     {
         private SaleEntity _saleEntity;
 
-        public SaleEntityViewModel(SaleEntity entity) => Entity = entity;
+        public SaleEntityViewModel(SaleEntity entity) =>
+            Entity = entity;
 
         public SaleEntity Entity
         {

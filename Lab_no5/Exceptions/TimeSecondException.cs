@@ -2,6 +2,7 @@
 {
     internal class TimeSecondException : TimeException
     {
-        public override string Message => base.Message + " Вы ввели недопустимое значение для переменной Секунды.";
+        public override string Message =>
+            base.Message + " Вы ввели недопустимое значение для переменной Секунды.";
     }
 }

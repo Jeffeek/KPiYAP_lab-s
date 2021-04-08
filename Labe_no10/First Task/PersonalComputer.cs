@@ -11,12 +11,21 @@ namespace Labe_no10.First_Task
         public PersonalComputer(int clockSpeed,
                                 int coresCount,
                                 int ram,
-                                int hardDriveCapacity)
+                                int hardDriveCapacity
+            )
         {
-            if (clockSpeed <= 300) throw new ArgumentException(nameof(clockSpeed));
-            if (coresCount <= 1) throw new ArgumentException(nameof(coresCount));
-            if (ram <= 512) throw new ArgumentException(nameof(ram));
-            if (hardDriveCapacity < 60) throw new ArgumentException(nameof(hardDriveCapacity));
+            if (clockSpeed <= 300)
+                throw new ArgumentException(nameof(clockSpeed));
+
+            if (coresCount <= 1)
+                throw new ArgumentException(nameof(coresCount));
+
+            if (ram <= 512)
+                throw new ArgumentException(nameof(ram));
+
+            if (hardDriveCapacity < 60)
+                throw new ArgumentException(nameof(hardDriveCapacity));
+
             ClockSpeed = clockSpeed;
             CoresCount = coresCount;
             RAM = ram;

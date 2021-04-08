@@ -3,7 +3,6 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces.EntityServices;
 using Lab_no26plus27.Model.AsyncCommand;
@@ -31,7 +30,9 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         {
             _toysCategoriesService = toysCategoriesService;
             ToysCategories = new ObservableCollection<ToyCategoryEntityViewModel>();
-            ReloadToysCategoriesAsync().Wait();
+
+            ReloadToysCategoriesAsync()
+                .Wait();
         }
 
         public DelegateCommand AddToyCategoryCommand =>
@@ -75,9 +76,11 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             set => SetProperty(ref _isEditMode, value);
         }
 
-        private bool CanManipulateOnToyCategory() => SelectedToyCategory is not null;
+        private bool CanManipulateOnToyCategory() =>
+            SelectedToyCategory is not null;
 
-        private void OnChangeEditModeCommandExecuted() => IsEditMode = !IsEditMode;
+        private void OnChangeEditModeCommandExecuted() =>
+            IsEditMode = !IsEditMode;
 
         private void OnAddToyCategoryCommandExecuted()
         {
@@ -88,12 +91,15 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
                                                                      CareRules = "",
                                                                      WarrantyPeriod = 0
                                                                  }));
+
             SelectedToyCategory = ToysCategories.First();
         }
 
         private async Task OnRemoveToyCategoryCommandExecuted()
         {
-            if (SelectedToyCategory.Entity.Id == 0) ToysCategories.Remove(SelectedToyCategory);
+            if (SelectedToyCategory.Entity.Id == 0)
+                ToysCategories.Remove(SelectedToyCategory);
+
             await _toysCategoriesService.RemoveToyCategoryAsync(SelectedToyCategory.Entity);
             ToysCategories.Remove(SelectedToyCategory);
             SelectedToyCategory = null;
@@ -105,6 +111,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
                 await _toysCategoriesService.AddToyCategoryAsync(SelectedToyCategory.Entity);
             else
                 await _toysCategoriesService.UpdateToyCategoryAsync(SelectedToyCategory.Entity);
+
             await ReloadToysCategoriesAsync();
         }
 
@@ -112,7 +119,9 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         {
             var dbToysCategories = await _toysCategoriesService.GetAllToysCategoriesAsync();
             ToysCategories.Clear();
-            foreach (var toyCategory in dbToysCategories) ToysCategories.Add(new ToyCategoryEntityViewModel(toyCategory));
+
+            foreach (var toyCategory in dbToysCategories)
+                ToysCategories.Add(new ToyCategoryEntityViewModel(toyCategory));
         }
     }
 }

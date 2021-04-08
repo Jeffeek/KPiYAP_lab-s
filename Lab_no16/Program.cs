@@ -20,7 +20,9 @@ namespace Lab_no16
         {
             var M = new List<string>();
 
-            while (Console.ReadKey().Key != ConsoleKey.Spacebar)
+            while (Console.ReadKey()
+                          .Key
+                   != ConsoleKey.Spacebar)
             {
                 Console.WriteLine("Введите значение: ");
                 var value = Console.ReadLine();
@@ -29,7 +31,10 @@ namespace Lab_no16
             }
 
             Console.WriteLine($"M : {String.Join(" ", M)}");
-            var M2 = M.AsEnumerable().Reverse();
+
+            var M2 = M.AsEnumerable()
+                      .Reverse();
+
             Console.WriteLine($"M2 : {String.Join(" ", M2)}");
             var M1 = M.Concat(M2);
             Console.WriteLine($"M1 : {String.Join(" ", M1)}");

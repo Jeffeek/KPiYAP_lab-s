@@ -5,13 +5,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
-using System.Xml.Linq;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces.EntityServices;
 using Lab_no26plus27.Model.AsyncCommand;
 using Lab_no26plus27.ViewModels.EntitiesViewModels;
-using MahApps.Metro.Controls.Dialogs;
 using Prism.Commands;
 using Prism.Mvvm;
 
@@ -21,6 +18,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 {
     public class PreOrdersTabViewModel : BindableBase
     {
+        public EventHandler<PreOrderEntityViewModel> FoundToyForPreOrder;
         private readonly IPreOrdersService _preOrdersService;
         private bool _isEditMode;
         private ObservableCollection<PreOrderEntityViewModel> _preOrders;
@@ -32,13 +30,13 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         private AsyncRelayCommand _reloadPreOrdersCommand;
         private AsyncRelayCommand _checkPreOrdersCommand;
 
-        public EventHandler<PreOrderEntityViewModel> FoundToyForPreOrder;
-
         public PreOrdersTabViewModel(IPreOrdersService preOrdersService)
         {
             _preOrdersService = preOrdersService;
             PreOrders = new ObservableCollection<PreOrderEntityViewModel>();
-            ReloadToysAsync().Wait();
+
+            ReloadToysAsync()
+                .Wait();
         }
 
         public DelegateCommand AddPreOrderCommand =>
@@ -59,7 +57,8 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         public AsyncRelayCommand ReloadPreOrdersCommand =>
             _reloadPreOrdersCommand ??= new AsyncRelayCommand(ReloadToysAsync);
 
-        public AsyncRelayCommand CheckPreOrdersCommand => _checkPreOrdersCommand ??= new AsyncRelayCommand(OnCheckPreOrdersExecuted);
+        public AsyncRelayCommand CheckPreOrdersCommand =>
+            _checkPreOrdersCommand ??= new AsyncRelayCommand(OnCheckPreOrdersExecuted);
 
         public ObservableCollection<PreOrderEntityViewModel> PreOrders
         {
@@ -83,9 +82,11 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             set => SetProperty(ref _isEditMode, value);
         }
 
-        private bool CanManipulateOnPreOrder() => SelectedPreOrder is not null;
+        private bool CanManipulateOnPreOrder() =>
+            SelectedPreOrder is not null;
 
-        private void OnChangeEditModeCommandExecuted() => IsEditMode = !IsEditMode;
+        private void OnChangeEditModeCommandExecuted() =>
+            IsEditMode = !IsEditMode;
 
         private void OnAddToyCommandExecuted()
         {
@@ -94,12 +95,15 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
                                                          {
                                                              PreOrderDate = DateTime.Now
                                                          }));
+
             SelectedPreOrder = PreOrders.First();
         }
 
         private async Task OnRemoveToyCommandExecuted()
         {
-            if (SelectedPreOrder.Entity.Id == 0) PreOrders.Remove(SelectedPreOrder);
+            if (SelectedPreOrder.Entity.Id == 0)
+                PreOrders.Remove(SelectedPreOrder);
+
             await _preOrdersService.RemovePreOrderAsync(SelectedPreOrder.Entity);
             PreOrders.Remove(SelectedPreOrder);
             SelectedPreOrder = null;
@@ -111,6 +115,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
                 await _preOrdersService.AddPreOrderAsync(SelectedPreOrder.Entity);
             else
                 await _preOrdersService.UpdatePreOrderAsync(SelectedPreOrder.Entity);
+
             await ReloadToysAsync();
         }
 
@@ -118,23 +123,24 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         {
             var preOrders = await _preOrdersService.GetAllPreOrdersAsync();
             PreOrders.Clear();
-            foreach (var preOrder in preOrders) PreOrders.Add(new PreOrderEntityViewModel(preOrder));
+
+            foreach (var preOrder in preOrders)
+                PreOrders.Add(new PreOrderEntityViewModel(preOrder));
         }
 
         private async Task OnCheckPreOrdersExecuted()
         {
             var toysForPreOrder = await _preOrdersService.GetAllPreOrdersAsync();
             var notClosedPreOrders = toysForPreOrder.Where(x => !x.IsDone);
+
             foreach (var order in notClosedPreOrders)
             {
                 if (order.Toy.WarehouseCount > 0)
-                {
                     MessageBox.Show($"Found toy for PreOrder Id: {order.Id}{Environment.NewLine}Customer: Name: {order.Customer.FullName}, Phone: {order.Customer.PhoneNumber}.",
                                     "Found toy for PreOrder",
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Information,
                                     MessageBoxResult.OK);
-                }
             }
         }
     }

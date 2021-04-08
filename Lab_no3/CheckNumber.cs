@@ -93,11 +93,13 @@ namespace Lab_no3
             return false;
         }
 
-        private void WriteNum(string num) => Console.WriteLine(num);
+        private void WriteNum(string num) =>
+            Console.WriteLine(num);
 
         public (bool, int) CheckInt()
         {
-            if (Int32.TryParse(Console.ReadLine(), out var x)) return (true, x);
+            if (Int32.TryParse(Console.ReadLine(), out var x))
+                return (true, x);
 
             return (false, Int32.MaxValue);
         }

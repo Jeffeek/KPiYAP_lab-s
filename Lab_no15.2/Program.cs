@@ -36,7 +36,10 @@ namespace Lab_no15._2
                 Console.WriteLine("5. Провести пати-хард");
                 Console.WriteLine("6. Закончить действия на этот шаг");
                 int input;
-                while (!Int32.TryParse(Console.ReadLine()?.Trim(), out input))
+
+                while (!Int32.TryParse(Console.ReadLine()
+                                              ?.Trim(),
+                                       out input))
                     Console.WriteLine("Введи ещё раз, чукча");
 
                 switch (input)
@@ -82,12 +85,15 @@ namespace Lab_no15._2
             {
                 var actions = GetActionsAtStep();
 
-                if (actions.Count == 0) continue;
+                if (actions.Count == 0)
+                    continue;
+
                 gameObject.MakeStep(actions);
                 SaveGame(gameObject);
             }
 
-            Process.GetCurrentProcess().CloseMainWindow();
+            Process.GetCurrentProcess()
+                   .CloseMainWindow();
         }
 
         private static FeudalGameEngine LoadOrNew()
@@ -100,8 +106,10 @@ namespace Lab_no15._2
                 case 1:
                 {
                     var serializer = new DataContractJsonSerializer(typeof(DTOGameSave));
+
                     using var fileStream =
                         new FileStream($"{Directory.GetCurrentDirectory()}\\save.json", FileMode.Open);
+
                     var dto = serializer.ReadObject(fileStream) as DTOGameSave;
 
                     return new FeudalGameEngine(dto);
@@ -117,8 +125,7 @@ namespace Lab_no15._2
                     return new FeudalGameEngine(targetCount, startCount);
                 }
 
-                default:
-                    throw new ArgumentException(nameof(answer));
+                default: throw new ArgumentException(nameof(answer));
             }
         }
 

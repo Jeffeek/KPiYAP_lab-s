@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces.EntityServices;
 using Lab_no26plus27.Model.AsyncCommand;
@@ -20,9 +19,9 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
     public class ToysTabViewModel : BindableBase
     {
         private readonly IToysService _toysService;
+        private readonly List<ToyEntityViewModel> _internalList;
         private bool _isEditMode;
         private ToyEntityViewModel _selectedToy;
-        private readonly List<ToyEntityViewModel> _internalList;
         private ObservableCollection<ToyEntityViewModel> _toys;
 
         private DelegateCommand _searchCommand;
@@ -38,34 +37,10 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             _toysService = toysService;
             Toys = new ObservableCollection<ToyEntityViewModel>();
             _internalList = new List<ToyEntityViewModel>();
-            ReloadToysAsync().Wait();
+
+            ReloadToysAsync()
+                .Wait();
         }
-
-        #region Commands
-
-        public DelegateCommand AddToyCommand =>
-            _addToyCommand ??= new DelegateCommand(OnAddToyCommandExecuted);
-
-        public DelegateCommand ChangeEditModeCommand =>
-            _changeEditModeCommand ??= new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnToy)
-                .ObservesProperty(() => SelectedToy);
-
-        public DelegateCommand SearchCommand =>
-            _searchCommand ??=
-                new DelegateCommand(OnSearchCommandExecuted, () => SearchText.Length != 0)
-                    .ObservesProperty(() => SearchText);
-
-        public AsyncRelayCommand RemoveToyCommand =>
-            _removeToyCommand ??= new AsyncRelayCommand(OnRemoveToyCommandExecuted,
-                                                        CanManipulateOnToy);
-
-        public AsyncRelayCommand ApplyToyChangesCommand =>
-            _applyToyChangesCommand ??= new AsyncRelayCommand(OnApplyToyChangesCommandExecuted);
-
-        public AsyncRelayCommand ReloadToysCommand =>
-            _reloadToysCommand ??= new AsyncRelayCommand(ReloadToysAsync);
-
-        #endregion
 
         public ObservableCollection<ToyEntityViewModel> Toys
         {
@@ -96,26 +71,32 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             {
                 _searchText = value;
 
-                if (value != String.Empty) return;
+                if (value != String.Empty)
+                    return;
 
                 Toys.Clear();
                 Toys.AddRange(_internalList);
             }
         }
 
-        private bool CanManipulateOnToy() => SelectedToy is not null;
+        private bool CanManipulateOnToy() =>
+            SelectedToy is not null;
 
-        private void OnChangeEditModeCommandExecuted() => IsEditMode = !IsEditMode;
+        private void OnChangeEditModeCommandExecuted() =>
+            IsEditMode = !IsEditMode;
 
         private void OnSearchCommandExecuted()
         {
             ToyEntityViewModel[] filteredToys;
+
             if (Int32.TryParse(SearchText, out var number))
             {
                 filteredToys =
-                    _internalList.Where(x => x.Entity.Id == number || x.Entity.CategoryId == number).ToArray();
+                    _internalList.Where(x => x.Entity.Id == number || x.Entity.CategoryId == number)
+                                 .ToArray();
 
-                if (filteredToys.Length == 0) return;
+                if (filteredToys.Length == 0)
+                    return;
 
                 Toys.Clear();
                 Toys.AddRange(filteredToys);
@@ -123,7 +104,9 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
                 return;
             }
 
-            filteredToys = Toys.Where(x => x.Entity.Producer.Contains(SearchText)).ToArray();
+            filteredToys = Toys.Where(x => x.Entity.Producer.Contains(SearchText))
+                               .ToArray();
+
             Toys.Clear();
             Toys.AddRange(filteredToys);
         }
@@ -144,7 +127,9 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
 
         private async Task OnRemoveToyCommandExecuted()
         {
-            if (SelectedToy.Entity.Id == 0) Toys.Remove(SelectedToy);
+            if (SelectedToy.Entity.Id == 0)
+                Toys.Remove(SelectedToy);
+
             await _toysService.RemoveToyAsync(SelectedToy.Entity);
             Toys.Remove(SelectedToy);
             SelectedToy = null;
@@ -165,10 +150,37 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
             var dbToys = await _toysService.GetAllToysAsync();
             Toys.Clear();
             _internalList.Clear();
+
             foreach (var toy in dbToys)
                 _internalList.Add(new ToyEntityViewModel(toy));
 
             Toys.AddRange(_internalList);
         }
+
+        #region Commands
+
+        public DelegateCommand AddToyCommand =>
+            _addToyCommand ??= new DelegateCommand(OnAddToyCommandExecuted);
+
+        public DelegateCommand ChangeEditModeCommand =>
+            _changeEditModeCommand ??= new DelegateCommand(OnChangeEditModeCommandExecuted, CanManipulateOnToy)
+                .ObservesProperty(() => SelectedToy);
+
+        public DelegateCommand SearchCommand =>
+            _searchCommand ??=
+                new DelegateCommand(OnSearchCommandExecuted, () => SearchText.Length != 0)
+                    .ObservesProperty(() => SearchText);
+
+        public AsyncRelayCommand RemoveToyCommand =>
+            _removeToyCommand ??= new AsyncRelayCommand(OnRemoveToyCommandExecuted,
+                                                        CanManipulateOnToy);
+
+        public AsyncRelayCommand ApplyToyChangesCommand =>
+            _applyToyChangesCommand ??= new AsyncRelayCommand(OnApplyToyChangesCommandExecuted);
+
+        public AsyncRelayCommand ReloadToysCommand =>
+            _reloadToysCommand ??= new AsyncRelayCommand(ReloadToysAsync);
+
+        #endregion
     }
 }

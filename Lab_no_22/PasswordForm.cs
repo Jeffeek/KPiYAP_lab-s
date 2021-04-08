@@ -19,7 +19,8 @@ namespace Lab_no_22
 
         private void buttonApplyPassword_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "superpassword") return;
+            if (textBox1.Text != "superpassword")
+                return;
 
             _checkPassword();
             Close();

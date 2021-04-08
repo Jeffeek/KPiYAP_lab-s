@@ -2,6 +2,7 @@
 {
     public static class MathBicycle
     {
-        public static double Abs(double num) => num < 0 ? -num : num;
+        public static double Abs(double num) =>
+            num < 0 ? -num : num;
     }
 }

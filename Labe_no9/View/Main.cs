@@ -41,7 +41,12 @@ namespace Labe_no9.View
                         var population = GetPopulation();
                         var area = GetArea();
                         var type = GetType();
-                        _worker.AddGovernment(type, name, capital, population, area);
+
+                        _worker.AddGovernment(type,
+                                              name,
+                                              capital,
+                                              population,
+                                              area);
 
                         break;
                     }
@@ -57,7 +62,10 @@ namespace Labe_no9.View
                     case 3:
                     {
                         var name = GetName();
-                        var item = _worker.GetCollection().SingleOrDefault(x => x.Name == name);
+
+                        var item = _worker.GetCollection()
+                                          .SingleOrDefault(x => x.Name == name);
+
                         ChangeGovernment(item);
 
                         break;
@@ -86,7 +94,8 @@ namespace Labe_no9.View
 
                     case 7:
                     {
-                        Process.GetCurrentProcess().CloseMainWindow();
+                        Process.GetCurrentProcess()
+                               .CloseMainWindow();
 
                         break;
                     }
@@ -114,7 +123,8 @@ namespace Labe_no9.View
         {
             Console.WriteLine("Введите популяцию страны: ");
 
-            if (Int64.TryParse(Console.ReadLine(), out var population)) return population;
+            if (Int64.TryParse(Console.ReadLine(), out var population))
+                return population;
 
             throw new InvalidCastException(nameof(population));
         }
@@ -123,7 +133,8 @@ namespace Labe_no9.View
         {
             Console.WriteLine("Введите площадь страны: ");
 
-            if (Int64.TryParse(Console.ReadLine(), out var area)) return area;
+            if (Int64.TryParse(Console.ReadLine(), out var area))
+                return area;
 
             throw new InvalidCastException(nameof(area));
         }
@@ -132,16 +143,20 @@ namespace Labe_no9.View
         {
             Console.WriteLine("Введите тип правления страны: ");
             var types = Enum.GetValues(typeof(GovernmentType));
-            foreach (var t in types) Console.WriteLine($"{t}");
 
-            if (Enum.TryParse(Console.ReadLine(), out GovernmentType type)) return type;
+            foreach (var t in types)
+                Console.WriteLine($"{t}");
+
+            if (Enum.TryParse(Console.ReadLine(), out GovernmentType type))
+                return type;
 
             throw new InvalidCastException(nameof(type));
         }
 
         private void PrintAll()
         {
-            foreach (var item in _worker.GetCollection()) Console.WriteLine(item);
+            foreach (var item in _worker.GetCollection())
+                Console.WriteLine(item);
         }
 
         private void ChangeGovernment(Government item)
@@ -178,19 +193,30 @@ namespace Labe_no9.View
             }
 
             _worker.RemoveGovernment(item.Name);
-            _worker.AddGovernment(item.Type, item.Name, item.Capital, item.Population, item.Area);
+
+            _worker.AddGovernment(item.Type,
+                                  item.Name,
+                                  item.Capital,
+                                  item.Population,
+                                  item.Area);
         }
 
         private void PrintPopulationByAllTypes()
         {
-            var items = _worker.GetCollection().GroupBy(x => x.Type);
-            foreach (var item in items) Console.WriteLine($"{item.Key} : {item.Sum(x => x.Population)} people");
+            var items = _worker.GetCollection()
+                               .GroupBy(x => x.Type);
+
+            foreach (var item in items)
+                Console.WriteLine($"{item.Key} : {item.Sum(x => x.Population)} people");
         }
 
         private void PrintAreasByAllTypes()
         {
-            var items = _worker.GetCollection().GroupBy(x => x.Type);
-            foreach (var item in items) Console.WriteLine($"{item.Key} : {item.Sum(x => x.Area)} km^2");
+            var items = _worker.GetCollection()
+                               .GroupBy(x => x.Type);
+
+            foreach (var item in items)
+                Console.WriteLine($"{item.Key} : {item.Sum(x => x.Area)} km^2");
         }
     }
 }

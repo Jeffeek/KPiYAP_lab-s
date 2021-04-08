@@ -14,7 +14,8 @@ namespace Lab_no_22
         private int _innerSum;
         private bool _isDiscount;
 
-        public Check() => _products = new Dictionary<Product, int>();
+        public Check() =>
+            _products = new Dictionary<Product, int>();
 
         public int Sum
         {
@@ -64,13 +65,17 @@ namespace Lab_no_22
             Sum = 0;
         }
 
-        private void UpdateSum() => Sum = (int)(_products.Sum(x => x.Key.Price * x.Value) * (_isDiscount ? 0.98 : 1));
+        private void UpdateSum() =>
+            Sum = (int)(_products.Sum(x => x.Key.Price * x.Value) * (_isDiscount ? 0.98 : 1));
 
         public void RemoveLast()
         {
-            if (_products.Count == 0) return;
+            if (_products.Count == 0)
+                return;
 
-            var last = _products.Last().Key;
+            var last = _products.Last()
+                                .Key;
+
             _products.Remove(last);
             UpdateSum();
         }

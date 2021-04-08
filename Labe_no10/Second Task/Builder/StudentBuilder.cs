@@ -67,7 +67,9 @@ namespace Labe_no10.Second_Task.Builder
         public StudentBuilder SetCategory()
         {
             Console.WriteLine("Введите категорию студента(числом или названием): ");
-            foreach (var type in Enum.GetNames(typeof(StudentType))) Console.WriteLine(type);
+
+            foreach (var type in Enum.GetNames(typeof(StudentType)))
+                Console.WriteLine(type);
 
             if (Enum.TryParse(Console.ReadLine(), out StudentType studentType))
             {

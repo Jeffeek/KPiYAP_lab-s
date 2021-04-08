@@ -19,7 +19,8 @@ namespace Lab_no26plus27.Model.AsyncCommand.Generic
 
         public AsyncRelayCommand(Func<T, Task> execute,
                                  Func<T, bool> canExecute = null,
-                                 IErrorHandler errorHandler = null)
+                                 IErrorHandler errorHandler = null
+            )
         {
             _execute = execute;
             _canExecute = canExecute;
@@ -28,7 +29,8 @@ namespace Lab_no26plus27.Model.AsyncCommand.Generic
 
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(T parameter) => !_isExecuting && (_canExecute?.Invoke(parameter) ?? true);
+        public bool CanExecute(T parameter) =>
+            !_isExecuting && (_canExecute?.Invoke(parameter) ?? true);
 
         public async Task ExecuteAsync(T parameter)
         {
@@ -46,13 +48,17 @@ namespace Lab_no26plus27.Model.AsyncCommand.Generic
             RaiseCanExecuteChanged();
         }
 
-        public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        public void RaiseCanExecuteChanged() =>
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 
         #region Explicit implementations
 
-        bool ICommand.CanExecute(object parameter) => CanExecute((T)parameter);
+        bool ICommand.CanExecute(object parameter) =>
+            CanExecute((T)parameter);
 
-        void ICommand.Execute(object parameter) => ExecuteAsync((T)parameter).FireAndForgetSafeAsync(_errorHandler);
+        void ICommand.Execute(object parameter) =>
+            ExecuteAsync((T)parameter)
+                .FireAndForgetSafeAsync(_errorHandler);
 
         #endregion
     }

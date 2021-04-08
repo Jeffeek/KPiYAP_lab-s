@@ -9,9 +9,11 @@ namespace lab_no6
 {
     internal static class Helper
     {
-        public static double FindMax(double[] arr) => arr.Max();
+        public static double FindMax(double[] arr) =>
+            arr.Max();
 
-        public static double FindMin(double[] arr) => arr.Min();
+        public static double FindMin(double[] arr) =>
+            arr.Min();
 
         //пузырёк
         public static void Sort(double[] arr, bool order)
@@ -19,6 +21,7 @@ namespace lab_no6
             for (var i = 0; i < arr.Length; i++)
             {
                 for (var j = i; j < arr.Length; j++)
+                {
                     if (order)
                     {
                         if (arr[i] < arr[j])
@@ -37,6 +40,7 @@ namespace lab_no6
                             arr[j] = temp;
                         }
                     }
+                }
             }
         }
 

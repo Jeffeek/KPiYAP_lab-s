@@ -14,7 +14,12 @@ namespace Lab_no15
         {
             var strings = input.Split(Environment.NewLine);
             var matrix = new int[strings.Length][];
-            for (var i = 0; i < matrix.Length; i++) matrix[i] = strings[i].Split().Select(Int32.Parse).ToArray();
+
+            for (var i = 0; i < matrix.Length; i++)
+                matrix[i] = strings[i]
+                            .Split()
+                            .Select(Int32.Parse)
+                            .ToArray();
 
             return matrix;
         }
@@ -24,9 +29,17 @@ namespace Lab_no15
             for (var i = 0; i < jaggedMatrix.Length; i++)
             {
                 var sum = 0;
-                for (var j = 0; j < jaggedMatrix[i].Length; j++) sum += jaggedMatrix[i][j];
 
-                yield return (double)sum / jaggedMatrix[i].Length;
+                for (var j = 0;
+                     j
+                     < jaggedMatrix[i]
+                         .Length;
+                     j++)
+                    sum += jaggedMatrix[i][j];
+
+                yield return (double)sum
+                             / jaggedMatrix[i]
+                                 .Length;
             }
         }
 
@@ -36,9 +49,15 @@ namespace Lab_no15
             {
                 var min = jaggedMatrix[i][0];
 
-                for (var j = 1; j < jaggedMatrix[i].Length; j++)
+                for (var j = 1;
+                     j
+                     < jaggedMatrix[i]
+                         .Length;
+                     j++)
+                {
                     if (min > jaggedMatrix[i][j])
                         min = jaggedMatrix[i][j];
+                }
 
                 yield return min;
             }
@@ -50,9 +69,15 @@ namespace Lab_no15
             {
                 var max = jaggedMatrix[i][0];
 
-                for (var j = 1; j < jaggedMatrix[i].Length; j++)
+                for (var j = 1;
+                     j
+                     < jaggedMatrix[i]
+                         .Length;
+                     j++)
+                {
                     if (max < jaggedMatrix[i][j])
                         max = jaggedMatrix[i][j];
+                }
 
                 yield return max;
             }
@@ -62,7 +87,12 @@ namespace Lab_no15
         {
             string[] punctuationSigns =
             {
-                ",", ":", ";", "-", "'", ".."
+                ",",
+                ":",
+                ";",
+                "-",
+                "'",
+                ".."
             };
 
             return collection.OrderBy(x => x.Count(_ => punctuationSigns.Contains(_.ToString())))

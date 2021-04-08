@@ -39,7 +39,8 @@ namespace Lab_no14
                 _abilityUsed = false;
                 var punch = _currentHero.Punch(_currentBeatenHero);
 
-                if (_abilityUsed) continue;
+                if (_abilityUsed)
+                    continue;
 
                 if (_currentHero == FirstHero)
                 {

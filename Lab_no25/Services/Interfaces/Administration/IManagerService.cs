@@ -1,10 +1,11 @@
-﻿using System;
+﻿#region Using namespaces
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Lab_no25.Model.Entities;
 using Lab_no25.Services.Interfaces.EntityServices;
+
+#endregion
 
 namespace Lab_no25.Services.Interfaces.Administration
 {

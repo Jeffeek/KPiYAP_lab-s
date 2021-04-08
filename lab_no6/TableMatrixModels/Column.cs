@@ -36,7 +36,9 @@ namespace lab_no6.TableMatrixModels
 
             for (var i = 0; i < Count; i++)
             {
-                str += CellsList[i].ToString();
+                str += CellsList[i]
+                    .ToString();
+
                 str += "\n";
             }
 

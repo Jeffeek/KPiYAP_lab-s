@@ -24,6 +24,7 @@ namespace Lab_no26plus27.ViewModels.PagesViewModels
         public SignInPageViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+
             _credentials = new Dictionary<string, string>
                            {
                                {
@@ -43,22 +44,21 @@ namespace Lab_no26plus27.ViewModels.PagesViewModels
         public string Login
         {
             get => _login;
-            set =>
-                SetProperty(ref _login,
-                            value,
-                            nameof(Login));
+            set => SetProperty(ref _login,
+                               value,
+                               nameof(Login));
         }
 
         public string Password
         {
             get => _password;
-            set =>
-                SetProperty(ref _password,
-                            value,
-                            nameof(Password));
+            set => SetProperty(ref _password,
+                               value,
+                               nameof(Password));
         }
 
-        private bool CanCheckCredentials() => Login.Length > 3 && Password.Length > 4;
+        private bool CanCheckCredentials() =>
+            Login.Length > 3 && Password.Length > 4;
 
         private void OnCheckCredentials()
         {
@@ -87,7 +87,8 @@ namespace Lab_no26plus27.ViewModels.PagesViewModels
                             MessageBoxButton.OK,
                             MessageBoxImage.Information);
 
-            _eventAggregator.GetEvent<PubSubEvent<string>>().Publish(Login);
+            _eventAggregator.GetEvent<PubSubEvent<string>>()
+                            .Publish(Login);
         }
     }
 }

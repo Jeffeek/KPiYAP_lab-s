@@ -25,8 +25,12 @@ namespace Labe_no8
             get => _path;
             set
             {
-                if (String.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
-                if (String.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(value));
+                if (String.IsNullOrWhiteSpace(value))
+                    throw new ArgumentNullException(nameof(value));
+
+                if (String.IsNullOrEmpty(value))
+                    throw new ArgumentNullException(nameof(value));
+
                 _path = value;
             }
         }
@@ -36,19 +40,23 @@ namespace Labe_no8
             var dateTimes = new List<DateTime>();
             var @string = ReadFile();
             var collection = _regex.Matches(@string);
-            for (var i = 0; i < collection.Count; i++) dateTimes.Add(DateTime.Parse(collection[i].Value));
+
+            for (var i = 0; i < collection.Count; i++)
+                dateTimes.Add(DateTime.Parse(collection[i]
+                                                 .Value));
 
             return dateTimes;
         }
 
         private string ReadFile()
         {
-            if (!File.Exists(Path)) throw new FileNotFoundException();
+            if (!File.Exists(Path))
+                throw new FileNotFoundException();
+
             string result;
+
             using (var stream = new StreamReader(Path))
-            {
                 result = stream.ReadToEnd();
-            }
 
             return result;
         }

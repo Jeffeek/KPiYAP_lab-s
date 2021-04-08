@@ -5,6 +5,7 @@ using Lab_no25;
 using Lab_no25.Model;
 using Lab_no25.Services.Implementations;
 using Lab_no25.Services.Interfaces.EntityServices;
+using Lab_no26plus27.Model.SalesStatisticsPrinter;
 using Lab_no26plus27.ViewModels.PagesViewModels;
 using Lab_no26plus27.ViewModels.WindowsViewModels;
 using Lab_no26plus27.Views;
@@ -22,13 +23,18 @@ namespace Lab_no26plus27
     {
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            var options = new DbContextOptionsBuilder<ToyStoreDbContext>().UseInMemoryDatabase("Customers").Options;
+            var options = new DbContextOptionsBuilder<ToyStoreDbContext>().UseInMemoryDatabase("Customers")
+                                                                          .Options;
 
             containerRegistry.RegisterSingleton<ToyStoreDbContext>(() =>
                                                                    {
-                                                                       var initializer = new ToyStoreContextInitializer();
+                                                                       var initializer =
+                                                                           new ToyStoreContextInitializer();
+
                                                                        var context = new ToyStoreDbContext(options);
-                                                                       initializer.Initialize(context).Wait();
+
+                                                                       initializer.Initialize(context)
+                                                                                  .Wait();
 
                                                                        return context;
                                                                    });
@@ -39,17 +45,24 @@ namespace Lab_no26plus27
             containerRegistry.RegisterScoped<ICustomersService, CustomersService>();
             containerRegistry.RegisterScoped<IPreOrdersService, PreOrdersService>();
 
+            containerRegistry.Register<ISalesStatisticsPrinter, FileSalesStatisticsPrinter>();
+
             containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>("SignInPage");
             containerRegistry.RegisterForNavigation<AdminPage, AdminPageViewModel>("AdministratorPage");
             containerRegistry.RegisterForNavigation<ManagerPage, ManagerPageViewModel>("ManagerPage");
 
             containerRegistry.Register<MainWindow>(() => new MainWindow
                                                          {
-                                                             DataContext = new MainWindowViewModel(Container.Resolve<IRegionManager>(),
-                                                                 Container.Resolve<IEventAggregator>())
+                                                             DataContext =
+                                                                 new MainWindowViewModel(Container
+                                                                                             .Resolve<IRegionManager>(),
+                                                                                         Container
+                                                                                             .Resolve<IEventAggregator
+                                                                                                 >())
                                                          });
         }
 
-        protected override Window CreateShell() => Container.Resolve<MainWindow>();
+        protected override Window CreateShell() =>
+            Container.Resolve<MainWindow>();
     }
 }

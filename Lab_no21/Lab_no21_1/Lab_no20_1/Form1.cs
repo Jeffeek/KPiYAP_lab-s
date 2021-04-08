@@ -12,7 +12,8 @@ namespace Lab_no20_1
     {
         private Button _currentButton;
 
-        public Form1() => InitializeComponent();
+        public Form1() =>
+            InitializeComponent();
 
         private void StartNewGame()
         {
@@ -45,24 +46,20 @@ namespace Lab_no20_1
 
         private Button GetSelectButton()
         {
-            if (!(comboBox1.Text is string selectedItem)) return null;
+            if (!(comboBox1.Text is string selectedItem))
+                return null;
 
             switch (selectedItem)
             {
-                case "Кнопка 1":
-                    return button1;
+                case "Кнопка 1": return button1;
 
-                case "Кнопка 2":
-                    return button2;
+                case "Кнопка 2": return button2;
 
-                case "Кнопка 3":
-                    return button3;
+                case "Кнопка 3": return button3;
 
-                case "Кнопка 4":
-                    return button4;
+                case "Кнопка 4": return button4;
 
-                default:
-                    return null;
+                default: return null;
             }
         }
 
@@ -79,7 +76,8 @@ namespace Lab_no20_1
             if (GetSelectButton() == null)
                 ColorButton(color);
             else
-                GetSelectButton().BackColor = color;
+                GetSelectButton()
+                    .BackColor = color;
         }
 
         private void CheckMission()
@@ -116,7 +114,8 @@ namespace Lab_no20_1
             }
             else
             {
-                if (!(_currentButton.BackColor == Color.Blue)) return;
+                if (!(_currentButton.BackColor == Color.Blue))
+                    return;
 
                 MessageBox.Show("Окно Вопроса",
                                 "Вопросик",
@@ -125,17 +124,23 @@ namespace Lab_no20_1
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e) => StartNewGame();
+        private void Form1_Load(object sender, EventArgs e) =>
+            StartNewGame();
 
-        private void Button5_Click(object sender, EventArgs e) => StartNewGame();
+        private void Button5_Click(object sender, EventArgs e) =>
+            StartNewGame();
 
-        private void RadioButton5_CheckedChanged(object sender, EventArgs e) => CurrentButtonColor(Color.Yellow);
+        private void RadioButton5_CheckedChanged(object sender, EventArgs e) =>
+            CurrentButtonColor(Color.Yellow);
 
-        private void RadioButton6_CheckedChanged(object sender, EventArgs e) => CurrentButtonColor(Color.Green);
+        private void RadioButton6_CheckedChanged(object sender, EventArgs e) =>
+            CurrentButtonColor(Color.Green);
 
-        private void RadioButton7_CheckedChanged(object sender, EventArgs e) => CurrentButtonColor(Color.Red);
+        private void RadioButton7_CheckedChanged(object sender, EventArgs e) =>
+            CurrentButtonColor(Color.Red);
 
-        private void RadioButton8_CheckedChanged(object sender, EventArgs e) => CurrentButtonColor(Color.Blue);
+        private void RadioButton8_CheckedChanged(object sender, EventArgs e) =>
+            CurrentButtonColor(Color.Blue);
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -161,7 +166,8 @@ namespace Lab_no20_1
             CheckMission();
         }
 
-        private void CheckBox5_CheckedChanged(object sender, EventArgs e) => CheckMission();
+        private void CheckBox5_CheckedChanged(object sender, EventArgs e) =>
+            CheckMission();
 
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -189,13 +195,17 @@ namespace Lab_no20_1
 
         #region Background
 
-        private void RadioButton1_CheckedChanged(object sender, EventArgs e) => BackColor = Color.Yellow;
+        private void RadioButton1_CheckedChanged(object sender, EventArgs e) =>
+            BackColor = Color.Yellow;
 
-        private void RadioButton2_CheckedChanged(object sender, EventArgs e) => BackColor = Color.Red;
+        private void RadioButton2_CheckedChanged(object sender, EventArgs e) =>
+            BackColor = Color.Red;
 
-        private void RadioButton3_CheckedChanged(object sender, EventArgs e) => BackColor = Color.Green;
+        private void RadioButton3_CheckedChanged(object sender, EventArgs e) =>
+            BackColor = Color.Green;
 
-        private void RadioButton4_CheckedChanged(object sender, EventArgs e) => BackColor = Color.Blue;
+        private void RadioButton4_CheckedChanged(object sender, EventArgs e) =>
+            BackColor = Color.Blue;
 
         #endregion
     }

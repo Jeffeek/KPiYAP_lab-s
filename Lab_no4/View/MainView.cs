@@ -18,7 +18,8 @@ namespace Lab_no4.View
             StartView();
         }
 
-        private void StartMessage() => Console.WriteLine("Добро пожаловать!");
+        private void StartMessage() =>
+            Console.WriteLine("Добро пожаловать!");
 
         private void StartView()
         {
@@ -30,7 +31,8 @@ namespace Lab_no4.View
             {
                 if (answer == 1)
                     CreateDecagonByHand(decagon);
-                else if (answer == 2) CreateDecagonRandomly(decagon);
+                else if (answer == 2)
+                    CreateDecagonRandomly(decagon);
 
                 Console.WriteLine("Десятиугольник готов!");
             }

@@ -38,6 +38,7 @@ namespace lab_no6
                       {
                           1, 7, 2, 10, 13
                       };
+
             Helper.Sort(vat, true);
             InOutArray.PrintArray(vat);
             Console.WriteLine(new string('-', 15));
@@ -65,19 +66,29 @@ namespace lab_no6
         {
             Console.WriteLine("Введите оценки студента через пробел: ");
             var marks = Console.ReadLine();
-            var algp = new Student(marks.Split().Select(Int32.Parse).ToArray());
+
+            var algp = new Student(marks.Split()
+                                        .Select(Int32.Parse)
+                                        .ToArray());
+
             var algorithm = algp.GetMarks();
-            foreach (var s in algorithm) Console.WriteLine(s);
+
+            foreach (var s in algorithm)
+                Console.WriteLine(s);
         }
 
         private static void ArrayEqualityTask()
         {
             Console.WriteLine("Введите последовательность чисел через пробел: ");
             var arrstr = Console.ReadLine();
-            var arr = arrstr.Split().Select(x => Int32.Parse(x.ToString()));
+
+            var arr = arrstr.Split()
+                            .Select(x => Int32.Parse(x.ToString()));
+
             var sorted = arr.OrderByDescending(x => x);
 
-            if (arr.SequenceEqual(sorted)) Console.WriteLine("Вы ввели числа в невозростающем порядке");
+            if (arr.SequenceEqual(sorted))
+                Console.WriteLine("Вы ввели числа в невозростающем порядке");
         }
 
         private static void MatrixWorkTask()
@@ -108,8 +119,14 @@ namespace lab_no6
         {
             var array = new double[31];
             var rnd = new Random();
-            for (var i = 0; i < 31; i++) array[i] = rnd.Next(102, 354);
-            var newArray = array.Where((x, y) => x * 0.1 > y).OrderBy(x => x).ToArray();
+
+            for (var i = 0; i < 31; i++)
+                array[i] = rnd.Next(102, 354);
+
+            var newArray = array.Where((x, y) => x * 0.1 > y)
+                                .OrderBy(x => x)
+                                .ToArray();
+
             Console.WriteLine("");
             Console.WriteLine(new string('-', 81));
 
@@ -119,9 +136,14 @@ namespace lab_no6
                     && i != 0)
                     Console.WriteLine('|');
 
-                if (i >= 9) Console.Write($"|M[{i + 1}]={array[i]}|\t");
-                if (i < 9) Console.Write($"|M[{i + 1}]={array[i]} |\t");
-                if (i == 30) Console.Write("\t\t\t\t\t\t\t\t|");
+                if (i >= 9)
+                    Console.Write($"|M[{i + 1}]={array[i]}|\t");
+
+                if (i < 9)
+                    Console.Write($"|M[{i + 1}]={array[i]} |\t");
+
+                if (i == 30)
+                    Console.Write("\t\t\t\t\t\t\t\t|");
             }
 
             Console.WriteLine();
@@ -133,8 +155,11 @@ namespace lab_no6
                     && i != 0)
                     Console.WriteLine('|');
 
-                if (i >= 9) Console.Write($"|M[{i + 1}]={array[i]}|\t");
-                if (i < 9) Console.Write($"|M[{i + 1}]={array[i]} |\t");
+                if (i >= 9)
+                    Console.Write($"|M[{i + 1}]={array[i]}|\t");
+
+                if (i < 9)
+                    Console.Write($"|M[{i + 1}]={array[i]} |\t");
             }
 
             Console.WriteLine();

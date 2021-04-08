@@ -20,7 +20,9 @@ namespace Lab_no20
             var E = Double.Parse(Console.ReadLine());
             Task.Run(() => Log10(x, E, token));
             var key = Console.ReadKey(true);
-            if (key.Key == ConsoleKey.UpArrow) tokenSource.Cancel();
+
+            if (key.Key == ConsoleKey.UpArrow)
+                tokenSource.Cancel();
 
             Console.ReadLine();
         }
@@ -30,9 +32,11 @@ namespace Lab_no20
             var n = 1;
             var t = x;
             var s = t;
+
             while (MathBicycle.Abs(t) / n > precision)
             {
                 Console.Clear();
+
                 if (token.IsCancellationRequested)
                 {
                     Console.WriteLine("До конца операция не выполнилась, но запрос остановить его всё таки пришёл..");

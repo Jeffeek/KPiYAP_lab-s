@@ -5,7 +5,8 @@
         private double _peasantSpawnChance = 0.3;
 
         //for new game
-        public FeudalGameSettings(int peasantsTargetCount) => PeasantsTargetCount = peasantsTargetCount;
+        public FeudalGameSettings(int peasantsTargetCount) =>
+            PeasantsTargetCount = peasantsTargetCount;
 
         //for load
         public FeudalGameSettings(DTOGameSettingsSave dto)

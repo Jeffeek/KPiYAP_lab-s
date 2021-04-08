@@ -11,7 +11,8 @@ namespace Lab_no26plus27.ViewModels.EntitiesViewModels
     {
         private CustomerEntity _entity;
 
-        public CustomerEntityViewModel(CustomerEntity entity) => _entity = entity;
+        public CustomerEntityViewModel(CustomerEntity entity) =>
+            _entity = entity;
 
         public CustomerEntity Entity
         {

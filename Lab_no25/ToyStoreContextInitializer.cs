@@ -24,9 +24,13 @@ namespace Lab_no25
                 var toyCategory = new ToyCategoryEntity
                                   {
                                       Age = (uint)random.Next(1, 20),
-                                      CareRules = Guid.NewGuid().ToString().Replace("-", "").ToUpper(),
+                                      CareRules = Guid.NewGuid()
+                                                      .ToString()
+                                                      .Replace("-", "")
+                                                      .ToUpper(),
                                       WarrantyPeriod = (uint)random.Next(1, 128)
                                   };
+
                 categories.Add(toyCategory);
             }
 
@@ -37,9 +41,13 @@ namespace Lab_no25
                               Category = categories[random.Next(0, categories.Count)],
                               Photo = $"photo{i + random.Next(0, 20000)}{Guid.NewGuid()}",
                               Price = (decimal)(random.NextDouble() * random.Next(1, 5000)),
-                              Producer = Guid.NewGuid().ToString().Substring(0, 7).Replace("-", ""),
+                              Producer = Guid.NewGuid()
+                                             .ToString()
+                                             .Substring(0, 7)
+                                             .Replace("-", ""),
                               WarehouseCount = (uint)random.Next(0, 30)
                           };
+
                 toys.Add(toy);
             }
 
@@ -49,6 +57,7 @@ namespace Lab_no25
                 var discount = random.Next(0, 80);
                 var count = random.Next(1, 100);
                 var price = selectedToy.Price * count * 100 / (discount == 0 ? 1 : discount);
+
                 var sale = new SaleEntity
                            {
                                Discount = (uint)discount,
@@ -57,6 +66,7 @@ namespace Lab_no25
                                Toy = selectedToy,
                                SaleCount = (uint)count
                            };
+
                 sales.Add(sale);
             }
 

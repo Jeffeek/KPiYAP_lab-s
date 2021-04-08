@@ -21,7 +21,8 @@ namespace Labe_no11
         {
             Console.WriteLine("Введите действительную часть: ");
 
-            if (Double.TryParse(Console.ReadLine(), out var real)) return real;
+            if (Double.TryParse(Console.ReadLine(), out var real))
+                return real;
 
             throw new ArgumentException();
         }
@@ -30,7 +31,8 @@ namespace Labe_no11
         {
             Console.WriteLine("Введите мнимую часть: ");
 
-            if (Double.TryParse(Console.ReadLine(), out var virt)) return virt;
+            if (Double.TryParse(Console.ReadLine(), out var virt))
+                return virt;
 
             throw new ArgumentException();
         }

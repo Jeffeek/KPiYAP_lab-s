@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Using namespaces
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace Lab_no25.Model.Entities
 {

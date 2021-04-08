@@ -10,7 +10,8 @@ namespace lab_no6
     {
         private readonly int[] _marks;
 
-        public Student(int[] marks) => _marks = marks;
+        public Student(int[] marks) =>
+            _marks = marks;
 
         public int[] GetMarks()
         {

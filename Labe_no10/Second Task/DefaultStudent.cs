@@ -12,14 +12,16 @@ namespace Labe_no10.Second_Task
 
         public override bool PassOffset()
         {
-            if (VisitedClasses == TotalCLasses) return true;
+            if (VisitedClasses == TotalCLasses)
+                return true;
 
             if (VisitedClasses > TotalCLasses / 2)
             {
                 var rnd = new Random();
                 var rndNumber = rnd.Next(0, 11);
 
-                if (rndNumber >= 5) return true;
+                if (rndNumber >= 5)
+                    return true;
 
                 return false;
             }

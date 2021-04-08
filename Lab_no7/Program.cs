@@ -38,6 +38,7 @@ namespace Lab_no7
             Console.ReadLine();
         }
 
-        private static int CountOfDigits(string str) => str.Count(Char.IsDigit);
+        private static int CountOfDigits(string str) =>
+            str.Count(Char.IsDigit);
     }
 }

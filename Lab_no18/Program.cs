@@ -22,10 +22,18 @@ namespace Lab_no18
             for (var i = 0; i < countries.ChildNodes.Count; i++)
             {
                 var country = countries.ChildNodes[i];
-                var name = country.SelectSingleNode("Name")?.InnerText;
-                var capital = country.SelectSingleNode("Capital")?.InnerText;
-                var population = Int32.Parse(country.SelectSingleNode("Population")?.InnerText!);
-                var square = Int32.Parse(country.SelectSingleNode("Square")?.InnerText!);
+
+                var name = country.SelectSingleNode("Name")
+                                  ?.InnerText;
+
+                var capital = country.SelectSingleNode("Capital")
+                                     ?.InnerText;
+
+                var population = Int32.Parse(country.SelectSingleNode("Population")
+                                                    ?.InnerText!);
+
+                var square = Int32.Parse(country.SelectSingleNode("Square")
+                                                ?.InnerText!);
 
                 countriesList.Add(new Government
                                   {
@@ -41,7 +49,9 @@ namespace Lab_no18
         }
 
         private static XmlNode RemoveLastGovernment(XmlDocument document) =>
-            document.SelectSingleNode("countries")?.RemoveChild(document["countries"].LastChild)
+            document.SelectSingleNode("countries")
+                    ?.RemoveChild(document["countries"]
+                                      .LastChild)
             ?? throw new Exception();
 
         private static XmlDocument SearchByPopulation(XmlDocument document, int startRange, int finishRange)
@@ -52,11 +62,14 @@ namespace Lab_no18
             newDocument.AppendChild(node);
             var countryChildNodes = countryChild?.ChildNodes;
 
-            if (countryChildNodes == null) return newDocument;
+            if (countryChildNodes == null)
+                return newDocument;
 
             for (var i = 0; i < countryChildNodes.Count; i++)
             {
-                var population = Int32.Parse(countryChildNodes?[i].SelectSingleNode("Population")?.InnerText!);
+                var population = Int32.Parse(countryChildNodes?[i]
+                                             .SelectSingleNode("Population")
+                                             ?.InnerText!);
 
                 if (population >= startRange
                     && population <= finishRange)
