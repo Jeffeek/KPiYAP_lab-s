@@ -9,7 +9,7 @@ namespace Lab_no26plus27.Model.Extensions
 {
     public static class TaskExtensions
     {
-        public static async void FireAndForgetSafeAsync(this Task task, IErrorHandler handler = null)
+        public async static void FireAndForgetSafeAsync(this Task task, IErrorHandler handler = null)
         {
             try
             {

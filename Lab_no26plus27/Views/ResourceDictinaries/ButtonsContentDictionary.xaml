@@ -123,7 +123,7 @@
             </Path>
         </Canvas>
     </Viewbox>
-    <Viewbox Stretch="Uniform" x:Key="EditButton">
+    <Viewbox Stretch="Uniform" x:Key="EditButton" x:Shared="False">
         <Canvas Name="svg12" Width="20" Height="20">
             <Canvas.RenderTransform>
                 <TranslateTransform X="0" Y="0" />

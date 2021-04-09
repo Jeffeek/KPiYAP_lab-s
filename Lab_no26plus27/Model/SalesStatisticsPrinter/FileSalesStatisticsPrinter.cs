@@ -34,14 +34,21 @@ namespace Lab_no26plus27.Model.SalesStatisticsPrinter
 
         /// <inheritdoc/>
         public void Write(IEnumerable<SaleEntity> sales) =>
-            File.WriteAllText(Path.Combine(_path, $"sales_{DateTime.Now:ddyyyy}.txt"),
+            File.WriteAllText(Path.Combine(_path, $"sales_{GetLogAppendTime()}.txt"),
                               GetContent(sales));
 
         /// <inheritdoc/>
         public async Task WriteAsync(IEnumerable<SaleEntity> sales) =>
-            await File.WriteAllTextAsync(Path.Combine(_path, $"sales_{DateTime.Now:ddyyyy}.txt"),
+            await File.WriteAllTextAsync(Path.Combine(_path, $"sales_{GetLogAppendTime()}.txt"),
                                          GetContent(sales));
 
         #endregion
+
+        private string GetLogAppendTime()
+        {
+            var now = DateTime.Now;
+
+            return $"{now:hh-mm-ss} {now:yyyy-mm-dd}";
+        }
     }
 }

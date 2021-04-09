@@ -28,7 +28,7 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         private AsyncRelayCommand _applySaleChangesCommand;
         private DelegateCommand _changeEditModeCommand;
         private AsyncRelayCommand _reloadSalesCommand;
-        private DelegateCommand _writeSalesStatisticsCommand;
+        private AsyncRelayCommand _writeSalesStatisticsCommand;
 
         public SalesTabViewModel(ISalesService salesService,
                                  ISalesStatisticsPrinter salesStatisticsPrinter
@@ -45,14 +45,10 @@ namespace Lab_no26plus27.ViewModels.TabsViewModels
         public DelegateCommand AddSaleCommand =>
             _addSaleCommand ??= new DelegateCommand(OnAddSaleCommandExecuted);
 
-        public DelegateCommand WriteSalesStatisticsCommand =>
-            _writeSalesStatisticsCommand ??=
-                new DelegateCommand(() => _salesStatisticsPrinter.Write(_salesService
-                                                                        .GetSalesByAsync(x => x.SaleDate.Day
-                                                                                              == DateTime.Now.Day)
-                                                                        .GetAwaiter()
-                                                                        .GetResult()),
-                                    () => true);
+        public AsyncRelayCommand WriteSalesStatisticsCommand =>
+            _writeSalesStatisticsCommand ??= new AsyncRelayCommand(() => _salesStatisticsPrinter.WriteAsync(_salesService.GetSalesByAsync(x => x.SaleDate.Day == DateTime.Now.Day)
+                                                                                                                         .GetAwaiter()
+                                                                                                                         .GetResult()));
 
         public AsyncRelayCommand RemoveSaleCommand =>
             _removeSaleCommand ??= new AsyncRelayCommand(OnRemoveToyCategoryCommandExecuted,

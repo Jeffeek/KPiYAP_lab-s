@@ -19,11 +19,10 @@ namespace Lab_no26plus27.Model.AsyncCommand
 
         public AsyncRelayCommand(Func<Task> execute,
                                  Func<bool> canExecute = null,
-                                 IErrorHandler errorHandler = null
-            )
+                                 IErrorHandler errorHandler = null)
         {
-            _execute = execute;
-            _canExecute = canExecute;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute ?? (() => true);
             _errorHandler = errorHandler;
         }
 
